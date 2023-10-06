@@ -22,31 +22,32 @@
     var CONFIG = {"hostname":"xd-mu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="c 1.实现过程1.1模型选择1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接">
+  <meta name="description" content="1.实现过程1.1模型选择1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接着，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于AM-CNN的细菌图谱分类模型">
 <meta property="og:url" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="野生调参侠的博客">
-<meta property="og:description" content="c 1.实现过程1.1模型选择1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接">
+<meta property="og:description" content="1.实现过程1.1模型选择1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接着，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/image-20230801094141414.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E8%AE%AD%E7%BB%83%E5%87%86%E7%A1%AE%E7%8E%87+%E8%AF%84%E4%BC%B0%E5%87%86%E7%A1%AE%E7%8E%87.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/1LOSS.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/98.833%%E5%9B%9B%E7%A7%8D%E7%BB%86%E8%8F%8C%E5%88%86%E7%B1%BB%E6%83%85%E5%86%B5Process.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/98.75%%E5%88%86%E7%B1%BB%E6%83%85%E5%86%B5process.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/FREE.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/LABEL.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/all_bacteria_heatmap.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/ROC.png">
-<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/PR.png">
-<meta property="og:image" content="https://xd-mu.github.io/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/compare.png">
-<meta property="og:image" content="https://xd-mu.github.io/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/performence.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/image-20230801094141414.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E8%AE%AD%E7%BB%83%E5%87%86%E7%A1%AE%E7%8E%87+%E8%AF%84%E4%BC%B0%E5%87%86%E7%A1%AE%E7%8E%87.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/1LOSS.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.833%25%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%06%7B%C5%B5Process.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.75%25%06%7B%C5%B5process.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/FREE.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/LABEL.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/all_bacteria_heatmap.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/ROC.png">
+<meta property="og:image" content="c:/Users/m/Desktop/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/PR.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/compare-169657254906614.png">
+<meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/performence-169657256481017.png">
 <meta property="article:published_time" content="2023-10-06T03:51:47.000Z">
-<meta property="article:modified_time" content="2023-10-06T03:55:09.535Z">
+<meta property="article:modified_time" content="2023-10-06T06:10:04.333Z">
 <meta property="article:author" content="野生调参侠">
-<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="深度学习;">
+<meta property="article:tag" content="自然语言处理;">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/image-20230801094141414.png">
+<meta name="twitter:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/image-20230801094141414.png">
 
 <link rel="canonical" href="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/">
 
@@ -228,7 +229,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-10-06 11:51:47 / 修改时间：11:55:09" itemprop="dateCreated datePublished" datetime="2023-10-06T11:51:47+08:00">2023-10-06</time>
+              <time title="创建时间：2023-10-06 11:51:47 / 修改时间：14:10:04" itemprop="dateCreated datePublished" datetime="2023-10-06T11:51:47+08:00">2023-10-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,11 +273,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>c</p>
-<h1 id="1-实现过程"><a href="#1-实现过程" class="headerlink" title="1.实现过程"></a>1.实现过程</h1><h2 id="1-1模型选择"><a href="#1-1模型选择" class="headerlink" title="1.1模型选择"></a>1.1模型选择</h2><h3 id="1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）"><a href="#1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）" class="headerlink" title="1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）"></a>1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</h3><p>​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接着，对卷积结果使用第二次注意力机制捕获视窗与关系的相关性。最终，将卷积结果与相关性矩阵相乘，得到最后的输出结果。</p>
+        <h1 id="1-实现过程"><a href="#1-实现过程" class="headerlink" title="1.实现过程"></a>1.实现过程</h1><h2 id="1-1模型选择"><a href="#1-1模型选择" class="headerlink" title="1.1模型选择"></a>1.1模型选择</h2><h3 id="1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）"><a href="#1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）" class="headerlink" title="1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）"></a>1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</h3><p>​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接着，对卷积结果使用第二次注意力机制捕获视窗与关系的相关性。最终，将卷积结果与相关性矩阵相乘，得到最后的输出结果。</p>
 <p>​	（这个模型的核心在于将细菌拉曼图谱的波长向量和强度向量与输入数据进行组合。首先，将这两种向量进行拼接，构成了最初的输入向量。接着，使用滑动窗口的方式将目标词与周围词组合在一起，形成综合向量。第一次的注意力机制应用在实体与序列中每个词的相关性。将相关性矩阵与输入的综合词向量矩阵相乘，得到一个二维矩阵。然后，使用卷积提取特征，并对卷积结果使用第二次注意力机制捕获视窗与关系的相关性。最后，将卷积结果与相关性矩阵相乘，得到最终的输出结果。通过这种方式，模型能够充分考虑细菌拉曼图谱的波长向量和强度向量在输入数据中的关联关系。）</p>
-<img src="基于AM-CNN的细菌图谱分类模型/image-20230801094141414.png" alt="image-20230801094141414" style="zoom:50%;" />	
-
+<p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/image-20230801094141414.png" alt="image-20230801094141414"></p>
 <p>​																			模型结构</p>
 <p>网络构建：</p>
 <ol>
@@ -300,36 +299,26 @@
 <li>调整模型参数，待模型结构最优后，测试模型最终的分类准确度，并记录训练期间 Loss 值的变动情况。</li>
 </ol>
 <h2 id="1-2基于注意力改进的卷积神经网络（AM-CNN）实验结果"><a href="#1-2基于注意力改进的卷积神经网络（AM-CNN）实验结果" class="headerlink" title="1.2基于注意力改进的卷积神经网络（AM-CNN）实验结果"></a>1.2基于注意力改进的卷积神经网络（AM-CNN）实验结果</h2><p>训练结束后，本实验分别随机选取了3种细菌的50个拉曼数据进行模型评估。</p>
-<h3 id="1-2-1未标注数据混合"><a href="#1-2-1未标注数据混合" class="headerlink" title="1.2.1未标注数据混合"></a>1.2.1未标注数据混合</h3><h3 id="1-2-2标注数据混合（6种细菌训练与分类效果）"><a href="#1-2-2标注数据混合（6种细菌训练与分类效果）" class="headerlink" title="1.2.2标注数据混合（6种细菌训练与分类效果）"></a>1.2.2标注数据混合（6种细菌训练与分类效果）</h3><h5 id="1-训练准确率变化情况"><a href="#1-训练准确率变化情况" class="headerlink" title="1.训练准确率变化情况"></a>1.训练准确率变化情况</h5><img src="基于AM-CNN的细菌图谱分类模型/训练准确率+评估准确率.png" alt="训练准确率+评估准确率" style="zoom: 33%;" />
-
-<p>准确率变化较为理想，满足预期要求：</p>
+<h3 id="1-2-1未标注数据混合"><a href="#1-2-1未标注数据混合" class="headerlink" title="1.2.1未标注数据混合"></a>1.2.1未标注数据混合</h3><h3 id="1-2-2标注数据混合（6种细菌训练与分类效果）"><a href="#1-2-2标注数据混合（6种细菌训练与分类效果）" class="headerlink" title="1.2.2标注数据混合（6种细菌训练与分类效果）"></a>1.2.2标注数据混合（6种细菌训练与分类效果）</h3><h5 id="1-训练准确率变化情况"><a href="#1-训练准确率变化情况" class="headerlink" title="1.训练准确率变化情况"></a>1.训练准确率变化情况</h5><p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/%E8%AE%AD%E7%BB%83%E5%87%86%E7%A1%AE%E7%8E%87+%E8%AF%84%E4%BC%B0%E5%87%86%E7%A1%AE%E7%8E%87.png" alt="训练准确率+评估准确率"></p>
+<p>准确率变化较为理想，满足预期要求!</p>
 <ul>
 <li>在第38次训练后模型的<strong>训练准确率</strong>维持在98%</li>
 <li>在第38次训练后模型的<strong>验证准确率</strong>维持在95%</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">模型验证通常是在训练过程中使用一个独立于训练集和测试集的数据集进行模型性能评估。它可以用来检测模型是否过拟合或者欠拟合。如果模型在训练集上表现良好，但在验证集上表现较差，那就意味着模型可能过拟合了。这种情况下，可以采取一些方法如提前停止训练或增加正则化等来防止模型过拟合。</span><br><span class="line"></span><br><span class="line">训练准确率代表模型在当前训练数据上的表现。训练多轮后，训练准确率会逐渐提高，这表明模型学到了更多的数据分类特征。但是，如果训练准确率开始变得非常高，而验证准确率却不再提高，这说明模型开始过拟合训练数据。</span><br></pre></td></tr></table></figure>
 
-<h5 id="2-训练LOSS值变化情况"><a href="#2-训练LOSS值变化情况" class="headerlink" title="2.训练LOSS值变化情况"></a>2.训练LOSS值变化情况</h5><img src="基于AM-CNN的细菌图谱分类模型/1LOSS.png" alt="1LOSS" style="zoom: 67%;" />
-
-<h5 id="3-模型分别对于n种细菌数据各自分类情况"><a href="#3-模型分别对于n种细菌数据各自分类情况" class="headerlink" title="3.模型分别对于n种细菌数据各自分类情况"></a>3.模型分别对于n种细菌数据各自分类情况</h5><img src="基于AM-CNN的细菌图谱分类模型/98.833%四种细菌分类情况Process.png" alt="98.833%四种细菌分类情况Process" style="zoom: 33%;" />
-
-<img src="基于AM-CNN的细菌图谱分类模型/98.75%分类情况process.png" alt="98.75%分类情况process" style="zoom: 40%;" />
-
-<h5 id="4-十种细菌同时分类情况"><a href="#4-十种细菌同时分类情况" class="headerlink" title="4.十种细菌同时分类情况"></a>4.十种细菌同时分类情况</h5><p><strong>（1）.未标注</strong></p>
-<img src="基于AM-CNN的细菌图谱分类模型/FREE.png" alt="FREE" style="zoom:67%;" />
-
+<h5 id="2-训练LOSS值变化情况"><a href="#2-训练LOSS值变化情况" class="headerlink" title="2.训练LOSS值变化情况"></a>2.训练LOSS值变化情况</h5><p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/1LOSS.png" alt="1LOSS"></p>
+<h5 id="模型分别对于n种细菌数据各自分类情况"><a href="#模型分别对于n种细菌数据各自分类情况" class="headerlink" title="模型分别对于n种细菌数据各自分类情况"></a>模型分别对于n种细菌数据各自分类情况</h5><p><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.833%25%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%06%7B%C5%B5Process.png" alt="98.833%四种细菌分类情况Process"></p>
+<h5 id=""><a href="#" class="headerlink" title=""></a><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.75%25%06%7B%C5%B5process.png" alt="98.75%分类情况process"></h5><p><strong>（1）.未标注</strong></p>
+<p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/FREE.png" alt="FREE"></p>
 <p><strong>（2）.标注</strong></p>
-<img src="基于AM-CNN的细菌图谱分类模型/LABEL.png" alt="LABEL" style="zoom:67%;" />
+<p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/LABEL.png" alt="LABEL"></p>
+<h5 id="5-模型对于测试集的验证情况"><a href="#5-模型对于测试集的验证情况" class="headerlink" title="5.模型对于测试集的验证情况"></a>5.模型对于测试集的验证情况</h5><p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/all_bacteria_heatmap.png" alt="all_bacteria_heatmap"></p>
+<h5 id="6-模型六种细菌的ROC变化情况"><a href="#6-模型六种细菌的ROC变化情况" class="headerlink" title="6.模型六种细菌的ROC变化情况"></a>6.模型六种细菌的ROC变化情况</h5><p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/ROC.png" alt="ROC"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROC曲线可以帮助我们了解分类器在不同阈值下的表现情况，以及在不同的分类阈值下分类器的敏感性和特异性。曲线的横坐标是假正率（False Positive Rate）即被错误地分为正类的样本占所有负样本的比例，曲线的纵坐标是真正率（True Positive Rate）即被正确地分为正类的样本占所有正样本的比例，曲线越接近左上角，说明分类器的表现越好。    通过ROC曲线我们可以判断分类器的性能是否足够好，同时也可以比较多个分类器的性能，选出最佳的分类器。    举个例子如果ROC曲线下的面积（AUC）接近于1，则说明分类器的性能较好，如果ROC曲线下的面积接近于0.5，则说明分类器的性能不如随机猜测（随机猜测的AUC为0.5）。</span><br></pre></td></tr></table></figure>
 
-<h5 id="5-模型对于测试集的验证情况"><a href="#5-模型对于测试集的验证情况" class="headerlink" title="5.模型对于测试集的验证情况"></a>5.模型对于测试集的验证情况</h5><img src="基于AM-CNN的细菌图谱分类模型/all_bacteria_heatmap.png" alt="all_bacteria_heatmap" style="zoom:72%;" />
-
-<h5 id="6-模型六种细菌的ROC变化情况"><a href="#6-模型六种细菌的ROC变化情况" class="headerlink" title="6.模型六种细菌的ROC变化情况"></a>6.模型六种细菌的ROC变化情况</h5><img src="基于AM-CNN的细菌图谱分类模型/ROC.png" alt="ROC" style="zoom:150%;" />
-
-<img src="基于AM-CNN的细菌图谱分类模型/PR.png" alt="PR" style="zoom:150%;" />
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ROC曲线可以帮助我们了解分类器在不同阈值下的表现情况，以及在不同的分类阈值下分类器的敏感性和特异性。曲线的横坐标是假正率（False Positive Rate）即被错误地分为正类的样本占所有负样本的比例，曲线的纵坐标是真正率（True Positive Rate）即被正确地分为正类的样本占所有正样本的比例，曲线越接近左上角，说明分类器的表现越好。</span><br><span class="line">通过ROC曲线我们可以判断分类器的性能是否足够好，同时也可以比较多个分类器的性能，选出最佳的分类器。</span><br><span class="line">举个例子如果ROC曲线下的面积（AUC）接近于1，则说明分类器的性能较好，如果ROC曲线下的面积接近于0.5，则说明分类器的性能不如随机猜测（随机猜测的AUC为0.5）。</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-2-3与经典网络相比的准确率提升程度"><a href="#1-2-3与经典网络相比的准确率提升程度" class="headerlink" title="1.2.3与经典网络相比的准确率提升程度"></a>1.2.3与经典网络相比的准确率提升程度</h3><p><img src="/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/compare.png" alt="compare"></p>
+<p><img src="C:/Users/m/Desktop/新建文件夹/PR.png" alt="PR"></p>
+<h3 id="1-2-3与经典网络相比的准确率提升程度"><a href="#1-2-3与经典网络相比的准确率提升程度" class="headerlink" title="1.2.3与经典网络相比的准确率提升程度"></a>1.2.3与经典网络相比的准确率提升程度</h3><p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/compare-169657254906614.png" alt="compare"></p>
 <table>
 <thead>
 <tr>
@@ -369,7 +358,7 @@
 <td>0.978</td>
 </tr>
 </tbody></table>
-<p><img src="/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/performence.png" alt="performence"></p>
+<p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/performence-169657256481017.png" alt="performence"></p>
 <h2 id="2-创新点"><a href="#2-创新点" class="headerlink" title="2.创新点"></a>2.创新点</h2><p>关于基于细菌拉曼光谱和注意力机制的CNN网络的创新性内容，具有以下几个主要优势：</p>
 <p>1.<strong>引入注意力机制</strong>：</p>
 <p>传统的卷积神经网络在图像分类任务中，通常使用池化层、全局卷积核等方式提取图像特征。而引入了注意力机制之后，可以使网络更加关注细菌图像的重要特征，从而提高分类精度。</p>
@@ -383,7 +372,6 @@
 <p>4.<strong>数据来源新颖</strong>：传统的基于图像的细菌分类方法需要基于显微镜下的图像进行分析和识别。而利用细菌拉曼光谱，则是通过非接触方式直接获取细菌组织的光谱数据，避免了细菌的处理过程对样本造成的影响和污染，同时提供了更加全局、多层次的细菌信息。</p>
 <p>5.<strong>数据处理方式创新</strong>：细菌拉曼光谱数据与图像数据不同，需要考虑光谱数据的高维度、数据噪声等问题。基于此，我们运用RamanSpectra库对数据进行预处理和降维，提取有用的特征信息，有利于构建更加高效的分类模型。</p>
 <h4 id="部分参考："><a href="#部分参考：" class="headerlink" title="部分参考："></a><strong>部分参考：</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.王吉俐,彭敦陆,陈章,等. AM-CNN:一种基于注意力的卷积神经网络文本分类模型[J]. 小型微型计算机系统,2019,40(4):710-714. DOI:10.3969/j.issn.1000-1220.2019.04.004.</span><br><span class="line"></span><br><span class="line">2.Wang, Linlin, et al. &quot;Relation classification via multi-level attention cnns.&quot; Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2016.</span><br><span class="line"></span><br><span class="line">3.https://mp.weixin.qq.com/s/N-lSzF72TooXAil5FUUW3w</span><br></pre></td></tr></table></figure>
-
 
 
     </div>
@@ -426,20 +414,14 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习;</a>
+              <a href="/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/" rel="tag"># 自然语言处理;</a>
           </div>
 
         
 
 
         
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2023/10/04/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
       </footer>
     
   </article>
@@ -497,7 +479,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">1.实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="nav-number">1.1.</span> <span class="nav-text">1.1模型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95%EF%BC%88AM-CNN%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88AM-CNN%EF%BC%89%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">1.2基于注意力改进的卷积神经网络（AM-CNN）实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1%E6%9C%AA%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1未标注数据混合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88%EF%BC%886%E7%A7%8D%E7%BB%86%E8%8F%8C%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%88%86%E7%B1%BB%E6%95%88%E6%9E%9C%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2标注数据混合（6种细菌训练与分类效果）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%AE%AD%E7%BB%83%E5%87%86%E7%A1%AE%E7%8E%87%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">1.训练准确率变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%AE%AD%E7%BB%83LOSS%E5%80%BC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.2.</span> <span class="nav-text">2.训练LOSS值变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E6%A8%A1%E5%9E%8B%E5%88%86%E5%88%AB%E5%AF%B9%E4%BA%8En%E7%A7%8D%E7%BB%86%E8%8F%8C%E6%95%B0%E6%8D%AE%E5%90%84%E8%87%AA%E5%88%86%E7%B1%BB%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.3.</span> <span class="nav-text">3.模型分别对于n种细菌数据各自分类情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%8D%81%E7%A7%8D%E7%BB%86%E8%8F%8C%E5%90%8C%E6%97%B6%E5%88%86%E7%B1%BB%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.4.</span> <span class="nav-text">4.十种细菌同时分类情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%A8%A1%E5%9E%8B%E5%AF%B9%E4%BA%8E%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E9%AA%8C%E8%AF%81%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.5.</span> <span class="nav-text">5.模型对于测试集的验证情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E6%A8%A1%E5%9E%8B%E5%85%AD%E7%A7%8D%E7%BB%86%E8%8F%8C%E7%9A%84ROC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.6.</span> <span class="nav-text">6.模型六种细菌的ROC变化情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3%E4%B8%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9B%B8%E6%AF%94%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87%E7%A8%8B%E5%BA%A6"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3与经典网络相比的准确率提升程度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">2.创新点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">部分参考：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">1.实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="nav-number">1.1.</span> <span class="nav-text">1.1模型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95%EF%BC%88AM-CNN%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88AM-CNN%EF%BC%89%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">1.2基于注意力改进的卷积神经网络（AM-CNN）实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1%E6%9C%AA%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1未标注数据混合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88%EF%BC%886%E7%A7%8D%E7%BB%86%E8%8F%8C%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%88%86%E7%B1%BB%E6%95%88%E6%9E%9C%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2标注数据混合（6种细菌训练与分类效果）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%AE%AD%E7%BB%83%E5%87%86%E7%A1%AE%E7%8E%87%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">1.训练准确率变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%AE%AD%E7%BB%83LOSS%E5%80%BC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.2.</span> <span class="nav-text">2.训练LOSS值变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%88%86%E5%88%AB%E5%AF%B9%E4%BA%8En%E7%A7%8D%E7%BB%86%E8%8F%8C%E6%95%B0%E6%8D%AE%E5%90%84%E8%87%AA%E5%88%86%E7%B1%BB%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.3.</span> <span class="nav-text">模型分别对于n种细菌数据各自分类情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.2.2.0.4.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%A8%A1%E5%9E%8B%E5%AF%B9%E4%BA%8E%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E9%AA%8C%E8%AF%81%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.5.</span> <span class="nav-text">5.模型对于测试集的验证情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E6%A8%A1%E5%9E%8B%E5%85%AD%E7%A7%8D%E7%BB%86%E8%8F%8C%E7%9A%84ROC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.6.</span> <span class="nav-text">6.模型六种细菌的ROC变化情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3%E4%B8%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9B%B8%E6%AF%94%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87%E7%A8%8B%E5%BA%A6"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3与经典网络相比的准确率提升程度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">2.创新点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">部分参考：</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -513,17 +495,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">1</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">标签</span>
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -570,13 +556,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">4k</span>
+    <span title="站点总字数">3k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">7 分钟</span>
+    <span title="站点阅读时长">6 分钟</span>
 </div>
 
 <!--

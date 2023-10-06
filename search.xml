@@ -4,6 +4,8 @@
     <title>基于AM-CNN的细菌图谱分类模型</title>
     <url>/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<h1 id="1-实现过程"><a href="#1-实现过程" class="headerlink" title="1.实现过程"></a>1.实现过程</h1><h2 id="1-1模型选择"><a href="#1-1模型选择" class="headerlink" title="1.1模型选择"></a>1.1模型选择</h2><h3 id="1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）"><a href="#1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）" class="headerlink" title="1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）"></a>1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</h3><p>​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接着，对卷积结果使用第二次注意力机制捕获视窗与关系的相关性。最终，将卷积结果与相关性矩阵相乘，得到最后的输出结果。</p>
+<span id="more"></span>
+
 <p>​	（这个模型的核心在于将细菌拉曼图谱的波长向量和强度向量与输入数据进行组合。首先，将这两种向量进行拼接，构成了最初的输入向量。接着，使用滑动窗口的方式将目标词与周围词组合在一起，形成综合向量。第一次的注意力机制应用在实体与序列中每个词的相关性。将相关性矩阵与输入的综合词向量矩阵相乘，得到一个二维矩阵。然后，使用卷积提取特征，并对卷积结果使用第二次注意力机制捕获视窗与关系的相关性。最后，将卷积结果与相关性矩阵相乘，得到最终的输出结果。通过这种方式，模型能够充分考虑细菌拉曼图谱的波长向量和强度向量在输入数据中的关联关系。）</p>
 <p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/image-20230801094141414.png" alt="image-20230801094141414"></p>
 <p>​																			模型结构</p>
@@ -39,7 +41,8 @@
 
 <h5 id="2-训练LOSS值变化情况"><a href="#2-训练LOSS值变化情况" class="headerlink" title="2.训练LOSS值变化情况"></a>2.训练LOSS值变化情况</h5><p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/1LOSS.png" alt="1LOSS"></p>
 <h5 id="模型分别对于n种细菌数据各自分类情况"><a href="#模型分别对于n种细菌数据各自分类情况" class="headerlink" title="模型分别对于n种细菌数据各自分类情况"></a>模型分别对于n种细菌数据各自分类情况</h5><p><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.833%25%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%06%7B%C5%B5Process.png" alt="98.833%四种细菌分类情况Process"></p>
-<h5 id=""><a href="#" class="headerlink" title=""></a><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.75%25%06%7B%C5%B5process.png" alt="98.75%分类情况process"></h5><p><strong>（1）.未标注</strong></p>
+<p><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.75%25%06%7B%C5%B5process.png" alt="98.75%分类情况process"></p>
+<p><strong>（1）.未标注</strong></p>
 <p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/FREE.png" alt="FREE"></p>
 <p><strong>（2）.标注</strong></p>
 <p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/LABEL.png" alt="LABEL"></p>

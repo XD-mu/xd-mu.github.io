@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/compare-169657254906614.png">
 <meta property="og:image" content="https://xd-mu.github.io/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/performence-169657256481017.png">
 <meta property="article:published_time" content="2023-10-06T03:51:47.000Z">
-<meta property="article:modified_time" content="2023-10-06T06:10:04.333Z">
+<meta property="article:modified_time" content="2023-10-06T10:00:37.136Z">
 <meta property="article:author" content="野生调参侠">
 <meta property="article:tag" content="深度学习;">
 <meta property="article:tag" content="自然语言处理;">
@@ -135,19 +135,24 @@
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
         <li class="menu-item menu-item-categories">
 
     <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -229,7 +234,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-10-06 11:51:47 / 修改时间：14:10:04" itemprop="dateCreated datePublished" datetime="2023-10-06T11:51:47+08:00">2023-10-06</time>
+              <time title="创建时间：2023-10-06 11:51:47 / 修改时间：18:00:37" itemprop="dateCreated datePublished" datetime="2023-10-06T11:51:47+08:00">2023-10-06</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -274,6 +279,8 @@
 
       
         <h1 id="1-实现过程"><a href="#1-实现过程" class="headerlink" title="1.实现过程"></a>1.实现过程</h1><h2 id="1-1模型选择"><a href="#1-1模型选择" class="headerlink" title="1.1模型选择"></a>1.1模型选择</h2><h3 id="1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）"><a href="#1-1-1基于注意力改进的卷积神经网络算法（AM-CNN）" class="headerlink" title="1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）"></a>1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</h3><p>​	AM-CNN（基于注意力改进的卷积神经网络）模型是一种用于处理细菌拉曼图谱数据的新型深度学习算法。该模型在输入数据特征组合时，考虑了细菌拉曼图谱的波长向量和强度向量，通过滑动窗口方式获取目标词与周围词的综合向量。首先，通过第一次的注意力机制捕获实体与序列中每个词的相关性，并将其与输入的综合词向量矩阵相乘。接着，对卷积结果使用第二次注意力机制捕获视窗与关系的相关性。最终，将卷积结果与相关性矩阵相乘，得到最后的输出结果。</p>
+<span id="more"></span>
+
 <p>​	（这个模型的核心在于将细菌拉曼图谱的波长向量和强度向量与输入数据进行组合。首先，将这两种向量进行拼接，构成了最初的输入向量。接着，使用滑动窗口的方式将目标词与周围词组合在一起，形成综合向量。第一次的注意力机制应用在实体与序列中每个词的相关性。将相关性矩阵与输入的综合词向量矩阵相乘，得到一个二维矩阵。然后，使用卷积提取特征，并对卷积结果使用第二次注意力机制捕获视窗与关系的相关性。最后，将卷积结果与相关性矩阵相乘，得到最终的输出结果。通过这种方式，模型能够充分考虑细菌拉曼图谱的波长向量和强度向量在输入数据中的关联关系。）</p>
 <p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/image-20230801094141414.png" alt="image-20230801094141414"></p>
 <p>​																			模型结构</p>
@@ -309,7 +316,8 @@
 
 <h5 id="2-训练LOSS值变化情况"><a href="#2-训练LOSS值变化情况" class="headerlink" title="2.训练LOSS值变化情况"></a>2.训练LOSS值变化情况</h5><p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/1LOSS.png" alt="1LOSS"></p>
 <h5 id="模型分别对于n种细菌数据各自分类情况"><a href="#模型分别对于n种细菌数据各自分类情况" class="headerlink" title="模型分别对于n种细菌数据各自分类情况"></a>模型分别对于n种细菌数据各自分类情况</h5><p><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.833%25%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD%06%7B%C5%B5Process.png" alt="98.833%四种细菌分类情况Process"></p>
-<h5 id=""><a href="#" class="headerlink" title=""></a><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.75%25%06%7B%C5%B5process.png" alt="98.75%分类情况process"></h5><p><strong>（1）.未标注</strong></p>
+<p><img src="/2023/10/06/%EF%BF%BD%EF%BF%BDAM-CNN%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BD1%06%7B!%EF%BF%BD/98.75%25%06%7B%C5%B5process.png" alt="98.75%分类情况process"></p>
+<p><strong>（1）.未标注</strong></p>
 <p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/FREE.png" alt="FREE"></p>
 <p><strong>（2）.标注</strong></p>
 <p><img src="/2023/10/06/%E5%9F%BA%E4%BA%8EAM-CNN%E7%9A%84%E7%BB%86%E8%8F%8C%E5%9B%BE%E8%B0%B1%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B/LABEL.png" alt="LABEL"></p>
@@ -479,7 +487,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">1.实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="nav-number">1.1.</span> <span class="nav-text">1.1模型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95%EF%BC%88AM-CNN%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88AM-CNN%EF%BC%89%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">1.2基于注意力改进的卷积神经网络（AM-CNN）实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1%E6%9C%AA%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1未标注数据混合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88%EF%BC%886%E7%A7%8D%E7%BB%86%E8%8F%8C%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%88%86%E7%B1%BB%E6%95%88%E6%9E%9C%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2标注数据混合（6种细菌训练与分类效果）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%AE%AD%E7%BB%83%E5%87%86%E7%A1%AE%E7%8E%87%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">1.训练准确率变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%AE%AD%E7%BB%83LOSS%E5%80%BC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.2.</span> <span class="nav-text">2.训练LOSS值变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%88%86%E5%88%AB%E5%AF%B9%E4%BA%8En%E7%A7%8D%E7%BB%86%E8%8F%8C%E6%95%B0%E6%8D%AE%E5%90%84%E8%87%AA%E5%88%86%E7%B1%BB%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.3.</span> <span class="nav-text">模型分别对于n种细菌数据各自分类情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">1.2.2.0.4.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%A8%A1%E5%9E%8B%E5%AF%B9%E4%BA%8E%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E9%AA%8C%E8%AF%81%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.5.</span> <span class="nav-text">5.模型对于测试集的验证情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E6%A8%A1%E5%9E%8B%E5%85%AD%E7%A7%8D%E7%BB%86%E8%8F%8C%E7%9A%84ROC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.6.</span> <span class="nav-text">6.模型六种细菌的ROC变化情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3%E4%B8%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9B%B8%E6%AF%94%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87%E7%A8%8B%E5%BA%A6"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3与经典网络相比的准确率提升程度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">2.创新点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">部分参考：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">1.实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9"><span class="nav-number">1.1.</span> <span class="nav-text">1.1模型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%AE%97%E6%B3%95%EF%BC%88AM-CNN%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1基于注意力改进的卷积神经网络算法（AM-CNN）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2%E5%9F%BA%E4%BA%8E%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%94%B9%E8%BF%9B%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88AM-CNN%EF%BC%89%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.</span> <span class="nav-text">1.2基于注意力改进的卷积神经网络（AM-CNN）实验结果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1%E6%9C%AA%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1未标注数据混合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2%E6%A0%87%E6%B3%A8%E6%95%B0%E6%8D%AE%E6%B7%B7%E5%90%88%EF%BC%886%E7%A7%8D%E7%BB%86%E8%8F%8C%E8%AE%AD%E7%BB%83%E4%B8%8E%E5%88%86%E7%B1%BB%E6%95%88%E6%9E%9C%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2标注数据混合（6种细菌训练与分类效果）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E8%AE%AD%E7%BB%83%E5%87%86%E7%A1%AE%E7%8E%87%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">1.训练准确率变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E8%AE%AD%E7%BB%83LOSS%E5%80%BC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.2.</span> <span class="nav-text">2.训练LOSS值变化情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%88%86%E5%88%AB%E5%AF%B9%E4%BA%8En%E7%A7%8D%E7%BB%86%E8%8F%8C%E6%95%B0%E6%8D%AE%E5%90%84%E8%87%AA%E5%88%86%E7%B1%BB%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.3.</span> <span class="nav-text">模型分别对于n种细菌数据各自分类情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-%E6%A8%A1%E5%9E%8B%E5%AF%B9%E4%BA%8E%E6%B5%8B%E8%AF%95%E9%9B%86%E7%9A%84%E9%AA%8C%E8%AF%81%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.4.</span> <span class="nav-text">5.模型对于测试集的验证情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-%E6%A8%A1%E5%9E%8B%E5%85%AD%E7%A7%8D%E7%BB%86%E8%8F%8C%E7%9A%84ROC%E5%8F%98%E5%8C%96%E6%83%85%E5%86%B5"><span class="nav-number">1.2.2.0.5.</span> <span class="nav-text">6.模型六种细菌的ROC变化情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-3%E4%B8%8E%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%E7%9B%B8%E6%AF%94%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87%E7%A8%8B%E5%BA%A6"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3与经典网络相比的准确率提升程度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%88%9B%E6%96%B0%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">2.创新点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">部分参考：</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

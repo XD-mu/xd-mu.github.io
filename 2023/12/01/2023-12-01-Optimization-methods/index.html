@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xd-mu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.任务​	学习Gradient Descent、Mini-Batch Gradient descent、Momentum、Adam（RMSprop和Momentum的结合）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2023-12-21 Optimization methods">
+<meta property="og:url" content="https://xd-mu.github.io/2023/12/01/2023-12-01-Optimization-methods/index.html">
+<meta property="og:site_name" content="野生调参侠的博客">
+<meta property="og:description" content="1.任务​	学习Gradient Descent、Mini-Batch Gradient descent、Momentum、Adam（RMSprop和Momentum的结合）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/nGQlvMCy53rijzu.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/6cEs3wQZIAntJCW.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/KgDklCsHr3RBNqU.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/2e7FkKp4DrHCo1j.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/nvGS3BZxrVbTtyo.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/WH7sBKt2PDXEjnZ.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/7Kk5OZBGLqHxdtP.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/4x7IvSq9btPp1go.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/EhJ8kBYyq3RtDW7.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/AIg1WLO6PQSl3c2.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/IB3u9wJcjCKLaSq.png">
+<meta property="og:image" content="https://s2.loli.net/2023/12/01/Znl46ejU8SB7N2Y.png">
+<meta property="article:published_time" content="2023-12-01T01:12:50.000Z">
+<meta property="article:modified_time" content="2023-12-01T04:06:20.240Z">
+<meta property="article:author" content="野生调参侠">
+<meta property="article:tag" content="优化算法;">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/12/01/nGQlvMCy53rijzu.png">
+
+<link rel="canonical" href="https://xd-mu.github.io/2023/12/01/2023-12-01-Optimization-methods/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>2023-12-21 Optimization methods | 野生调参侠的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">野生调参侠的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/01/2023-12-01-Optimization-methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
+      <meta itemprop="name" content="野生调参侠">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="野生调参侠的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2023-12-21 Optimization methods
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-01 09:12:50 / 修改时间：12:06:20" itemprop="dateCreated datePublished" datetime="2023-12-01T09:12:50+08:00">2023-12-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">传统算法学习</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">吴恩达课程学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>22k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>40 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-任务"><a href="#1-任务" class="headerlink" title="1.任务"></a>1.任务</h2><p>​	学习<strong>Gradient Descent</strong>、<strong>Mini-Batch Gradient descent</strong>、<strong>Momentum</strong>、<strong>Adam（RMSprop和Momentum的结合）</strong></p>
+<span id="more"></span>
+
+<h2 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2.准备工作"></a>2.准备工作</h2><ul>
+<li><strong>导入依赖包</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> scipy.io</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> sklearn</span><br><span class="line"><span class="keyword">import</span> sklearn.datasets</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> opt_utils <span class="keyword">import</span> load_params_and_grads, initialize_parameters, forward_propagation, backward_propagation</span><br><span class="line"><span class="keyword">from</span> opt_utils <span class="keyword">import</span> compute_cost, predict, predict_dec, plot_decision_boundary, load_dataset</span><br><span class="line"><span class="keyword">from</span> testCases <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-四种算法介绍"><a href="#3-四种算法介绍" class="headerlink" title="3.四种算法介绍"></a>3.四种算法介绍</h2><h3 id="3-1Gradient-Descent"><a href="#3-1Gradient-Descent" class="headerlink" title="3.1Gradient Descent"></a>3.1Gradient Descent</h3><p>​	Gradient Descent是机器学习中一个简单的优化算法，简称GD。当对每个步骤上的所有 $m$ 示例采取梯度步骤时，它也称为批量梯度下降。</p>
+<ul>
+<li><strong>热身训练</strong></li>
+</ul>
+<p>​	实现梯度下降更新规则。梯度下降规则是，对于 $l &#x3D; 1, …, L$: 来说</p>
+<p>​																					$$ W^{[l]} &#x3D; W^{[l]} - \alpha \text{ } dW^{[l]} \tag{1}$$</p>
+<p>​																						$$ b^{[l]} &#x3D; b^{[l]} - \alpha \text{ } db^{[l]} \tag{2}$$</p>
+<p>​	在这段话中，“L”表示层数，“$\alpha$”表示学习率。所有参数应该存储在<code>parameters</code>字典中。注意迭代器<code>l</code>在<code>for</code>循环中从0开始，而第一个参数是$W^{[1]}$和$b^{[1]}$。编码时需要将<code>l</code>转换为<code>l+1</code>。</p>
+<p>​	下面我们实现这个算法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: 使用梯度下降更新参数的函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_parameters_with_gd</span>(<span class="params">parameters, grads, learning_rate</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    使用梯度下降的一步来更新参数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">    parameters -- 包含要更新的参数的python字典：</span></span><br><span class="line"><span class="string">                    parameters[&#x27;W&#x27; + str(l)] = Wl</span></span><br><span class="line"><span class="string">                    parameters[&#x27;b&#x27; + str(l)] = bl</span></span><br><span class="line"><span class="string">    grads -- 包含用于更新每个参数的梯度的python字典：</span></span><br><span class="line"><span class="string">                    grads[&#x27;dW&#x27; + str(l)] = dWl</span></span><br><span class="line"><span class="string">                    grads[&#x27;db&#x27; + str(l)] = dbl</span></span><br><span class="line"><span class="string">    learning_rate -- 学习率，标量。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">    parameters -- 包含更新后参数的python字典</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    L = <span class="built_in">len</span>(parameters) // <span class="number">2</span> <span class="comment"># 神经网络中的层数</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 每个参数的更新规则</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">        <span class="comment">### 开始编写代码 ### (大约 2 行)</span></span><br><span class="line">        parameters[<span class="string">&quot;W&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] -= learning_rate * grads[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        parameters[<span class="string">&quot;b&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] -= learning_rate * grads[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        <span class="comment">### 结束编写代码 ###</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>部署这段代码：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取测试数据</span></span><br><span class="line">parameters, grads, learning_rate = update_parameters_with_gd_test_case()</span><br><span class="line"><span class="comment">#运行算法</span></span><br><span class="line">parameters = update_parameters_with_gd(parameters, grads, learning_rate)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;W1 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;W1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b1 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;b1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;W2 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;W2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b2 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;b2&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>输出</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">W1 = [[ 1.63535156, -0.62320365, -0.53718766],</span><br><span class="line">      [-1.07799357,  0.85639907, -2.29470142]]</span><br><span class="line"></span><br><span class="line">b1 = [[ 1.74604067],</span><br><span class="line">      [-0.75184921]]</span><br><span class="line"></span><br><span class="line">W2 = [[ 0.32171798, -0.25467393,  1.46902454],</span><br><span class="line">      [-2.05617317, -0.31554548, -0.3756023 ],</span><br><span class="line">      [ 1.1404819,  -1.09976462, -0.1612551 ]]</span><br><span class="line"></span><br><span class="line">b2 = [[-0.88020257],</span><br><span class="line">      [ 0.02561572],</span><br><span class="line">      [ 0.57539477]]</span><br></pre></td></tr></table></figure>
+
+<p>​	这里有一种变体叫做随机梯度下降（SGD），它等同于小批量梯度下降，但每个小批量仅包含一个样本。我刚刚实现的更新规则并不会改变。改变的是，我将一次只对一个训练样本计算梯度，而不是对整个训练集计算。下面的代码示例展示了随机梯度下降和（批量）梯度下降之间的区别。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###(Batch) Gradient Descent:###</span></span><br><span class="line">X = data_input</span><br><span class="line">Y = labels</span><br><span class="line">parameters = initialize_parameters(layers_dims)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, num_iterations):</span><br><span class="line">    <span class="comment"># Forward propagation</span></span><br><span class="line">    a, caches = forward_propagation(X, parameters)</span><br><span class="line">    <span class="comment"># Compute cost.</span></span><br><span class="line">    cost = compute_cost(a, Y)</span><br><span class="line">    <span class="comment"># Backward propagation.</span></span><br><span class="line">    grads = backward_propagation(a, caches, parameters)</span><br><span class="line">    <span class="comment"># Update parameters.</span></span><br><span class="line">    parameters = update_parameters(parameters, grads)</span><br><span class="line"></span><br><span class="line"><span class="comment">###Stochastic Gradient Descent:###</span></span><br><span class="line">X = data_input</span><br><span class="line">Y = labels</span><br><span class="line">parameters = initialize_parameters(layers_dims)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, num_iterations):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, m):</span><br><span class="line">        <span class="comment"># Forward propagation</span></span><br><span class="line">        a, caches = forward_propagation(X[:,j], parameters)</span><br><span class="line">        <span class="comment"># Compute cost</span></span><br><span class="line">        cost = compute_cost(a, Y[:,j])</span><br><span class="line">        <span class="comment"># Backward propagation</span></span><br><span class="line">        grads = backward_propagation(a, caches, parameters)</span><br><span class="line">        <span class="comment"># Update parameters.</span></span><br><span class="line">        parameters = update_parameters(parameters, grads)</span><br></pre></td></tr></table></figure>
+
+<p>​	在随机梯度下降中，更新梯度之前只使用一个训练样本。当训练集很大时，随机梯度下降可以更快。但是，参数会向最小值“振荡”，而不是平滑地收敛。这里有一个这种情况的示意图：</p>
+<p><img src="https://s2.loli.net/2023/12/01/nGQlvMCy53rijzu.png" alt="image-20231201100551931"></p>
+<p>​	在实际应用中，如果既不使用整个训练集，也不仅使用一个训练样本来进行每次更新，通常会得到更快的结果。Mini-Batch Gradient descent使用中间数量的样本来进行每一步的更新。使用Mini-Batch Gradient descent时，训练时会遍历小批量样本而不是单个训练样本。</p>
+<p><img src="https://s2.loli.net/2023/12/01/6cEs3wQZIAntJCW.png" alt="image-20231201100521508"></p>
+<p>​	我们应该额外关注的是：</p>
+<ul>
+<li>梯度下降、小批量梯度下降和随机梯度下降之间的区别在于你用来进行一次更新步骤的样本数量。</li>
+<li>你需要调整学习率超参数$\alpha$。</li>
+<li>使用一个调整得当的小批量大小，通常它会优于梯度下降或随机梯度下降（特别是当训练集很大时）</li>
+</ul>
+<h3 id="3-2Mini-Batch-Gradient-descent"><a href="#3-2Mini-Batch-Gradient-descent" class="headerlink" title="3.2Mini-Batch Gradient descent"></a>3.2Mini-Batch Gradient descent</h3><p>​	该算法主要分为两步：</p>
+<ul>
+<li><strong>Shuffle（洗牌）</strong></li>
+</ul>
+<p>​	如下所示，创建一个训练集（X, Y）的打乱版本。X和Y的每一列代表一个训练样本。注意，X和Y之间的随机洗牌是同步进行的。这样在洗牌后，X的第$i^{th}$列是与Y中第$i^{th}$标签对应的样本。洗牌步骤确保样本将随机分配到不同的小批量中。</p>
+<p><img src="https://s2.loli.net/2023/12/01/KgDklCsHr3RBNqU.png" alt="kiank_shuffle"></p>
+<ul>
+<li><strong>Partition（分割）</strong></li>
+</ul>
+<p>​	将打乱的（X, Y）分割成大小为<code>mini_batch_size</code>（这里是64）的小批量。注意，训练样本的数量并不总是能被<code>mini_batch_size</code>整除。最后一个小批量可能会更小，但这不需要担心。当最终的小批量小于完整的<code>mini_batch_size</code>时，它将如下所示：</p>
+<p><img src="https://s2.loli.net/2023/12/01/2e7FkKp4DrHCo1j.png" alt="kiank_partition"></p>
+<p>​	下面我们实现这个算法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: 随机生成小批量的函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">random_mini_batches</span>(<span class="params">X, Y, mini_batch_size = <span class="number">64</span>, seed = <span class="number">0</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    从 (X, Y) 中创建随机小批量的列表</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    X -- 输入数据，形状为 (输入大小, 样本数量)</span></span><br><span class="line"><span class="string">    Y -- 真实的“标签”向量（蓝点为1 / 红点为0），形状为 (1, 样本数量)</span></span><br><span class="line"><span class="string">    mini_batch_size -- 小批量的大小，整数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">    mini_batches -- 同步的 (mini_batch_X, mini_batch_Y) 列表</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(seed)            <span class="comment"># 为了使你的“随机”小批量与我们的相同</span></span><br><span class="line">    m = X.shape[<span class="number">1</span>]                  <span class="comment"># 训练样本的数量</span></span><br><span class="line">    mini_batches = []</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 第一步：洗牌 (X, Y)</span></span><br><span class="line">    permutation = <span class="built_in">list</span>(np.random.permutation(m))</span><br><span class="line">    shuffled_X = X[:, permutation]</span><br><span class="line">    shuffled_Y = Y[:, permutation].reshape((<span class="number">1</span>,m))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 第二步：分割 (shuffled_X, shuffled_Y)，排除最后一个案例。</span></span><br><span class="line">    num_complete_minibatches = math.floor(m/mini_batch_size) <span class="comment"># 在你的分割中，大小为 mini_batch_size 的小批量的数量</span></span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, num_complete_minibatches):</span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        mini_batch_X = shuffled_X[:, k * mini_batch_size : (k + <span class="number">1</span>) * mini_batch_size]</span><br><span class="line">        mini_batch_Y = shuffled_Y[:, k * mini_batch_size : (k + <span class="number">1</span>) * mini_batch_size]</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line">        mini_batch = (mini_batch_X, mini_batch_Y)</span><br><span class="line">        mini_batches.append(mini_batch)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 处理最后一个案例（最后一个小批量 &lt; mini_batch_size）</span></span><br><span class="line">    <span class="keyword">if</span> m % mini_batch_size != <span class="number">0</span>:</span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        mini_batch_X = shuffled_X[:, num_complete_minibatches * mini_batch_size : m]</span><br><span class="line">        mini_batch_Y = shuffled_Y[:, num_complete_minibatches * mini_batch_size : m]</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line">        mini_batch = (mini_batch_X, mini_batch_Y)</span><br><span class="line">        mini_batches.append(mini_batch)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> mini_batches</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>部署代码：</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">X_assess, Y_assess, mini_batch_size = random_mini_batches_test_case()</span><br><span class="line">mini_batches = random_mini_batches(X_assess, Y_assess, mini_batch_size)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;shape of the 1st mini_batch_X: &quot;</span> + <span class="built_in">str</span>(mini_batches[<span class="number">0</span>][<span class="number">0</span>].shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;shape of the 2nd mini_batch_X: &quot;</span> + <span class="built_in">str</span>(mini_batches[<span class="number">1</span>][<span class="number">0</span>].shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;shape of the 3rd mini_batch_X: &quot;</span> + <span class="built_in">str</span>(mini_batches[<span class="number">2</span>][<span class="number">0</span>].shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;shape of the 1st mini_batch_Y: &quot;</span> + <span class="built_in">str</span>(mini_batches[<span class="number">0</span>][<span class="number">1</span>].shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;shape of the 2nd mini_batch_Y: &quot;</span> + <span class="built_in">str</span>(mini_batches[<span class="number">1</span>][<span class="number">1</span>].shape)) </span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;shape of the 3rd mini_batch_Y: &quot;</span> + <span class="built_in">str</span>(mini_batches[<span class="number">2</span>][<span class="number">1</span>].shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;mini batch sanity check: &quot;</span> + <span class="built_in">str</span>(mini_batches[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>:<span class="number">3</span>]))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>输出：</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shape of the 1st mini_batch_X: (12288, 64)</span><br><span class="line">shape of the 2nd mini_batch_X: (12288, 64)</span><br><span class="line">shape of the 3rd mini_batch_X: (12288, 20)</span><br><span class="line">shape of the 1st mini_batch_Y: (1, 64)</span><br><span class="line">shape of the 2nd mini_batch_Y: (1, 64)</span><br><span class="line">shape of the 3rd mini_batch_Y: (1, 20)</span><br><span class="line">mini batch sanity check: [ 0.90085595 -0.7612069   0.2344157 ]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3Momentum"><a href="#3-3Momentum" class="headerlink" title="3.3Momentum"></a>3.3Momentum</h3><p>​	由于Mini-Batch Gradient descent在仅看到示例子集后进行参数更新，因此更新的方向存在一定方差，因此Mini-Batch Gradient descent所采取的路径将“振荡”收敛。 利用Momentum可以减少这些振荡。</p>
+<p>​	Momentum考虑了过去的梯度来平滑更新。 我们将先前梯度的“方向”存储在变量 $v$ 中。 形式上，这将是先前步骤梯度的指数加权平均值。 您还可以将 $v$ 视为滚下山的球的“速度”，根据山坡的梯度&#x2F;坡度方向增加速度（和动量）。</p>
+<p><img src="https://s2.loli.net/2023/12/01/nvGS3BZxrVbTtyo.png" alt="Momentum"></p>
+<p>​	下面我们实现这个算法：</p>
+<p>​	首先是初始化速度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: 初始化速度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_velocity</span>(<span class="params">parameters</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    以python字典的形式初始化速度，其中：</span></span><br><span class="line"><span class="string">                - 键： &quot;dW1&quot;, &quot;db1&quot;, ..., &quot;dWL&quot;, &quot;dbL&quot; </span></span><br><span class="line"><span class="string">                - 值：与相应梯度/参数形状相同的零值numpy数组。</span></span><br><span class="line"><span class="string">    参数:</span></span><br><span class="line"><span class="string">    parameters -- 包含你的参数的python字典。</span></span><br><span class="line"><span class="string">                    parameters[&#x27;W&#x27; + str(l)] = Wl</span></span><br><span class="line"><span class="string">                    parameters[&#x27;b&#x27; + str(l)] = bl</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回:</span></span><br><span class="line"><span class="string">    v -- 包含当前速度的python字典。</span></span><br><span class="line"><span class="string">                    v[&#x27;dW&#x27; + str(l)] = dWl的速度</span></span><br><span class="line"><span class="string">                    v[&#x27;db&#x27; + str(l)] = dbl的速度</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    L = <span class="built_in">len</span>(parameters) // <span class="number">2</span> <span class="comment"># 神经网络中的层数</span></span><br><span class="line">    v = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化速度</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        v[<span class="string">&#x27;dW&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = np.zeros(parameters[<span class="string">&quot;W&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)].shape)</span><br><span class="line">        v[<span class="string">&#x27;db&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = np.zeros(parameters[<span class="string">&quot;b&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)].shape)</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> v</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>部署代码：</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">parameters = initialize_velocity_test_case()</span><br><span class="line"></span><br><span class="line">v = initialize_velocity(parameters)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db2&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>输出：</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">v[&quot;dW1&quot;] = [[0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0]]</span><br><span class="line"></span><br><span class="line">v[&quot;db1&quot;] = [[0.0],</span><br><span class="line">            [0.0]]</span><br><span class="line"></span><br><span class="line">v[&quot;dW2&quot;] = [[0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0]]</span><br><span class="line"></span><br><span class="line">v[&quot;db2&quot;] = [[0.0],</span><br><span class="line">            [0.0],</span><br><span class="line">            [0.0]]</span><br></pre></td></tr></table></figure>
+
+<p>​	接着是momentum算法实现参数的更新。动量更新规则是，对于 $l &#x3D; 1, …, L$：</p>
+<p>​																$$ \begin{cases}<br>v_{dW^{[l]}} &#x3D; \beta v_{dW^{[l]}} + (1 - \beta) dW^{[l]} \<br>W^{[l]} &#x3D; W^{[l]} - \alpha v_{dW^{[l]}}<br>\end{cases}\tag{3}$$</p>
+<p>​																$$\begin{cases}<br>v_{db^{[l]}} &#x3D; \beta v_{db^{[l]}} + (1 - \beta) db^{[l]} \<br>b^{[l]} &#x3D; b^{[l]} - \alpha v_{db^{[l]}}<br>\end{cases}\tag{4}$$</p>
+<p>​	其中L是层数，$\beta$ 是动量，$\alpha$ 是学习率。所有参数应该存储在<code>parameters</code>字典中。注意迭代器<code>l</code>在<code>for</code>循环中从0开始，而第一个参数是 $W^{[1]}$ 和 $b^{[1]}$（这里的上标是“一”）。因此，在编码时需要将<code>l</code>改为<code>l+1</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: 使用动量更新参数的函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_parameters_with_momentum</span>(<span class="params">parameters, grads, v, beta, learning_rate</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    使用动量方法更新参数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">    parameters -- 包含你的参数的python字典：</span></span><br><span class="line"><span class="string">                    parameters[&#x27;W&#x27; + str(l)] = Wl</span></span><br><span class="line"><span class="string">                    parameters[&#x27;b&#x27; + str(l)] = bl</span></span><br><span class="line"><span class="string">    grads -- 包含每个参数梯度的python字典：</span></span><br><span class="line"><span class="string">                    grads[&#x27;dW&#x27; + str(l)] = dWl</span></span><br><span class="line"><span class="string">                    grads[&#x27;db&#x27; + str(l)] = dbl</span></span><br><span class="line"><span class="string">    v -- 包含当前速度的python字典：</span></span><br><span class="line"><span class="string">                    v[&#x27;dW&#x27; + str(l)] = ...</span></span><br><span class="line"><span class="string">                    v[&#x27;db&#x27; + str(l)] = ...</span></span><br><span class="line"><span class="string">    beta -- 动量超参数，标量</span></span><br><span class="line"><span class="string">    learning_rate -- 学习率，标量</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">    parameters -- 包含更新后参数的python字典 </span></span><br><span class="line"><span class="string">    v -- 包含更新后速度的python字典</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    L = <span class="built_in">len</span>(parameters) // <span class="number">2</span> <span class="comment"># 神经网络中的层数</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 每个参数的动量更新</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">        </span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 4 行)</span></span><br><span class="line">        <span class="comment"># 计算速度</span></span><br><span class="line">        v[<span class="string">&#x27;dW&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = beta * v[<span class="string">&#x27;dW&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] + (<span class="number">1</span> - beta) * grads[<span class="string">&#x27;dW&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        v[<span class="string">&#x27;db&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = beta * v[<span class="string">&#x27;db&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] + (<span class="number">1</span> - beta) * grads[<span class="string">&#x27;db&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        <span class="comment"># 更新参数</span></span><br><span class="line">        parameters[<span class="string">&#x27;W&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] -= learning_rate * v[<span class="string">&#x27;dW&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        parameters[<span class="string">&#x27;b&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] -= learning_rate * v[<span class="string">&#x27;db&#x27;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> parameters, v</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>部署算法</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">parameters, grads, v = update_parameters_with_momentum_test_case()</span><br><span class="line"></span><br><span class="line">parameters, v = update_parameters_with_momentum(parameters, grads, v, beta = <span class="number">0.9</span>, learning_rate = <span class="number">0.01</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;W1 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;W1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b1 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;b1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;W2 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;W2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b2 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;b2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db2&quot;</span>]))	</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>输出</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">W1 = [[ 1.62544598, -0.61290114, -0.52907334],</span><br><span class="line">      [-1.07347112,  0.86450677, -2.30085497]]</span><br><span class="line"></span><br><span class="line">b1 = [[ 1.74493465],</span><br><span class="line">      [-0.76027113]]</span><br><span class="line"></span><br><span class="line">W2 = [[ 0.31930698, -0.24990073,  1.4627996 ],</span><br><span class="line">      [-2.05974396, -0.32173003, -0.38320915],</span><br><span class="line">      [ 1.13444069, -1.0998786,  -0.1713109 ]]</span><br><span class="line"></span><br><span class="line">b2 = [[-0.87809283],</span><br><span class="line">      [ 0.04055394],</span><br><span class="line">      [ 0.58207317]]</span><br><span class="line"></span><br><span class="line">v[&quot;dW1&quot;] = [[-0.11006192,  0.11447237,  0.09015907],</span><br><span class="line">            [ 0.05024943,  0.09008559, -0.06837279]]</span><br><span class="line"></span><br><span class="line">v[&quot;db1&quot;] = [[-0.01228902],</span><br><span class="line">            [-0.09357694]]</span><br><span class="line"></span><br><span class="line">v[&quot;dW2&quot;] = [[-0.02678881,  0.05303555, -0.06916608],</span><br><span class="line">            [-0.03967535, -0.06871727, -0.08452056],</span><br><span class="line">            [-0.06712461, -0.00126646, -0.11173103]]</span><br><span class="line"></span><br><span class="line">v[&quot;db2&quot;] = [[ 0.02344157],</span><br><span class="line">            [ 0.16598022],</span><br><span class="line">            [ 0.07420442]]</span><br></pre></td></tr></table></figure>
+
+<p>​	<font color="red"><strong>这个算法需要额外注意的是</strong>：</font> </p>
+<ul>
+<li>速度是以<strong>0</strong>开始初始化的。因此，算法需要几次迭代来“积累”速度并开始采取更大的步伐。</li>
+<li>如果 $\beta &#x3D; 0$，那么这就变成了没有动量的标准梯度下降。</li>
+</ul>
+<p>​	<font color="red"><strong>如何选择$\beta$？</strong></font> </p>
+<ul>
+<li>动量 $\beta$ 越大，更新就越平滑，因为我们考虑了更多过去的梯度。但是，如果 $\beta$ 太大，也可能过度平滑更新。</li>
+<li>$\beta$ 的常见值范围从 0.8 到 0.999。如果你不想调整这个值，$\beta &#x3D; 0.9$ 通常是一个合理的默认选择。</li>
+<li>为你的模型调整最优的 $\beta$ 可能需要尝试多个值，以查看哪个在降低成本函数 $J$ 的值方面效果最好。</li>
+</ul>
+<h3 id="3-4Adam"><a href="#3-4Adam" class="headerlink" title="3.4Adam"></a>3.4Adam</h3><ul>
+<li><strong>工作机制</strong></li>
+</ul>
+<ol>
+<li>它计算过去梯度的指数加权平均值，并将其存储在变量 $v$（未进行偏差校正前）和 $v^{corrected}$（进行偏差校正后）中。</li>
+<li>它计算过去梯度平方的指数加权平均值，并将其存储在变量 $s$（未进行偏差校正前）和 $s^{corrected}$（进行偏差校正后）中。</li>
+<li>它基于结合“1”和“2”的信息来更新参数。</li>
+</ol>
+<p>​	更新规则，对于 $l &#x3D; 1, …, L$：</p>
+<p><img src="https://s2.loli.net/2023/12/01/WH7sBKt2PDXEjnZ.png" alt="image-20231201113047855"></p>
+<p>其中： </p>
+<ul>
+<li>t 表示 Adam 执行的步数 </li>
+<li>L 是层数 </li>
+<li>$\beta_1$ 和 $\beta_2$ 是控制两个指数加权平均的超参数。 </li>
+<li>$\alpha$ 是学习率 </li>
+<li>$\varepsilon$ 是一个非常小的数，用来避免除以零 像往常一样，我们会将所有参数存储在 <code>parameters</code> 字典中。</li>
+</ul>
+<p>​	下面我们实现这个算法：</p>
+<p>​	首先是初始化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: 初始化Adam算法的函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">initialize_adam</span>(<span class="params">parameters</span>) :</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    以两个python字典的形式初始化 v 和 s：</span></span><br><span class="line"><span class="string">                - 键： &quot;dW1&quot;, &quot;db1&quot;, ..., &quot;dWL&quot;, &quot;dbL&quot; </span></span><br><span class="line"><span class="string">                - 值：形状与相应梯度/参数相同的零值numpy数组。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">    parameters -- 包含你的参数的python字典。</span></span><br><span class="line"><span class="string">                    parameters[&quot;W&quot; + str(l)] = Wl</span></span><br><span class="line"><span class="string">                    parameters[&quot;b&quot; + str(l)] = bl</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    返回： </span></span><br><span class="line"><span class="string">    v -- 将包含梯度指数加权平均的python字典。</span></span><br><span class="line"><span class="string">                    v[&quot;dW&quot; + str(l)] = ...</span></span><br><span class="line"><span class="string">                    v[&quot;db&quot; + str(l)] = ...</span></span><br><span class="line"><span class="string">    s -- 将包含平方梯度指数加权平均的python字典。</span></span><br><span class="line"><span class="string">                    s[&quot;dW&quot; + str(l)] = ...</span></span><br><span class="line"><span class="string">                    s[&quot;db&quot; + str(l)] = ...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    L = <span class="built_in">len</span>(parameters) // <span class="number">2</span> <span class="comment"># 神经网络中的层数</span></span><br><span class="line">    v = &#123;&#125;</span><br><span class="line">    s = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化 v, s。输入：&quot;parameters&quot;。输出：&quot;v, s&quot;。</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">    <span class="comment">### 开始编码 ### (大约 4 行)</span></span><br><span class="line">        v[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = np.zeros(parameters[<span class="string">&quot;W&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)].shape)</span><br><span class="line">        v[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = np.zeros(parameters[<span class="string">&quot;b&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)].shape)</span><br><span class="line">        s[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = np.zeros(parameters[<span class="string">&quot;W&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)].shape)</span><br><span class="line">        s[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = np.zeros(parameters[<span class="string">&quot;b&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)].shape)</span><br><span class="line">    <span class="comment">### 结束编码 ###</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> v, s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>部署代码</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">parameters = initialize_adam_test_case()</span><br><span class="line"></span><br><span class="line">v, s = initialize_adam(parameters)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;dW1\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;dW1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;db1\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;db1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;dW2\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;dW2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;db2\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;db2&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>输出</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">v[&quot;dW1&quot;] = [[0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0]]</span><br><span class="line"></span><br><span class="line">v[&quot;db1&quot;] = [[0.0],</span><br><span class="line">            [0.0]]</span><br><span class="line"></span><br><span class="line">v[&quot;dW2&quot;] = [[0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0]]</span><br><span class="line"></span><br><span class="line">v[&quot;db2&quot;] = [[0.0],</span><br><span class="line">            [0.0],</span><br><span class="line">            [0.0]]</span><br><span class="line"></span><br><span class="line">s[&quot;dW1&quot;] = [[0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0]]</span><br><span class="line"></span><br><span class="line">s[&quot;db1&quot;] = [[0.0],</span><br><span class="line">            [0.0]]</span><br><span class="line"></span><br><span class="line">s[&quot;dW2&quot;] = [[0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0],</span><br><span class="line">            [0.0, 0.0, 0.0]]</span><br><span class="line"></span><br><span class="line">s[&quot;db2&quot;] = [[0.0],</span><br><span class="line">            [0.0],</span><br><span class="line">            [0.0]]</span><br></pre></td></tr></table></figure>
+
+<p>​	接着我们利用写好的初始化函数和上述提到的Adam算法公式来写出对应的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># GRADED FUNCTION: 使用Adam更新参数的函数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_parameters_with_adam</span>(<span class="params">parameters, grads, v, s, t, learning_rate = <span class="number">0.01</span>,</span></span><br><span class="line"><span class="params">                                beta1 = <span class="number">0.9</span>, beta2 = <span class="number">0.999</span>,  epsilon = <span class="number">1e-8</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    使用Adam方法更新参数</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">    parameters -- 包含你的参数的python字典：</span></span><br><span class="line"><span class="string">                    parameters[&#x27;W&#x27; + str(l)] = Wl</span></span><br><span class="line"><span class="string">                    parameters[&#x27;b&#x27; + str(l)] = bl</span></span><br><span class="line"><span class="string">    grads -- 包含每个参数梯度的python字典：</span></span><br><span class="line"><span class="string">                    grads[&#x27;dW&#x27; + str(l)] = dWl</span></span><br><span class="line"><span class="string">                    grads[&#x27;db&#x27; + str(l)] = dbl</span></span><br><span class="line"><span class="string">    v -- Adam变量，第一梯度的移动平均值，python字典</span></span><br><span class="line"><span class="string">    s -- Adam变量，平方梯度的移动平均值，python字典</span></span><br><span class="line"><span class="string">    learning_rate -- 学习率，标量。</span></span><br><span class="line"><span class="string">    beta1 -- 第一时刻估计的指数衰减超参数</span></span><br><span class="line"><span class="string">    beta2 -- 第二时刻估计的指数衰减超参数</span></span><br><span class="line"><span class="string">    epsilon -- 防止Adam更新中除以零的超参数</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">    parameters -- 包含更新后参数的python字典 </span></span><br><span class="line"><span class="string">    v -- Adam变量，第一梯度的移动平均值，python字典</span></span><br><span class="line"><span class="string">    s -- Adam变量，平方梯度的移动平均值，python字典</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    L = <span class="built_in">len</span>(parameters) // <span class="number">2</span>                 <span class="comment"># 神经网络中的层数</span></span><br><span class="line">    v_corrected = &#123;&#125;                         <span class="comment"># 初始化第一时刻估计，python字典</span></span><br><span class="line">    s_corrected = &#123;&#125;                         <span class="comment"># 初始化第二时刻估计，python字典</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 对所有参数执行Adam更新</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">        <span class="comment"># 计算梯度的移动平均值。输入：&quot;v, grads, beta1&quot;。输出：&quot;v&quot;。</span></span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        v[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = beta1 * v[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] + (<span class="number">1</span> - beta1) * grads[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        v[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = beta1 * v[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] + (<span class="number">1</span> - beta1) * grads[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算校正后的第一时刻估计。输入：&quot;v, beta1, t&quot;。输出：&quot;v_corrected&quot;。</span></span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        v_corrected[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = v[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] / (<span class="number">1</span> - beta1 ** t)</span><br><span class="line">        v_corrected[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = v[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] / (<span class="number">1</span> - beta1 ** t)</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算平方梯度的移动平均值。输入：&quot;s, grads, beta2&quot;。输出：&quot;s&quot;。</span></span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        s[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = beta2 * s[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] + (<span class="number">1</span> - beta2) * np.multiply(grads[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)], grads[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)])</span><br><span class="line">        s[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = beta2 * s[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] + (<span class="number">1</span> - beta2) * np.multiply(grads[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)], grads[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)])</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算校正后的第二原始时刻估计。输入：&quot;s, beta2, t&quot;。输出：&quot;s_corrected&quot;。</span></span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        s_corrected[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = s[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] / (<span class="number">1</span> - beta2 ** t)</span><br><span class="line">        s_corrected[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] = s[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] / (<span class="number">1</span> - beta2 ** t)</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 更新参数。输入：&quot;parameters, learning_rate, v_corrected, s_corrected, epsilon&quot;。输出：&quot;parameters&quot;。</span></span><br><span class="line">        <span class="comment">### 开始编码 ### (大约 2 行)</span></span><br><span class="line">        parameters[<span class="string">&quot;W&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] -= learning_rate * v_corrected[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] / (epsilon + np.sqrt(s_corrected[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]))</span><br><span class="line">        parameters[<span class="string">&quot;b&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] -= learning_rate * v_corrected[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)] / (epsilon + np.sqrt(s_corrected[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(i + <span class="number">1</span>)]))</span><br><span class="line">        <span class="comment">### 结束编码 ###</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters, v, s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>代码部署</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">parameters, grads, v, s = update_parameters_with_adam_test_case()</span><br><span class="line">parameters, v, s  = update_parameters_with_adam(parameters, grads, v, s, t = <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;W1 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;W1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b1 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;b1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;W2 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;W2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;b2 = &quot;</span> + <span class="built_in">str</span>(parameters[<span class="string">&quot;b2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db1\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;dW2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;dW2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;v[\&quot;db2\&quot;] = &quot;</span> + <span class="built_in">str</span>(v[<span class="string">&quot;db2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;dW1\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;dW1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;db1\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;db1&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;dW2\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;dW2&quot;</span>]))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;s[\&quot;db2\&quot;] = &quot;</span> + <span class="built_in">str</span>(s[<span class="string">&quot;db2&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>输出</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">W1 = [[ 1.63178673, -0.61919778, -0.53561312],</span><br><span class="line">      [-1.08040999,  0.85796626, -2.29409733]]</span><br><span class="line"></span><br><span class="line">b1 = [[ 1.75225313],</span><br><span class="line">      [-0.75376553]]</span><br><span class="line"></span><br><span class="line">W2 = [[ 0.32648046, -0.25681174,  1.46954931],</span><br><span class="line">      [-2.05269934, -0.31497584, -0.37661299],</span><br><span class="line">      [ 1.14121081, -1.09244991, -0.16498684]]</span><br><span class="line"></span><br><span class="line">b2 = [[-0.88529979],</span><br><span class="line">      [ 0.03477238],</span><br><span class="line">      [ 0.57537385]]</span><br><span class="line"></span><br><span class="line">v[&quot;dW1&quot;] = [[-0.11006192,  0.11447237,  0.09015907],</span><br><span class="line">            [ 0.05024943,  0.09008559, -0.06837279]]</span><br><span class="line"></span><br><span class="line">v[&quot;db1&quot;] = [[-0.01228902],</span><br><span class="line">            [-0.09357694]]</span><br><span class="line"></span><br><span class="line">v[&quot;dW2&quot;] = [[-0.02678881,  0.05303555, -0.06916608],</span><br><span class="line">            [-0.03967535, -0.06871727, -0.08452056],</span><br><span class="line">            [-0.06712461, -0.00126646, -0.11173103]]</span><br><span class="line"></span><br><span class="line">v[&quot;db2&quot;] = [[ 0.02344157],</span><br><span class="line">            [ 0.16598022],</span><br><span class="line">            [ 0.07420442]]</span><br><span class="line"></span><br><span class="line">s[&quot;dW1&quot;] = [[0.00121136, 0.00131039, 0.00081287],</span><br><span class="line">            [0.0002525,  0.00081154, 0.00046748]]</span><br><span class="line"></span><br><span class="line">s[&quot;db1&quot;] = [[1.51020075e-05],</span><br><span class="line">            [8.75664434e-04]]</span><br><span class="line"></span><br><span class="line">s[&quot;dW2&quot;] = [[7.17640232e-05, 2.81276921e-04, 4.78394595e-04],</span><br><span class="line">            ...</span><br><span class="line">            [4.50571368e-04, 1.60392066e-07, 1.24838242e-03]]</span><br><span class="line"></span><br><span class="line">s[&quot;db2&quot;] = [[5.49507194e-05],</span><br><span class="line">            [2.75494327e-03],</span><br><span class="line">            [5.50629536e-04]]</span><br></pre></td></tr></table></figure>
+
+<h2 id="4四种算法在模型中的可视化对比"><a href="#4四种算法在模型中的可视化对比" class="headerlink" title="4四种算法在模型中的可视化对比"></a>4四种算法在模型中的可视化对比</h2><h3 id="4-1准备工作"><a href="#4-1准备工作" class="headerlink" title="4.1准备工作"></a>4.1准备工作</h3><ul>
+<li><strong>导入数据</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_X, train_Y = load_dataset()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>定义可视化图函数用于观察三种优化函数的效果</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot_decision_boundary</span>(<span class="params">model, X, y</span>):</span><br><span class="line">    <span class="comment">#import pdb;pdb.set_trace()</span></span><br><span class="line">    <span class="comment"># Set min and max values and give it some padding</span></span><br><span class="line">    x_min, x_max = X[<span class="number">0</span>, :].<span class="built_in">min</span>() - <span class="number">1</span>, X[<span class="number">0</span>, :].<span class="built_in">max</span>() + <span class="number">1</span></span><br><span class="line">    y_min, y_max = X[<span class="number">1</span>, :].<span class="built_in">min</span>() - <span class="number">1</span>, X[<span class="number">1</span>, :].<span class="built_in">max</span>() + <span class="number">1</span></span><br><span class="line">    h = <span class="number">0.01</span></span><br><span class="line">    <span class="comment"># Generate a grid of points with distance h between them</span></span><br><span class="line">    xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))</span><br><span class="line">    <span class="comment"># Predict the function value for the whole grid</span></span><br><span class="line">    Z = model(np.c_[xx.ravel(), yy.ravel()])</span><br><span class="line">    Z = Z.reshape(xx.shape)</span><br><span class="line">    <span class="comment"># Plot the contour and training examples</span></span><br><span class="line">    plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;x2&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;x1&#x27;</span>)</span><br><span class="line">    y = y.reshape(X[<span class="number">0</span>,:].shape)<span class="comment">#must reshape,otherwise confliction with dimensions</span></span><br><span class="line">    plt.scatter(X[<span class="number">0</span>, :], X[<span class="number">1</span>, :], c=y, cmap=plt.cm.Spectral)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2定义模型"><a href="#4-2定义模型" class="headerlink" title="4.2定义模型"></a>4.2定义模型</h3><p>我们已经实现了一个三层神经网络。你将用以下方法来训练它：</p>
+<ul>
+<li><p>Mini-batch Gradient Descent：它会调用你的函数：</p>
+<ul>
+<li><code>update_parameters_with_gd()</code></li>
+</ul>
+</li>
+<li><p>Mini-batchMomentum：它会调用你的函数：</p>
+<ul>
+<li><code>initialize_velocity()</code> 和 <code>update_parameters_with_momentum()</code></li>
+</ul>
+</li>
+<li><p>Mini-batch Adam：它会调用你的函数：</p>
+<ul>
+<li><code>initialize_adam()</code> 和 <code>update_parameters_with_adam()</code></li>
+</ul>
+</li>
+<li><p><strong>模型代码</strong>：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">model</span>(<span class="params">X, Y, layers_dims, optimizer, learning_rate=<span class="number">0.0007</span>, mini_batch_size=<span class="number">64</span>, beta=<span class="number">0.9</span>,</span></span><br><span class="line"><span class="params">          beta1=<span class="number">0.9</span>, beta2=<span class="number">0.999</span>, epsilon=<span class="number">1e-8</span>, num_epochs=<span class="number">10000</span>, print_cost=<span class="literal">True</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    可以在不同优化器模式下运行的三层神经网络模型。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    参数：</span></span><br><span class="line"><span class="string">    X -- 输入数据，形状为 (2, 样本数量)</span></span><br><span class="line"><span class="string">    Y -- 真实的“标签”向量（蓝点为1 / 红点为0），形状为 (1, 样本数量)</span></span><br><span class="line"><span class="string">    layers_dims -- python列表，包含每层的大小</span></span><br><span class="line"><span class="string">    learning_rate -- 学习率，标量。</span></span><br><span class="line"><span class="string">    mini_batch_size -- 小批量的大小</span></span><br><span class="line"><span class="string">    beta -- 动量超参数</span></span><br><span class="line"><span class="string">    beta1 -- 过去梯度估计的指数衰减超参数</span></span><br><span class="line"><span class="string">    beta2 -- 过去平方梯度估计的指数衰减超参数</span></span><br><span class="line"><span class="string">    epsilon -- 防止Adam更新中除以零的超参数</span></span><br><span class="line"><span class="string">    num_epochs -- 迭代次数</span></span><br><span class="line"><span class="string">    print_cost -- 如果为True，每1000次迭代打印一次成本</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    返回：</span></span><br><span class="line"><span class="string">    parameters -- 包含更新后参数的python字典</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    L = <span class="built_in">len</span>(layers_dims)             <span class="comment"># 神经网络中的层数</span></span><br><span class="line">    costs = []                       <span class="comment"># 用于跟踪成本</span></span><br><span class="line">    t = <span class="number">0</span>                            <span class="comment"># 初始化Adam更新所需的计数器</span></span><br><span class="line">    seed = <span class="number">10</span>                        <span class="comment"># 出于评分目的，确保你的“随机”小批量与我们的相同</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化参数</span></span><br><span class="line">    parameters = initialize_parameters(layers_dims)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 初始化优化器</span></span><br><span class="line">    <span class="keyword">if</span> optimizer == <span class="string">&quot;gd&quot;</span>:</span><br><span class="line">        <span class="keyword">pass</span> <span class="comment"># 梯度下降不需要初始化</span></span><br><span class="line">    <span class="keyword">elif</span> optimizer == <span class="string">&quot;momentum&quot;</span>:</span><br><span class="line">        v = initialize_velocity(parameters)</span><br><span class="line">    <span class="keyword">elif</span> optimizer == <span class="string">&quot;adam&quot;</span>:</span><br><span class="line">        v, s = initialize_adam(parameters)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 优化循环</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 定义随机小批量。每个周期后我们增加种子以不同地重洗数据集</span></span><br><span class="line">        seed = seed + <span class="number">1</span></span><br><span class="line">        minibatches = random_mini_batches(X, Y, mini_batch_size, seed)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> minibatch <span class="keyword">in</span> minibatches:</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 选择一个小批量</span></span><br><span class="line">            (minibatch_X, minibatch_Y) = minibatch</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 正向传播</span></span><br><span class="line">            a3, caches = forward_propagation(minibatch_X, parameters)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 计算成本</span></span><br><span class="line">            cost = compute_cost(a3, minibatch_Y)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 反向传播</span></span><br><span class="line">            grads = backward_propagation(minibatch_X, minibatch_Y, caches)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 更新参数</span></span><br><span class="line">            <span class="keyword">if</span> optimizer == <span class="string">&quot;gd&quot;</span>:</span><br><span class="line">                parameters = update_parameters_with_gd(parameters, grads, learning_rate)</span><br><span class="line">            <span class="keyword">elif</span> optimizer == <span class="string">&quot;momentum&quot;</span>:</span><br><span class="line">                parameters, v = update_parameters_with_momentum(parameters, grads, v, beta, learning_rate)</span><br><span class="line">            <span class="keyword">elif</span> optimizer == <span class="string">&quot;adam&quot;</span>:</span><br><span class="line">                t = t + <span class="number">1</span> <span class="comment"># Adam计数器</span></span><br><span class="line">                parameters, v, s = update_parameters_with_adam(parameters, grads, v, s,</span><br><span class="line">                                                               t, learning_rate, beta1, beta2, epsilon)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 每1000次迭代打印成本</span></span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;迭代次数 %i 后的成本: %f&quot;</span> % (i, cost))</span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            costs.append(cost)</span><br><span class="line">                </span><br><span class="line">    <span class="comment"># 绘制成本图</span></span><br><span class="line">    plt.plot(costs)</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;成本&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;迭代次数（每100次）&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&quot;学习率 = &quot;</span> + <span class="built_in">str</span>(learning_rate))</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3对比算法效果"><a href="#4-3对比算法效果" class="headerlink" title="4.3对比算法效果"></a>4.3对比算法效果</h3><h4 id="4-3-1Mini-batch-Gradient-descent"><a href="#4-3-1Mini-batch-Gradient-descent" class="headerlink" title="4.3.1Mini-batch Gradient descent"></a>4.3.1<strong>Mini-batch Gradient descent</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># train 3-layer model</span></span><br><span class="line">layers_dims = [train_X.shape[<span class="number">0</span>], <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">parameters = model(train_X, train_Y, layers_dims, optimizer = <span class="string">&quot;gd&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Predict</span></span><br><span class="line">predictions = predict(train_X, train_Y, parameters)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot decision boundary</span></span><br><span class="line">plt.title(<span class="string">&quot;Model with Gradient Descent optimization&quot;</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([-<span class="number">1.5</span>,<span class="number">2.5</span>])</span><br><span class="line">axes.set_ylim([-<span class="number">1</span>,<span class="number">1.5</span>])</span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/12/01/7Kk5OZBGLqHxdtP.png" alt="image-20231201120226785"></p>
+<p><strong>Accuracy: 0.7966666666666666</strong></p>
+<p><img src="https://s2.loli.net/2023/12/01/4x7IvSq9btPp1go.png" alt="image-20231201120238291"></p>
+<h4 id="4-3-2Mini-batch-gradient-descent-with-momentum"><a href="#4-3-2Mini-batch-gradient-descent-with-momentum" class="headerlink" title="4.3.2Mini-batch gradient descent with momentum"></a>4.3.2<strong>Mini-batch gradient descent with momentum</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># train 3-layer model</span></span><br><span class="line">layers_dims = [train_X.shape[<span class="number">0</span>], <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">parameters = model(train_X, train_Y, layers_dims, beta = <span class="number">0.9</span>, optimizer = <span class="string">&quot;momentum&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Predict</span></span><br><span class="line">predictions = predict(train_X, train_Y, parameters)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot decision boundary</span></span><br><span class="line">plt.title(<span class="string">&quot;Model with Momentum optimization&quot;</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([-<span class="number">1.5</span>,<span class="number">2.5</span>])</span><br><span class="line">axes.set_ylim([-<span class="number">1</span>,<span class="number">1.5</span>])</span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/12/01/EhJ8kBYyq3RtDW7.png" alt="image-20231201120325570"></p>
+<p><strong>Accuracy: 0.7966666666666666</strong></p>
+<p><img src="https://s2.loli.net/2023/12/01/AIg1WLO6PQSl3c2.png" alt="image-20231201120330219"></p>
+<h4 id="4-3-3Mini-batch-with-Adam-mode"><a href="#4-3-3Mini-batch-with-Adam-mode" class="headerlink" title="4.3.3Mini-batch with Adam mode"></a>4.3.3<strong>Mini-batch with Adam mode</strong></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># train 3-layer model</span></span><br><span class="line">layers_dims = [train_X.shape[<span class="number">0</span>], <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>]</span><br><span class="line">parameters = model(train_X, train_Y, layers_dims, optimizer = <span class="string">&quot;adam&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Predict</span></span><br><span class="line">predictions = predict(train_X, train_Y, parameters)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Plot decision boundary</span></span><br><span class="line">plt.title(<span class="string">&quot;Model with Adam optimization&quot;</span>)</span><br><span class="line">axes = plt.gca()</span><br><span class="line">axes.set_xlim([-<span class="number">1.5</span>,<span class="number">2.5</span>])</span><br><span class="line">axes.set_ylim([-<span class="number">1</span>,<span class="number">1.5</span>])</span><br><span class="line">plot_decision_boundary(<span class="keyword">lambda</span> x: predict_dec(parameters, x.T), train_X, train_Y)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/12/01/IB3u9wJcjCKLaSq.png" alt="image-20231201120408163"></p>
+<p><strong>Accuracy: 0.94</strong></p>
+<p><img src="https://s2.loli.net/2023/12/01/Znl46ejU8SB7N2Y.png" alt="image-20231201120420375"></p>
+<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h2><p>​	Momentum通常有所帮助，但鉴于较小的学习率和简单的数据集，其影响几乎可以忽略不计。此外，你在成本中看到的巨大波动来自于一些小批量对优化算法来说比其他批量更难处理的事实。</p>
+<p>另一方面，Adam明显优于mini-batch gradient descent和Momentum。如果在这个简单的数据集上运行更多的迭代，所有三种方法都会导致非常好的结果。然而，你已经看到Adam收敛得更快。</p>
+<p>Adam的一些优点包括：</p>
+<ul>
+<li>相对较低的内存要求（尽管高于梯度下降和带动量的梯度下降）</li>
+<li>通常即使在很少调整超参数的情况下也能表现良好（$\alpha$ 除外）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="野生调参侠 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>野生调参侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xd-mu.github.io/2023/12/01/2023-12-01-Optimization-methods/" title="2023-12-21 Optimization methods">https://xd-mu.github.io/2023/12/01/2023-12-01-Optimization-methods/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" rel="tag"># 优化算法;</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/30/2023-11-30%EF%BC%9ADeep-Neural-Network-Application/" rel="prev" title="2023-11-30：Deep-Neural-Network-Application">
+      <i class="fa fa-chevron-left"></i> 2023-11-30：Deep-Neural-Network-Application
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%BB%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">1.任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">2.准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%9B%9B%E7%A7%8D%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">3.四种算法介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1Gradient-Descent"><span class="nav-number">3.1.</span> <span class="nav-text">3.1Gradient Descent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2Mini-Batch-Gradient-descent"><span class="nav-number">3.2.</span> <span class="nav-text">3.2Mini-Batch Gradient descent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3Momentum"><span class="nav-number">3.3.</span> <span class="nav-text">3.3Momentum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4Adam"><span class="nav-number">3.4.</span> <span class="nav-text">3.4Adam</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E5%9B%9B%E7%A7%8D%E7%AE%97%E6%B3%95%E5%9C%A8%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96%E5%AF%B9%E6%AF%94"><span class="nav-number">4.</span> <span class="nav-text">4四种算法在模型中的可视化对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">4.1.</span> <span class="nav-text">4.1准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text">4.2定义模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3%E5%AF%B9%E6%AF%94%E7%AE%97%E6%B3%95%E6%95%88%E6%9E%9C"><span class="nav-number">4.3.</span> <span class="nav-text">4.3对比算法效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-1Mini-batch-Gradient-descent"><span class="nav-number">4.3.1.</span> <span class="nav-text">4.3.1Mini-batch Gradient descent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-2Mini-batch-gradient-descent-with-momentum"><span class="nav-number">4.3.2.</span> <span class="nav-text">4.3.2Mini-batch gradient descent with momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-3Mini-batch-with-Adam-mode"><span class="nav-number">4.3.3.</span> <span class="nav-text">4.3.3Mini-batch with Adam mode</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">5.总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="野生调参侠"
+      src="/images/%E5%A4%B4%E5%83%8F.jpg">
+  <p class="site-author-name" itemprop="name">野生调参侠</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/XD-mu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;XD-mu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/2410275787@qq.com" title="E-Mail → 2410275787@qq.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">野生调参侠</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">44k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:20</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/06/2023 11:48:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":200,"height":400,"position":"right","hOffset":20,"vOffset":0},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"log":false});</script></body>
+</html>

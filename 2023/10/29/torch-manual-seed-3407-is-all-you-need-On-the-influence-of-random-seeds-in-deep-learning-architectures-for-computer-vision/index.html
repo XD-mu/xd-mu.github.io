@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"xd-mu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="​	最近阅读到这篇论文，对于里面的调种子的方法比较感兴趣，简单记录一下阅读过程中的一些发现以及一些思考。 ​	首先先说结论：即使方差不是很大，也很容易找到一个比平均值表现好得多或差得多的异常值。这意味着如果计算量充足并且研究者对于自己的研究足够负责，那么最好探究一下因为随机种子设置、数据集划分等随即来源对于实验结果的影响，最终通过类似平均值、均值、方差、标准差、最值等数据形式展现。">
+  <meta name="description" content="摘要  ​ 最近阅读到这篇论文，对于里面的调种子的方法比较感兴趣，简单记录一下阅读过程中的一些发现以及一些思考。 ​ 首先先说结论：即使方差不是很大，也很容易找到一个比平均值表现好得多或差得多的异常值。这意味着如果计算量充足并且研究者对于自己的研究足够负责，那么最好探究一下因为随机种子设置、数据集划分等随即来源对于实验结果的影响，最终通过类似平均值、均值、方差、标准差、最值等数据">
 <meta property="og:type" content="article">
 <meta property="og:title" content="torch-manual-seed(3407)-is-all-you-need:-On-the-influence-of-random seeds-in-deep-learning-architectures-for computer-vision">
 <meta property="og:url" content="https://xd-mu.github.io/2023/10/29/torch-manual-seed-3407-is-all-you-need-On-the-influence-of-random-seeds-in-deep-learning-architectures-for-computer-vision/index.html">
 <meta property="og:site_name" content="野生调参侠的博客">
-<meta property="og:description" content="​	最近阅读到这篇论文，对于里面的调种子的方法比较感兴趣，简单记录一下阅读过程中的一些发现以及一些思考。 ​	首先先说结论：即使方差不是很大，也很容易找到一个比平均值表现好得多或差得多的异常值。这意味着如果计算量充足并且研究者对于自己的研究足够负责，那么最好探究一下因为随机种子设置、数据集划分等随即来源对于实验结果的影响，最终通过类似平均值、均值、方差、标准差、最值等数据形式展现。">
+<meta property="og:description" content="摘要  ​ 最近阅读到这篇论文，对于里面的调种子的方法比较感兴趣，简单记录一下阅读过程中的一些发现以及一些思考。 ​ 首先先说结论：即使方差不是很大，也很容易找到一个比平均值表现好得多或差得多的异常值。这意味着如果计算量充足并且研究者对于自己的研究足够负责，那么最好探究一下因为随机种子设置、数据集划分等随即来源对于实验结果的影响，最终通过类似平均值、均值、方差、标准差、最值等数据">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/11/29/NKpeY3FyC5AMUxX.png">
 <meta property="og:image" content="https://s2.loli.net/2023/11/29/19jNdcPgLsGtfDW.png">
@@ -269,14 +269,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -288,58 +288,127 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><img src="https://s2.loli.net/2023/11/29/NKpeY3FyC5AMUxX.png" alt="摘要"></p>
-<p>​	最近阅读到这篇论文，对于里面的调种子的方法比较感兴趣，简单记录一下阅读过程中的一些发现以及一些思考。</p>
-<p>​	首先先说结论：<strong>即使方差不是很大，也很容易找到一个比平均值表现好得多或差得多的异常值</strong>。这意味着如果计算量充足并且研究者对于自己的研究足够负责，那么最好探究一下因为随机种子设置、数据集划分等随即来源对于实验结果的影响，最终通过类似平均值、均值、方差、标准差、最值等数据形式展现。</p>
+        <figure>
+<img src="https://s2.loli.net/2023/11/29/NKpeY3FyC5AMUxX.png"
+alt="摘要" />
+<figcaption aria-hidden="true">摘要</figcaption>
+</figure>
+<p>​
+最近阅读到这篇论文，对于里面的调种子的方法比较感兴趣，简单记录一下阅读过程中的一些发现以及一些思考。</p>
+<p>​
+首先先说结论：<strong>即使方差不是很大，也很容易找到一个比平均值表现好得多或差得多的异常值</strong>。这意味着如果计算量充足并且研究者对于自己的研究足够负责，那么最好探究一下因为随机种子设置、数据集划分等随即来源对于实验结果的影响，最终通过类似平均值、均值、方差、标准差、最值等数据形式展现。</p>
 <span id="more"></span>
-
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>​	这是一篇论述通过设置torch.manual seed(3407)随机种子对于模型最终结果影响的实验性文章，作者通过大量实验选择出来一类可以影响模型精度的种子。在CIFAR10数据集上，作者探究了一万多个随机种子，同时也利用预训练模型在ImageNet大数据集上进行实验。</p>
-<p>​	整篇文章围绕着这三个问题展开的：</p>
-<ol>
+<h2 id="问题描述">问题描述</h2>
+<p>​ 这是一篇论述通过设置torch.manual
+seed(3407)随机种子对于模型最终结果影响的实验性文章，作者通过大量实验选择出来一类可以影响模型精度的种子。在CIFAR10数据集上，作者探究了一万多个随机种子，同时也利用预训练模型在ImageNet大数据集上进行实验。</p>
+<p>​ 整篇文章围绕着这三个问题展开的：</p>
+<ol type="1">
 <li>随机种子的不同导致的模型结果分布是怎样的?</li>
 <li>是否存在黑天鹅事件，也就是存在效果明显不同的随机种子？</li>
 <li>在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？</li>
 </ol>
-<h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><p>​	由于这只是一个简单的实验，并不是想要得到模型最好的结果，因此作者仅尝试在V100 GPU上进行实验，GPU时间限制为1000小时。（作为实验来讲，算力还是很充足的😄）</p>
-<p>​	<font color=Red><strong>CIFAR 10</strong></font>: 在CIFAR 10数据集上，作者选取了10000个随机种子，每个随机种子利用30s的时间来训练和测试，总耗时将近83h。模型架构采用的是9层ResNet，优化器是SGD。为了保证部分实验中，模型是接近收敛的，因此作者对其中500次的结果训练时长延迟至1分钟。最后，总算力消耗为90h的V100 GPU运行时间。</p>
-<p>​	<font color=Red><strong>ImageNet</strong></font>: 在ImageNet大型数据集上难以快速进行实验，因此作者使用预训练好的网络，然后仅仅对于最后一层分类层进行初始化并从头训练。每次实验模型训练时间为2h，测试50s。最终总耗时440h的V100 GPU运行时间。</p>
-<p>​	<font color=Red>实验缺陷</font>: </p>
-<p>​	作者通过实验表面，以上这种实验设置存在如下缺陷：</p>
-<ol>
+<h2 id="实验设置">实验设置</h2>
+<p>​
+由于这只是一个简单的实验，并不是想要得到模型最好的结果，因此作者仅尝试在V100
+GPU上进行实验，GPU时间限制为1000小时。（作为实验来讲，算力还是很充足的😄）</p>
+<p>​ <font color=Red><strong>CIFAR 10</strong></font>: 在CIFAR
+10数据集上，作者选取了10000个随机种子，每个随机种子利用30s的时间来训练和测试，总耗时将近83h。模型架构采用的是9层ResNet，优化器是SGD。为了保证部分实验中，模型是接近收敛的，因此作者对其中500次的结果训练时长延迟至1分钟。最后，总算力消耗为90h的V100
+GPU运行时间。</p>
+<p>​ <font color=Red><strong>ImageNet</strong></font>:
+在ImageNet大型数据集上难以快速进行实验，因此作者使用预训练好的网络，然后仅仅对于最后一层分类层进行初始化并从头训练。每次实验模型训练时间为2h，测试50s。最终总耗时440h的V100
+GPU运行时间。</p>
+<p>​ <font color=Red>实验缺陷</font>:</p>
+<p>​ 作者通过实验表面，以上这种实验设置存在如下缺陷：</p>
+<ol type="1">
 <li>实验中，模型结果并不是SOTA（由于运行时间限制导致，可能训练时间进一步增加可以得到更好的结果）</li>
 <li>在ImageNet数据集上，作者使用的是预训练模型，仅对最后一层网络进行训练，所以最终的结果只能说明与最后一层的训练和优化有关（而不是整个模型）。</li>
 </ol>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><h3 id="1、随机种子的不同导致的模型结果分布是怎样的"><a href="#1、随机种子的不同导致的模型结果分布是怎样的" class="headerlink" title="1、随机种子的不同导致的模型结果分布是怎样的?"></a>1、随机种子的不同导致的模型结果分布是怎样的?</h3><p>​	针对第一个问题，作者首先在CIFAR 10上对500个不同的种子进行训练，得到如下结果图:（视线为均值，深红色区域对应一个标准差，浅红色对应最大值和最小值）</p>
-<p><img src="https://s2.loli.net/2023/11/29/19jNdcPgLsGtfDW.png" alt="Resnet9架构在CIFAR 10上的验证精度随训练历元数的变化，实线表示超过500个种子的平均值，深红色区域对应一个标准差，浅红色对应最大值和最小值。"></p>
+<h2 id="问题解决">问题解决</h2>
+<h3
+id="随机种子的不同导致的模型结果分布是怎样的">1、随机种子的不同导致的模型结果分布是怎样的?</h3>
+<p>​ 针对第一个问题，作者首先在CIFAR
+10上对500个不同的种子进行训练，得到如下结果图:（视线为均值，深红色区域对应一个标准差，浅红色对应最大值和最小值）</p>
+<figure>
+<img src="https://s2.loli.net/2023/11/29/19jNdcPgLsGtfDW.png"
+alt="Resnet9架构在CIFAR 10上的验证精度随训练历元数的变化，实线表示超过500个种子的平均值，深红色区域对应一个标准差，浅红色对应最大值和最小值。" />
+<figcaption aria-hidden="true">Resnet9架构在CIFAR
+10上的验证精度随训练历元数的变化，实线表示超过500个种子的平均值，深红色区域对应一个标准差，浅红色对应最大值和最小值。</figcaption>
+</figure>
 <p><strong>作者发现：</strong></p>
-<p>​	1. 模型在25个epoch后准确率就不增加了，说明训练收敛了。然而，准确率的标准差并没有收敛（红色区域并没有变小），说明训练更久不会减少随机种子带来的差异。</p>
-<p><img src="https://s2.loli.net/2023/11/29/9ceyYBISJi32lmU.png" alt="在CIFAR 10上对超过500粒种子的Resnet9架构进行最终验证精度的直方图和密度图。底部的每一个破折号对应一次epoch。"></p>
-<ol start="2">
+<p>​ 1.
+模型在25个epoch后准确率就不增加了，说明训练收敛了。然而，准确率的标准差并没有收敛（红色区域并没有变小），说明训练更久不会减少随机种子带来的差异。</p>
+<figure>
+<img src="https://s2.loli.net/2023/11/29/9ceyYBISJi32lmU.png"
+alt="在CIFAR 10上对超过500粒种子的Resnet9架构进行最终验证精度的直方图和密度图。底部的每一个破折号对应一次epoch。" />
+<figcaption aria-hidden="true">在CIFAR
+10上对超过500粒种子的Resnet9架构进行最终验证精度的直方图和密度图。底部的每一个破折号对应一次epoch。</figcaption>
+</figure>
+<ol start="2" type="1">
 <li>模型准确率大多集中在90.5%至90.1%左右，也就是说，如果不去刻意选取特别好或者特别差的随机种子的话，不同随机种子带来的准确率差异普遍为0.5%。(结果图中底部的每个破折号对应一次跑动)</li>
 </ol>
-<p>​	因此，回到第一个问题，<font color=Red><strong>随机种子的不同导致的模型效果分布是怎样的？</strong> </font>答案显然就是：不同随机种子的运行效果分布是<strong>相当集中</strong>的——这是一个比较令人满意的结果，除非有人刻意去“调”随机种子，不然最后的结果是能够比较反应模型效果的。</p>
-<h3 id="2、是否存在“黑天鹅事件”？"><a href="#2、是否存在“黑天鹅事件”？" class="headerlink" title="2、是否存在“黑天鹅事件”？"></a>2、是否存在“黑天鹅事件”？</h3><p><img src="https://s2.loli.net/2023/11/29/oIiv8JFYd5UE2As.png" alt="CIFAR 10数据集上，不同随机种子在较长和较短训练时间下的结果"></p>
+<p>​
+因此，回到第一个问题，<font color=Red><strong>随机种子的不同导致的模型效果分布是怎样的？</strong>
+</font>答案显然就是：不同随机种子的运行效果分布是<strong>相当集中</strong>的——这是一个比较令人满意的结果，除非有人刻意去“调”随机种子，不然最后的结果是能够比较反应模型效果的。</p>
+<h3 id="是否存在黑天鹅事件">2、是否存在“黑天鹅事件”？</h3>
+<figure>
+<img src="https://s2.loli.net/2023/11/29/oIiv8JFYd5UE2As.png"
+alt="CIFAR 10数据集上，不同随机种子在较长和较短训练时间下的结果" />
+<figcaption aria-hidden="true">CIFAR
+10数据集上，不同随机种子在较长和较短训练时间下的结果</figcaption>
+</figure>
 <p><strong>作者发现：</strong></p>
-<ol>
+<ol type="1">
 <li>模型训练长比训练时间短效果更好。此外，在短训练时间条件下，准确率最小值和最大值相差为1.82%。（可以说在深度学习领域里差距比较大了）</li>
 <li>10000个随机种子的结果发现，准确率主要位于89.5%至90.5%的区间中。如果不扫描大量的种子，就不可能获得更高或更低的极端值。话虽如此，仅通过扫描前10000个随机种子得到的极值并不能代表该模型正常的结果。</li>
 </ol>
-<p><img src="https://s2.loli.net/2023/11/29/rpuCK5PMGwymjAU.png" alt="CIFAR 10 数据集上10000个随机种子的结果"></p>
-<p>​	因此，回到问题二：是否存在黑天鹅事件？显然，黑天鹅是存在的。确实有种子表现得比较好或者比较差，这是一个比较令人担忧的结果，<font color=Red><strong>因为当前深度学习社区内，大多文章都是追求模型效果的，而这种较好的效果可能仅仅是由于随机种子引起的</strong>。</font></p>
-<h3 id="3、在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？"><a href="#3、在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？" class="headerlink" title="3、在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？"></a>3、在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？</h3><p>​	为了验证大规模数据集对于种子造成模型精度的差异性，作者接着在ImageNet数据集进行实验，得到了如下结果：<br><img src="https://s2.loli.net/2023/11/29/9iw1N4CYjRcWxMA.png" alt="ImageNet数据集上不同模型不同随机种子的准确率"></p>
-<p><img src="https://s2.loli.net/2023/11/29/g7rMlNHoyjetB6z.png" alt="预训练好的ResNet50网络在Imagenet上最终验证精度的直方图和密度图。底部的每个破折号对应一次跑动。"></p>
-<p><img src="https://s2.loli.net/2023/11/29/7oH9JXKGtb15vBU.png" alt="自监督预训练的Visual Transformer在Imagenet上的最终验证精度的直方图和密度图。底部的每个破折号对应一次跑动"></p>
+<figure>
+<img src="https://s2.loli.net/2023/11/29/rpuCK5PMGwymjAU.png"
+alt="CIFAR 10 数据集上10000个随机种子的结果" />
+<figcaption aria-hidden="true">CIFAR 10
+数据集上10000个随机种子的结果</figcaption>
+</figure>
+<p>​
+因此，回到问题二：是否存在黑天鹅事件？显然，黑天鹅是存在的。确实有种子表现得比较好或者比较差，这是一个比较令人担忧的结果，<font color=Red><strong>因为当前深度学习社区内，大多文章都是追求模型效果的，而这种较好的效果可能仅仅是由于随机种子引起的</strong>。</font></p>
+<h3
+id="在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性">3、在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？</h3>
+<p>​
+为了验证大规模数据集对于种子造成模型精度的差异性，作者接着在ImageNet数据集进行实验，得到了如下结果：
+<img src="https://s2.loli.net/2023/11/29/9iw1N4CYjRcWxMA.png"
+alt="ImageNet数据集上不同模型不同随机种子的准确率" /></p>
+<figure>
+<img src="https://s2.loli.net/2023/11/29/g7rMlNHoyjetB6z.png"
+alt="预训练好的ResNet50网络在Imagenet上最终验证精度的直方图和密度图。底部的每个破折号对应一次跑动。" />
+<figcaption
+aria-hidden="true">预训练好的ResNet50网络在Imagenet上最终验证精度的直方图和密度图。底部的每个破折号对应一次跑动。</figcaption>
+</figure>
+<figure>
+<img src="https://s2.loli.net/2023/11/29/7oH9JXKGtb15vBU.png"
+alt="自监督预训练的Visual Transformer在Imagenet上的最终验证精度的直方图和密度图。底部的每个破折号对应一次跑动" />
+<figcaption aria-hidden="true">自监督预训练的Visual
+Transformer在Imagenet上的最终验证精度的直方图和密度图。底部的每个破折号对应一次跑动</figcaption>
+</figure>
 <p><strong>作者发现：</strong></p>
-<ol>
-<li>大数据集的上的结果标准差是比CIFA 10<strong>小得多</strong>的，根据上表还是能够观察到大约0.5%的结果提升——这仅仅是由于随机种子引起的。然而，0.5%的准确率提高在CV领域已经可以算是很明显的提升了。</li>
-<li>ImageNet数据集上的结果与CIFAR 10的分布还是有比较大的差异——这是由于随机种子仅仅选了50个的原因。然而，作者认为，哪怕是测试更多的随机种子，准确率分布的差异也不会达到1%以上。</li>
+<ol type="1">
+<li>大数据集的上的结果标准差是比CIFA
+10<strong>小得多</strong>的，根据上表还是能够观察到大约0.5%的结果提升——这仅仅是由于随机种子引起的。然而，0.5%的准确率提高在CV领域已经可以算是很明显的提升了。</li>
+<li>ImageNet数据集上的结果与CIFAR
+10的分布还是有比较大的差异——这是由于随机种子仅仅选了50个的原因。然而，作者认为，哪怕是测试更多的随机种子，准确率分布的差异也不会达到1%以上。</li>
 </ol>
-<p><img src="https://s2.loli.net/2023/11/29/A4xlzpTdhWutHDB.png" alt="自监督预训练的ResNet50网络在Imagenet上的最终验证精度的直方图和密度图"></p>
-<h3 id="3、在更大的数据集上进行预训练是否能减少由选择种子引起的差异性"><a href="#3、在更大的数据集上进行预训练是否能减少由选择种子引起的差异性" class="headerlink" title="3、在更大的数据集上进行预训练是否能减少由选择种子引起的差异性?"></a>3、<strong>在更大的数据集上进行预训练是否能减少由选择种子引起的差异性?</strong></h3><p>​	原文作者写到：<strong>它确实减少了因使用不同种子而产生的变异，但它并不能减轻这种变异。在Imagenet上，我们发现最大和最小精度之间的差异约为0.5 %，这通常被社区认为是该数据集的显著性。</strong>说白了，这个并不是一个符合作者预期的结果，因为目前预训练模型在CV领域里是广泛使用的，哪怕是用的同一个预训练模型，只要你扫描50个随机种子进行测试，你还是能够得到比较好的结果。</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>​	下次做实验时设置这个可能会提升代码模型的精确度😎😎😎</p>
+<figure>
+<img src="https://s2.loli.net/2023/11/29/A4xlzpTdhWutHDB.png"
+alt="自监督预训练的ResNet50网络在Imagenet上的最终验证精度的直方图和密度图" />
+<figcaption
+aria-hidden="true">自监督预训练的ResNet50网络在Imagenet上的最终验证精度的直方图和密度图</figcaption>
+</figure>
+<h3
+id="在更大的数据集上进行预训练是否能减少由选择种子引起的差异性">3、<strong>在更大的数据集上进行预训练是否能减少由选择种子引起的差异性?</strong></h3>
+<p>​
+原文作者写到：<strong>它确实减少了因使用不同种子而产生的变异，但它并不能减轻这种变异。在Imagenet上，我们发现最大和最小精度之间的差异约为0.5
+%，这通常被社区认为是该数据集的显著性。</strong>说白了，这个并不是一个符合作者预期的结果，因为目前预训练模型在CV领域里是广泛使用的，哪怕是用的同一个预训练模型，只要你扫描50个随机种子进行测试，你还是能够得到比较好的结果。</p>
+<h3 id="思考">思考</h3>
+<p>​ 下次做实验时设置这个可能会提升代码模型的精确度😎😎😎</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.manual_seed(<span class="number">3407</span>)</span><br></pre></td></tr></table></figure>
-
-<p>​	论文地址：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2109.08203">https://arxiv.org/abs/2109.08203</a></p>
+<p>​ 论文地址：https://arxiv.org/abs/2109.08203</p>
 
     </div>
 
@@ -457,7 +526,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E9%9A%8F%E6%9C%BA%E7%A7%8D%E5%AD%90%E7%9A%84%E4%B8%8D%E5%90%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%9C%E5%88%86%E5%B8%83%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">1、随机种子的不同导致的模型结果分布是怎样的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E2%80%9C%E9%BB%91%E5%A4%A9%E9%B9%85%E4%BA%8B%E4%BB%B6%E2%80%9D%EF%BC%9F"><span class="nav-number">3.2.</span> <span class="nav-text">2、是否存在“黑天鹅事件”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%9C%A8%E6%9B%B4%E5%A4%A7%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E8%BF%9B%E8%A1%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%87%8F%E5%B0%91%E7%94%B1%E9%80%89%E6%8B%A9%E7%A7%8D%E5%AD%90%E5%BC%95%E8%B5%B7%E7%9A%84%E5%B7%AE%E5%BC%82%E6%80%A7%EF%BC%9F"><span class="nav-number">3.3.</span> <span class="nav-text">3、在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%9C%A8%E6%9B%B4%E5%A4%A7%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E8%BF%9B%E8%A1%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E6%98%AF%E5%90%A6%E8%83%BD%E5%87%8F%E5%B0%91%E7%94%B1%E9%80%89%E6%8B%A9%E7%A7%8D%E5%AD%90%E5%BC%95%E8%B5%B7%E7%9A%84%E5%B7%AE%E5%BC%82%E6%80%A7"><span class="nav-number">3.4.</span> <span class="nav-text">3、在更大的数据集上进行预训练是否能减少由选择种子引起的差异性?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">3.5.</span> <span class="nav-text">思考</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">实验设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E7%A7%8D%E5%AD%90%E7%9A%84%E4%B8%8D%E5%90%8C%E5%AF%BC%E8%87%B4%E7%9A%84%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%9C%E5%88%86%E5%B8%83%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84"><span class="nav-number">3.1.</span> <span class="nav-text">1、随机种子的不同导致的模型结果分布是怎样的?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%E9%BB%91%E5%A4%A9%E9%B9%85%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">2、是否存在“黑天鹅事件”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%9B%B4%E5%A4%A7%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E8%BF%9B%E8%A1%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E5%87%8F%E5%B0%91%E7%94%B1%E9%80%89%E6%8B%A9%E7%A7%8D%E5%AD%90%E5%BC%95%E8%B5%B7%E7%9A%84%E5%B7%AE%E5%BC%82%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">3、在更大的数据集上进行预训练是否可以减少由选择种子引起的差异性？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%9B%B4%E5%A4%A7%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E8%BF%9B%E8%A1%8C%E9%A2%84%E8%AE%AD%E7%BB%83%E6%98%AF%E5%90%A6%E8%83%BD%E5%87%8F%E5%B0%91%E7%94%B1%E9%80%89%E6%8B%A9%E7%A7%8D%E5%AD%90%E5%BC%95%E8%B5%B7%E7%9A%84%E5%B7%AE%E5%BC%82%E6%80%A7"><span class="nav-number">3.4.</span> <span class="nav-text">3、在更大的数据集上进行预训练是否能减少由选择种子引起的差异性?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">3.5.</span> <span class="nav-text">思考</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -534,13 +603,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">61k</span>
+    <span title="站点总字数">62k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
 
 <!--

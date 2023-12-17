@@ -420,9 +420,9 @@ descent和Momentum。如果在这个简单的数据集上运行更多的迭代�
     <url>/2023/12/02/2023-12-2%EF%BC%9AHyperparameter-tuning-and-Tensorflow-using-note/</url>
     <content><![CDATA[<h2 id="任务">1.任务</h2>
 <ol type="1">
-<li>
-<li><font color="red>利用Jupyter" Notebook进行Tensorflow的基本操作进行熟悉(X)</font=""></font></li>
-</li></ol>
+<li>学习超参数调试技巧并记录</li>
+<li>利用Jupyter Notebook进行Tensorflow的基本操作进行熟悉(X)</li>
+</ol>
 <span id="more"></span>
 <h2 id="超参数调试技巧">2.超参数调试技巧</h2>
 <p><img src="https://s2.loli.net/2023/12/02/B247iQh1UekmES8.png" alt="image-20231202102333826" style="zoom:50%;"></p>
@@ -1470,5 +1470,77 @@ P-MIL
         <tag>YOLO;</tag>
         <tag>目标检测;</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Learning Action Completeness from Points for Weakly-supervised Temporal Action Localization</title>
+    <url>/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/</url>
+    <content><![CDATA[<h2 id="abstract">1.Abstract</h2>
+<p>​
+我们要解决的问题是，在每个动作实例只有一个帧标签的情况下，如何定位动作的时间间隔，以进行训练。由于标签稀疏，现有工作无法学习动作的完整性，从而导致零碎的动作预测。在本文中，我们提出了一个新颖的框架，即生成密集的伪标签，为模型提供完整性指导。具体来说，我们首先选择伪背景点来补充点级动作标签。然后，通过将点作为种子，我们搜索可能包含完整动作实例的最佳序列，同时与种子达成一致。为了从获得的序列中学习完整性，我们引入了两种新的损失，分别从动作得分和特征相似性方面对动作实例和背景实例进行对比。实验结果表明，我们的完整性指导确实有助于模型定位完整的动作实例，从而大幅提高了性能，尤其是在高
+IoU
+阈值下。此外，我们还在四个基准测试中证明了我们的方法优于现有的先进方法：
+THUMOS'14、GTEA、BEOID 和
+ActivityNet。值得注意的是，我们的方法甚至可以与最新的全监督方法相媲美，而注释成本却低
+6 倍。</p>
+<span id="more"></span>
+<h2 id="introduction">2.Introduction</h2>
+<p>​</p>
+<h2 id="related-work">3.Related Work</h2>
+<h2 id="model">4.Model</h2>
+<h2 id="experiment">5.Experiment</h2>
+<p>​</p>
+<h2 id="conclusion">6.Conclusion</h2>
+<h2 id="相关链接">7.相关链接</h2>
+<p>​ 论文地址：</p>
+<p>​ 作者源码地址：</p>
+<p>​ Pytorch源码版本：</p>
+]]></content>
+      <categories>
+        <category>课内学习</category>
+        <category>论文精读</category>
+      </categories>
+      <tags>
+        <tag>视频定位;</tag>
+        <tag>弱监督;</tag>
+        <tag>时序动作定位;</tag>
+        <tag>单帧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多层感知机</title>
+    <url>/2023/12/17/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/</url>
+    <content><![CDATA[<h2 id="目标">1.目标</h2>
+<p>​
+简单实现多层感知机，并学习其他方法：模型选择、欠拟合过拟合、权重衰减(L1、L2正则化)、暂退法（Dropout）、前向传播和反向传播、<strong>数值稳定性和模型初始化</strong>、环境和分布偏移。</p>
+<span id="more"></span>
+<h2 id="多层感知机">2.多层感知机</h2>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> util </span><br><span class="line"></span><br><span class="line"><span class="comment">#实现一个具有单隐藏层的多层感知机，它包含256个隐藏单元</span></span><br><span class="line">num_inputs,num_outputs,num_hiddens = <span class="number">784</span>,<span class="number">10</span>,<span class="number">256</span></span><br><span class="line"></span><br><span class="line">W1 = nn.Parameter(</span><br><span class="line">    torch.randn(num_hiddens,num_hiddens,requires_grad=<span class="literal">True</span>))</span><br><span class="line">b1 = nn.Parameter(torch.zeros(num_hiddens,requires_grad=<span class="literal">True</span>))</span><br><span class="line">W2 = nn.Parameter(torch.randn(num_hiddens,num_outputs,requires_grad=<span class="literal">True</span>)*<span class="number">0.01</span>)</span><br><span class="line">b2 = nn.Parameter(torch.zeros(num_outputs,requires_grad=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">params = [W1,b1,W2,b2]</span><br><span class="line"></span><br><span class="line"><span class="comment">#实现Relu激活函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">relu</span>(<span class="params">X</span>):</span><br><span class="line">    a = torch.zeros_like(X)</span><br><span class="line">    <span class="keyword">return</span> torch.<span class="built_in">max</span>(X,a)</span><br><span class="line"><span class="comment">#初始化</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight,std=<span class="number">0.01</span>)</span><br><span class="line"><span class="comment">#实现模型</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">net</span>(<span class="params">X</span>):</span><br><span class="line">    X = X.reshape((-<span class="number">1</span>,num_inputs)) </span><br><span class="line">    H = relu(X @ W1 + b1)</span><br><span class="line">    <span class="keyword">return</span> (H @ W2 + b2)</span><br><span class="line"><span class="comment">#损失函数</span></span><br><span class="line">net = nn.Sequential(nn.Flatten(),</span><br><span class="line">                    nn.Linear(<span class="number">784</span>,<span class="number">256</span>),</span><br><span class="line">                    nn.Linear(<span class="number">256</span>,<span class="number">10</span>)</span><br><span class="line">                    )</span><br><span class="line">net.apply(init_weights)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">batch_size, lr, num_epochs = <span class="number">256</span>,<span class="number">0.1</span>,<span class="number">10</span></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">'none'</span>)</span><br><span class="line">train_iter,test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line">updater = torch.optim.SGD(net.parameters(),lr=lr)</span><br><span class="line"></span><br><span class="line">util.train_ch3(net,train_iter,test_iter,loss,num_epochs,updater)</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/12/17/iXtb9dW76MAJrYq.png" style="zoom: 67%;"></p>
+<h2 id="数值稳定性和模型初始化">3.数值稳定性和模型初始化</h2>
+<p>存在两个问题：梯度爆炸和梯度消失</p>
+<p><img src="https://s2.loli.net/2023/12/17/WXJVO3MUEraTACk.png"></p>
+<ul>
+<li>梯度爆炸</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#梯度爆炸</span></span><br><span class="line">M = torch.normal(<span class="number">0</span>,<span class="number">1</span>,size=(<span class="number">4</span>,<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"初始矩阵\n"</span>,M)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    M = torch.mm(M,torch.normal(<span class="number">0</span>,<span class="number">1</span>,(<span class="number">4</span>,<span class="number">4</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">"乘以100个矩阵后\n"</span>,M)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">初始矩阵</span><br><span class="line"> tensor([[ <span class="number">0.5473</span>,  <span class="number">0.2958</span>, -<span class="number">0.6352</span>,  <span class="number">0.8350</span>],</span><br><span class="line">        [ <span class="number">0.6142</span>, -<span class="number">2.1497</span>, -<span class="number">0.9319</span>, -<span class="number">0.7660</span>],</span><br><span class="line">        [-<span class="number">0.1770</span>, -<span class="number">0.5082</span>,  <span class="number">0.6372</span>,  <span class="number">1.4567</span>],</span><br><span class="line">        [-<span class="number">0.7529</span>,  <span class="number">1.1125</span>,  <span class="number">0.6797</span>,  <span class="number">0.0318</span>]])</span><br><span class="line">乘以<span class="number">100</span>个矩阵后</span><br><span class="line"> tensor([[-<span class="number">5.5963e+21</span>, -<span class="number">3.1355e+21</span>,  <span class="number">1.8995e+22</span>,  <span class="number">6.6069e+21</span>],</span><br><span class="line">        [ <span class="number">9.9777e+22</span>,  <span class="number">5.5904e+22</span>, -<span class="number">3.3867e+23</span>, -<span class="number">1.1780e+23</span>],</span><br><span class="line">        [-<span class="number">2.2861e+20</span>, -<span class="number">1.2809e+20</span>,  <span class="number">7.7594e+20</span>,  <span class="number">2.6989e+20</span>],</span><br><span class="line">        [-<span class="number">5.6377e+22</span>, -<span class="number">3.1587e+22</span>,  <span class="number">1.9136e+23</span>,  <span class="number">6.6558e+22</span>]])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>梯度消失</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#梯度消失</span></span><br><span class="line">x = torch.arange(-<span class="number">8.0</span>,<span class="number">8.0</span>,<span class="number">0.1</span>,requires_grad=<span class="literal">True</span>)</span><br><span class="line">y = torch.sigmoid(x)</span><br><span class="line">y.backward(torch.ones_like(x))</span><br><span class="line"></span><br><span class="line">d2l.plot(x.detach().numpy(),[y.detach().numpy(),x.grad.numpy()],</span><br><span class="line">         legend=[<span class="string">'sigmoid'</span>,<span class="string">'gradient'</span>],figsize=(<span class="number">4.5</span>,<span class="number">2.5</span>))</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2023/12/17/c2IhjasnUgKYQxX.png"></p>
+<h2 id="总结">4.总结</h2>
+<ul>
+<li>在深度网络训练前的参数初始化时需要小心，要保证梯度和参数可以得到很好的控制，以防出现梯度消失和梯度爆炸</li>
+<li>RELU激活函数可以缓解梯度消失问题，加速收敛</li>
+<li>随机初始化是保证在进行优化前打破对称性的关键</li>
+<li>Xavier初始化表面，对于每一层，输出的方差不受输入数量的影响，任何梯度的方差不受输出数量的影响</li>
+</ul>
+]]></content>
+      <categories>
+        <category>课内学习</category>
+        <category>传统算法学习</category>
+        <category>李沐《动手学深度学习》</category>
+      </categories>
   </entry>
 </search>

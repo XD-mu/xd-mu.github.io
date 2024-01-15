@@ -22,23 +22,19 @@
     var CONFIG = {"hostname":"xd-mu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1.Abstract​	我们要解决的问题是，在每个动作实例只有一个帧标签的情况下，如何定位动作的时间间隔，以进行训练。由于标签稀疏，现有工作无法学习动作的完整性，从而导致零碎的动作预测。在本文中，我们提出了一个新颖的框架，即生成密集的伪标签，为模型提供完整性指导。具体来说，我们首先选择伪背景点来补充点级动作标签。然后，通过将点作为种子，我们搜索可能包含完整动作实例的最佳序列，同时与种子达成一致。为">
+  <meta name="description" content="这里有东西被加密了，需要输入密码查看哦。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Learning Action Completeness from Points for Weakly-supervised Temporal Action Localization">
-<meta property="og:url" content="https://xd-mu.github.io/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/index.html">
+<meta property="og:title" content="每日计划（长期）">
+<meta property="og:url" content="https://xd-mu.github.io/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/index.html">
 <meta property="og:site_name" content="野生调参侠的博客">
-<meta property="og:description" content="1.Abstract​	我们要解决的问题是，在每个动作实例只有一个帧标签的情况下，如何定位动作的时间间隔，以进行训练。由于标签稀疏，现有工作无法学习动作的完整性，从而导致零碎的动作预测。在本文中，我们提出了一个新颖的框架，即生成密集的伪标签，为模型提供完整性指导。具体来说，我们首先选择伪背景点来补充点级动作标签。然后，通过将点作为种子，我们搜索可能包含完整动作实例的最佳序列，同时与种子达成一致。为">
+<meta property="og:description" content="这里有东西被加密了，需要输入密码查看哦。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-13T07:07:17.000Z">
-<meta property="article:modified_time" content="2023-12-13T07:09:51.765Z">
+<meta property="article:published_time" content="2024-01-15T02:40:20.000Z">
+<meta property="article:modified_time" content="2024-01-15T02:41:40.021Z">
 <meta property="article:author" content="野生调参侠">
-<meta property="article:tag" content="视频定位;">
-<meta property="article:tag" content="弱监督;">
-<meta property="article:tag" content="时序动作定位;">
-<meta property="article:tag" content="单帧">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://xd-mu.github.io/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/">
+<link rel="canonical" href="https://xd-mu.github.io/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -51,7 +47,7 @@
   };
 </script>
 
-  <title>Learning Action Completeness from Points for Weakly-supervised Temporal Action Localization | 野生调参侠的博客</title>
+  <title>每日计划（长期） | 野生调参侠的博客</title>
   
 
 
@@ -313,7 +309,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/">
+    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
@@ -326,7 +322,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Learning Action Completeness from Points for Weakly-supervised Temporal Action Localization
+          每日计划（长期）
         </h1>
 
         <div class="post-meta">
@@ -337,7 +333,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-12-13 15:07:17 / 修改时间：15:09:51" itemprop="dateCreated datePublished" datetime="2023-12-13T15:07:17+08:00">2023-12-13</time>
+              <time title="创建时间：2024-01-15 10:40:20 / 修改时间：10:41:40" itemprop="dateCreated datePublished" datetime="2024-01-15T10:40:20+08:00">2024-01-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -345,11 +341,7 @@ mjx-container[display="true"] + br {
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文精读</span></a>
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%AE%89%E6%8E%92/" itemprop="url" rel="index"><span itemprop="name">生活安排</span></a>
                 </span>
             </span>
 
@@ -366,14 +358,14 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>506</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -385,15 +377,18 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1.Abstract"></a>1.Abstract</h2><p>​	我们要解决的问题是，在每个动作实例只有一个帧标签的情况下，如何定位动作的时间间隔，以进行训练。由于标签稀疏，现有工作无法学习动作的完整性，从而导致零碎的动作预测。在本文中，我们提出了一个新颖的框架，即生成密集的伪标签，为模型提供完整性指导。具体来说，我们首先选择伪背景点来补充点级动作标签。然后，通过将点作为种子，我们搜索可能包含完整动作实例的最佳序列，同时与种子达成一致。为了从获得的序列中学习完整性，我们引入了两种新的损失，分别从动作得分和特征相似性方面对动作实例和背景实例进行对比。实验结果表明，我们的完整性指导确实有助于模型定位完整的动作实例，从而大幅提高了性能，尤其是在高 IoU 阈值下。此外，我们还在四个基准测试中证明了我们的方法优于现有的先进方法： THUMOS’14、GTEA、BEOID 和 ActivityNet。值得注意的是，我们的方法甚至可以与最新的全监督方法相媲美，而注释成本却低 6 倍。</p>
-<span id="more"></span>
-
-<h2 id="2-Introduction"><a href="#2-Introduction" class="headerlink" title="2.Introduction"></a>2.Introduction</h2><p>​	</p>
-<h2 id="3-Related-Work"><a href="#3-Related-Work" class="headerlink" title="3.Related Work"></a>3.Related Work</h2><h2 id="4-Model"><a href="#4-Model" class="headerlink" title="4.Model"></a>4.Model</h2><h2 id="5-Experiment"><a href="#5-Experiment" class="headerlink" title="5.Experiment"></a>5.Experiment</h2><p>​	</p>
-<h2 id="6-Conclusion"><a href="#6-Conclusion" class="headerlink" title="6.Conclusion"></a>6.Conclusion</h2><h2 id="7-相关链接"><a href="#7-相关链接" class="headerlink" title="7.相关链接"></a>7.相关链接</h2><p>​	论文地址：</p>
-<p>​	作者源码地址：</p>
-<p>​	Pytorch源码版本：</p>
-
+        <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。">
+  <script id="hbeData" type="hbeData" data-hmacdigest="c3553eb8a1cafbdd636e49ce11a75e7e35813e0af0c4c5da277453dde04d541e">d32af276de44d6b569fe81b42c741d8c6c9690c575fbe5cc9ae52f90cef19594bc5927579e21e8d49ec5c7ecbe57a9197faf5e2297b64961083e0a58d765117606a139bd4d40d65bfabc3510b68ceb8e89bb283aaa5247d65d3ba3f7343515b51243e9a9aa41cea998c08deb16adc93e3f650754af329b43f38313d3d450593bce87d9c35aefc6de674a709a9bea69766954542676092dcb95552a02a8799af5c4487d8dbbab15af3e95366ffa485209a6cbe71cc2c0082b55d78d85a9ab1700396575865162389761640dcb4c6bab185fdec91e1e7b53b57757107a29e8527e65836788a0c89b2c4db55617d55e8042a74ea6a6d17e5e08087c297ef74b83760ad36b28ce7b6f53af8bd1d235a0565e4b2cd60643147fe87f40687b438802fe651d90b7de3eeff14cc0c15481722b924cef4de850c4b59ff467b19ffc00f46ad0f4413ba58866a01c72917681be46c4e9fcbee4b5cc91ad5fdbe3ed9fbc6da72240d6de622e366fe36b4bb0cd6537e110843965322e9eaf13afa76b30952933ce31462dadd3398cd91fdae58388402ec97aab2817c1b2729d8df33c9fdee408fcb57711c663f86ce8fcf95a22fd365155453aaeddac64f7cf0a85adc8ea735141871321102699657fdb1af16713c5684cfcebe9fe6f60495f47be89a658e8e40885baab68fd60901624f8f5adf8df74fb779bc62526d05eb74eb28b3ac5d02326008b695abd213a356081e36a0b6625779e44ffc0d9f0147a8494475fcd093291b00aae95eda604d336e209de80d13ea6694d6e5fee89df6a0cd61e2dc313c433684f441de6f26a5725ac56d49f8824993b5b49920c2e34fd1363b5718c72ea41e614488e2b5f7ad09d94d1bd2172c9e75e09c0508eea17a32a050573bae02a3fd20f820db00f0f9e3bcd938a00f2093099cc0fc576979afdcaec24fca84e5282500b36621ccde17508daf23240a4bd6b52a2cb12bed30449bd16b67de8b02f11fb158547012112de3e0e59da82fb6199a3e5bc6085d27d197924cf8e4d39ea562ffe6d36e256c72604f254c1437de5dea955c2bf7b91f09e573396ad83f6ae2531a8132c02436b28b2b17b6177e6c20d3fbcea7e194f3645fcc7c84ef7fce1bf8526ae5b82c298fa26012573ddb2e42b6d30adb7dd34b67e50278b2f9ffdda7852299c3087b10516543e1548a3e91199caef5321c9c274e893684ba48ff43c630d4915be2b575cd5e8d9f224547da39428582ab09f6db592ff8ddb5d4dec9907f53c7fddaa9a13cada8a5e52099ca965b2b82e49d6e92b56022ec09a81e643ea32f082f49524e29c036db066f459248e327d7485f7c003653918641fa4b33814f5e868ba63dcf9f4805e8c127bc388b65172c3c50bc1ef8e5b786a0ce56083dcc4cce4dc28c7bf1f8e7ae46e0b9f496363cbf237810f421384ec2eb9552bc4099db7afeb546b909e2d92428e7638cf42dad533563c178500187290eb77cf5fc0447e4e434e6ebbced8c3a3acf8c492ee58398dcee609d469cc91e034b3ad80f2851d62198713e1bf24c79a4d9415ebb6fd26cf293a8a9745d4510e1b2ec36929466d757e447ef0873ee3ac9a00578e58a784289ed6a82629d771e52519b2512acb29f4c1159f4bf724dd45b8b4f3bed4755d99c4f77a21ebb90bab9e2c65a11b0056aa3c5af77d4522ef61c75522bc1d1fdec78ad4a33feeda9c22ad586edb38a5c470e4277cd82efc677bc946b0f2474d27a9029a290c64b2af4f9b3cd735a30dd12ff980b284c7080c5c8964fc5156b2e36c5281d883e52c170dd53a307751f6e555c1f541f621ff35cd1f35e16d2119f4762ab49c8bd9ed7194c991eb172244537b0ab45e7c0440a8103361b433e2094ca5fc36aa955936122602fd5a01972f7226523e10be934373f7748ace0cec3d4dd1d16af72c5166d983ba188a3e6bdec54967360c869e6b2bbf1fe160b89c96725af6cbe46cf9ed6395d5d9ce28c951aba9375ede9715bd00f568180cb7a4fed5281748c7f08ec96b31f8088b59ef65fef898ffedd3f301891f6ef11d3b7c9d831fdd061ddf1844d4cc7670e060cb5ab577e7e67cf96f7674a856e93eedad3e50a88c7b76d76c4c98b17195f54ff0c16a249bd7366b7dc9f9d4d90969fe47f26b864834522a68853739b3d29ac20329146903625a6df82e2719f0ad4450e6e905f8a9aa85dce2b8aba2eb4924f87b94fc425562b11f09005406b6ed61b9a7d47eb8146f54aa7c140595fea63d17eab4612c0a17594c5a7bb07b783755682508d6391eb38ff599d762fb3061a5a1d042261d1bdf82a5400398c94743e734d8b0b5646e1068f79def1b0c9e28734ebb9285bbcfc09889f38cd6929a71d8ad5fcf44907daec37dae9567902499b76dcee641a73432d96fd19c801a5f6dba1be6e108c42b26d2d99a2c5e97d05a3537467299535887bd693651db179029df0d02f3232ec7419efe5aa2332ef4fbf41321fef06c46e90ca691c34fb074f28ef39fb44b74bd71ed94a71bee02ded7b6bbb2e3b1937e87d3b203085fc4f10cee887aa8134968d2aa9e50f30dc7a8c08a296df02dbc8c08c216197e2b665aa9d3800511c5fbe295ab3d0464fae4ea11dfa794e116ad44d4d9527d8d5c7c974a7474287ad9e8d0553be0177aa86da4835a9673216534897075a9374dd1c458b4850c7e4a19e4c1fe588ce17f4fffefe3ed06aaccfb0f062f7522f277d8a18c24d1fecc14affa2ab24ff24271e9cb7da26f64a1f8e1384583511ef4b083cb775fa6fd4b89fe8b362e416b07c0c9a2b06a92c3840e9812da1ce1e49737106cd3e1038647b219240955ac758e2cc318c1803688b5a76be4b2c3231206fcac1a46e734dd7af9717cd3f9f13b17345e7a3014662a0c46fe2d5672479ea602297c923a6f1d037a16368ff81ab5119406ae6b1c8b7f33740c779ebe9477c855b4965d7af05c673f9e2f2c16f2053cf3148ae4a2f0e34fe3b98292f555afbb9b10ce91197982e9528b7446bb5a5f518b285dbcfd96bb26e1a309ac8fd1e0ff6cb3d0b3e7c815f5aeff4eff7f3054c3fcf409b8bc7f5c3f7604a06653e99679843a83613363c3292cff65d78b6375a899a690232155dbab08bab637e0b80f31525c652a1a30c4d73082c5e17e926d2d9c469d0406a8d675cb239692dd60436ad358159fc956f5c22d8c0af65a7b48d40016ff2bfafbf27c656695b038f2eb9e88fc7742b82967e99f328cfbc2b7865ca14ee8ef3fbb1f79ddcdc0721393db214d128d1106be67d7317289d01e8a3215146af6e54d874735749cb5b31a688f9d9b1388c17a6d130136046eb599ac0bf57806f60cd23c0353612685af6e115d4adaf4fbfd5117e9955ddc43eac80b96647bcb616cc87ae8c0115a94ae6fc1d3367d2eda4148584b67e0304d8f1c81fed1d207fc9cdad820afd52c4123cd8862e6010b3622bbf1b121dc8819ab6781bbd1fb9aa423f84820cb63954d70ef972a74d1d5425f6251d108e51217fa138020afd8bb13f08b5746cfc61b553d79c1b358959d0ffca3989d4e330e3e7fc0a3a855d3501f1b7c4d1dbe29577f07740f33e02a2f57e365d6da0ee4b802d496c2a9e27ad8caa66e0448e4fd4bf725d065b5d1ea47a81f87f164551b036ea40ae88b72cf46f3434de8b10bb808215259e39b31e7e740436d4cdd6b8c2865726caf39c179dd8a8c88f58e5d4fc89f1f082451226cb8e27d7b934a7230f68a6aab58af806ecf372687bfd6aa4b51c94820bd2ab3944b4290272745c91f14401e202af5b665c2bc9f557d872f1494cee7d1212b16cca21bc17b262accd510f2e442f7c3edcd09279aa38a8812053b69d7cbb74000e90c9ea1f36885c2d5527790a75d060770b62cdd16e7fb4f3d2e3f4170eb8eae0607ec9a97c86a12025713b8239a5f09b5cf88e1c86bd51087872c9c0df152bd1d3a5a0d351bd2429feb3b9622107bea6c42e6c36f52f10e2975262ce99e37d702889d682b688f2c41e5edeaec4ee606013ab71e07c626c8764f826c75928b54d439a6c1e0ef513c51a0e49b8fba577cbc68fc855f870347e99c736963b5432575ee0bd0f16eb81eb4cb256b3ac13997bb623d3c0b483f68cd57754a28fa99445f88793441a5487bba2135fb384b4883c7e4087745a5e1ec188998a5c5a3353e2cce4288a227aadf3e87b9081d4de8571e2e569074713093dc2dd10621143cdb8b10fe9f011f1f057ed77c88be33c7fad121a5cda7b49c1a8b385ce60c4c789929507549cd0e2dd9de27dd0800158c6e399ac8d04b6dc80c2a0f77468528cf7225ae5ceb0d5ec6770f8aa2b5b4108ec58683d891acf0b3ae3fac5bcad49ee2713fe0bfc9519012672c54895e1719345813055e1d8ea5c34069d80a697bd4a65a4989c53dee6967a4953580e89ed08900e90bb0976a0d275cfa56cf85ad2044bbbac6d0afc4a3c0d74bbf8a483d4ed77de17a8fa48b90ce41f5a37c649223f5177740c2f24a3290b69398292c4619ca2a312e3053c0121253e69fe15c3953e810070ba89269031f10aa284dfe93acfb292b7c2d08715e65b4c168cde7445e459519e3a67be9d30e4777148c565f7c85cc8105686bef8ad9a8ac59c8fc7dba8972407570b3982aba25beec43dc09f2fcdc39dc3829c648cc54d16fef17850d604f7de9afaf6fc9f5f43ab549fd53a8d6691fe7dbc4364a0722f73d53947b797b6c96335e4ec1aee6c6f291519160ad065554d279d706c90fe563c9d2e6b860153d8c02372d3e071252cba48db9ddc770386c2f4e58f34fc0657700b4440cfa6f769dfabc603f1be7faad8a9d30b67ce964d76eb246b773d501b662ea8505eb01b58d37cd2988ff298f24c7c81789c8751fb642701e7381d1e31f56dfd02545035b2df478ca501e1ee9c7a0632ab06802f669cf3610baae1e9758763be9a00e37fdd5f8d3f6fa6f9e868b6bfa67769f3579010a232dcf28360fa03b60954032bc10a25e502b7d001819ab45aa40f39650c41ea4bf15fdb91dd6d3c448c0d1b7aba4849b404f0a4e0523b4d2fc8e0784f6cd7b172557c74a9afabd0b550785338a0e3f5756c215ad67526e0950e7a2867aa3b74f9dfc635dc269811f04020b09a4f8539dea0886173b2c9802ea7178696e78e0630a7b574662278f74f52063c6633411671316f69682cb9a21cb80e4528f1931d2324a72fc92a75f7f62f41e02835bde1ef7901db06629b484b6267d794f3e579fbd7ae6d8aa04bc4a13f8a7c11adee94538079c336aac818dc08502feda184f5e86ba27374bbb751f4e681edd2be6e654040fd35f69bb6d7dbf472b37f8240949e185cb36f617e4ff6b0c8e5fb09d5a0e90d34bc72bf387375ad61c1b3c3595fb9550fe37cb13ff807e1ed8fd566e80fff9d36e65da915eebfb3799dd8d967844bedd4a8724fcf5caee46645632c6f7186502168e5542dc14a895e4c941cff6e0679596cfd3ed3de0553886009af3c72cea1f1f926cfe5dfcf8493b89b34bad33c73ed243678a6b63b6b954c034a6c4393250bf2032d8b8ecbe56fc488b367b9f04d723dcb5407e82c3f1011a0936b076c56e0df47bbaf7ae64593dce15e6668fe619078bf8b8a2aa2a2f3cc879fd34d91c7a3967a4dc3080fc44d321b8dd1cd962e21e39b83da44dda836d3ab7dbdb6d454fac06759769f8fb277efa9c376a8843229160433274818e7bfc4c91de79a80d1a819d5ec8bfc9de664e6f3436dc06a6becb9e56b4d3dfc5c1a2fa84c9bbc574dae693fa1941e295df296e488d3b1fe0e6491235a617724e8b7f092fd7426f83b01ac8d749a5ef2e6cd4b3592ecc356788b160c9f4b54a085902a3db2ce4aa8c75c03e985697fbe93d2cc1297b1aeeec6851d017ac7f31f5b5b170e6d746cb96bc593734aae1ddcfcefcd6c90d533c802cabd8c1b3b301ec00d08be5b700fec33abb90df098517969c7ea65f138e28bf670bb455295d7ad579a2dbc8fb27789a46db88114747bc12143b62d1a514c0c6b509751b2ba8c7b5a1803e74198e5ffd1b184823b7449b3578e77f7a384c761077ed8ae413371722b2c94bce2d45b5b6dd0f8f155a0fdb3c5015d3f59cd47912722f29e365b593657ae6183e0b524e0a784ebb30a5aed7d7d933c49b1f8f7ebde591dcb4169ceb528d67be0ea8596278a35684942e64ffb3b9b52cf5408c0b05a966f8247b8d4d24a4ede772f7d14a3505ad021a690acd9b9752432dacc096263a50878bd780db03f86775a3196920d7d4959cb9d32d3990dd7399a8b3d3108746cc770adbd4535cad2c77c9c6906f741056b361fd5932c3ace390c88212ef74ccb0caece8f58ee7b8460f3b8209050b5233bd10c652cc5827abdccb5e0090a8906e74190837562455af9b2683f6f84e15b0ffbb5de6af979e3421042830ac969f8c33106d6afa975b689212b5b9b06f12081a3dfe42734f673485d855c3ee1cf4d4c6a895d86e98c29d7a4aeae49fed1735efdbc1c6766bb1635800d34fdbd35e9a63eb1ac097decdd8bbc2d20afc744475772603155578aab57ba27d2b703be40ec8d788485e98e131dfd89ea179c964e88cc7a7694b47466bf27e5d1bb8dd949326b9b6c7abb2e430646bef7fbbe8825a373389a13ae88428c264a930cfcbbaaee1dba7f1fa7f24428c67eef114d3e89f48fc3237fca1a66e55f9c9524b15791ef5417dc9886afa4886fa3d022ce2df56cf48e18c763b6fd850c076f526b0f62714656e426f626fa97bf4f12a8ebd2b4aa3e475c8dae72558f1f41f4afc05a51f0eb38b2d1aa0c757dc8fc7aec797af4e56092c1f1a971ae5c84da2aec53a3e8ae38b226061de73223a63c3df9ed847e0ca556561a577d494e88e6cc77ab5df7efa814e52fe4fc6fd0274855be90c1431f5c13f3d5b022532532983b87b408ea9bd0ba7014666401be2fca953e366f9a6531a0c4983596054c2727e2d8d41d5f652adc4276dce35aab9a7ed7a2a1991b3e1990923d080b858f8618603c7bf4645e3c7c77e27f5fa1fe83377b75805b87864673e4449ed67bcf441f662abddd0bf39852884be05ee0f8daad6fa4defc7e01f2bc5d5ba8ae58d06e516b0308b12fca776031a7e0c63124f37a14dcf31843abb1fddf62d7c1e7679a5aa58444c0b5e9bf9bc4f19409068c77f338e997d58f21440eb4813c75007facda8235e0b5d5d18890691c55398bbae5f64d9342283bd5b5befe2d18e7556d2b0d721d1a34c1fb932525c5a25886d6ef706e7f7412b9d94c24d80bb5d3c26888584f5825dd4e2947ae75bc99e55738436478b753d808f88919699399418df1a86208212e624895512b24bc641928355b97ac072e9fc59110b9127b91e6dc84074ae75ef13b2422a03dac757af54978762f4cbaf06e7c887e5488c39ad8d538fc873775a219f8b53896d212d57481680a1839a31bbf267db0113c4ecc70703d81a10d16f6e2e0096981961d87f03d6ef411aea9b1a1ed184f8fd303991b11df1118cf8551b5332dd22bc98c02dc3724b9e1d5664c3e1388f5af108f4c306bf4314fc802e960cb4658e6d888cb8df2fab41f1b888d902e974534669601ab5de8202bd5e9a5c598fef4c66e3a13497c1ae952d8f3369625299253848142bf7cf935b4aa2e3f668b8d126b91afbdb55a87cdd71963e2e9a136773d86fd11ac6e05cb7cf68f60ed19ac778834b0e40f61e01e5c96857e6477390031ebea4385596f259d91bdf52b5a4d00caeb1b93a79fe7470eb8dfc62dc1a6e3d7f73925000e677568449788ca11377484c35176cb33b4d5585966bd24393feee4474d96bcd72db08fb2334b0353f7bb4bf97a15a8f01da2f49074c122413e5d63b11bc413fa0907366f52421c9f6758e91355dc55ae650f72e6cefb3ccb485022c2243d28cf3678d2ec60aa100a38cc04ba3795074470d826b34fcac6dd395e7e3a1ab7de9109a98eeac4ebe667cbf7fa35ddb09bc3d6a3f7955387e74342caf1cc3a0b931aa4afea71121b6d34c028392ab0952631329baf394019d042625fee0f4ffc67f91b28499f8d29573c14b628f75bce5ddb2dbada9eb53b14f21a4375cf58fc6951077ce5d9c47f4fbd348ff78eaa81cdc5742cd003d3ed4d3a2ace7d518fc0fa05e0c3f2ecea65f99c59462e46b4ffdaf2e5623af840bac74733bfd724aa6ecdb30f48f0fb0de77fe3e7b07c14452707bbd96916964fdda873872d200a743c8e3497169281ee2b904b0cedd3ad08b3aa285d52d16e535f1b9deab7356d412fd28829c8fabcb30b95a5b82dc97869d13654a4a97422db910edd284dbb9d5eb04af1e206244796e403719611e75ac2eeae317bb31070db1a7f064be3ad00b35cf67f381f3f42e70887b7654a759fb01a5399968075b3c8b3b2a1f79e8d29669728352253c01ec1dcc934036c7271f3ae6c773339d7ea9643d4e1993aecce52209dfadeff5f29b2702de5fe4364838d4b28a137c81707ce7cd9ad5530bf875b45e03b6aa9a63f941073a45aee16d850845dd52bc395ebd3b204d9d843c48b0cc8b7f22d82e1da1d943e1cdc4c0d2e4023832e5af3614ce612294031f2f7ea61383328698819c2c2f08e9e46baa20aa3a6050ac4bce210eb5537324eae71e3476ebd91d4dfbf5055abb26b1597f24f6ce9ca97849d46a367d9823da900a995c3d830a1be41895c455010cdc71c480923c338241a55bfd0885830df31158632a2d7317d8ae34e5709f2548f907095136676e82bc1556e89c80a3dfddece61cc5db3901139898e4e96ffb4e8cb617706dfca2dcaac90df8eecdf72b364431646928b121444997083e372f3fa896889ce7453842af3aeaba145f9de517e0e3a96d1ddc863edb0d82f5fc0e1a4f423bb0d236da1945458386446bb7134d808951c3df737553221d6700df9a7068dc7ecbdddce70dccb9b77d19ab2ac00859edc5583a4fbd3bfef02d002d441a7858409009e2fcca830e3175aebd49c724a82e6e3af11b1bdee6a2a048bd8042ed3bcb90fa0a14e0aa386451fa2589f57776b1ea2bed8c510288d86bbcc954497aa38a748d6187781dc531dd55bd2c33cc8abcb2b9178538b46b5b91aeaa75210d4cfe48713705ad3f01335d25006e313cf76ffd21a8a7906a85f3e69eaec292e394e21ae44dc1b138b669587aaa54a96e1ae6dc0f303beba8161b2b89ba9800f1b931bab316eb03dc77773795e0d99e5a57953fd7859d49eb4d35d1138c6bf9bf131501f0daab47c1a218baaed643b95f11a52a67951e11dd07097d55cd355939267db95c3fc738a734e6deaaec609bd60192ef90ae0289f48660beacabebc17120e920c641f7c573719962ec3830a30884b4265d6055bb743fff96f648d141c8c7a65e6a5987cd243a40d22e08d6faf3a53e68c29dc482501ec97c9d686a7b7f53bcce91e287597200502ce7320ae19da70d89aff562754b6bdca8785caf6fc105c1848f103979200e30ded34011417a6ea187bc312f3e064a8470ecc12b9fec5c85fcaa468a291352580875c8760083f8bb3e55cf61b52377fdcf1019122489c40a94e10fea61f7985fd17a02fb52c1430e7ed7fc8dde27f3d25f2b16d80ff4f5a53ab3a3cf3c1388da66328aebaf5a8230f5f9c35c9c0f99533ae4ac918154675cfeeaa3eb20ab86763e9f3a20df62b7e5c688a582ca64bf83a3fe3287915f9164d708ca362f361322831a49fb865955c1401b96a615d8215cadd931977bbbe6d0fc59d072f2d4cee2100d1de2af2e30624822e4b33619860a4b6f2e3236e94f226d805e5dd2fc3bc041ba87bb9f0fb4bbb46845bc2e49e33ea710c790a2637ac69a6d5f915fb232d2288be51da0b7e93bd3402363fa1169784c2d2818f332f9f7b2fc14b9b07fb586c1c1a9e38fa4078b0c9cd85e38ccfea0bbc121a80881476995c768825501c9bce8fe5beed4edcbc22cece571afe29a74aa205c70ed30b6a1488c6dd6169d10821006b35712b4ba66cadf716436a3af1bfebcf09f2ea97e2aaed23dcc89775e04c4aea624b6c8f7122223ac616db81e8392fda084f8c4a17057ad1acc1549a6a3d1df32415eb551e3170b822b846f7e2393af011bbf52dd7483b34c4fbc88e3ebf33bd1ee807b54c6664749038050c9b95ff5497ac67f529d17b9823eafeee36513ad6ad2734d317800ee8fbd0f5d0eeb9edbe0b847ca60074127c4dba9d5ec5bfffb9d2515b69fc2d33d8c459bd248c0286c47aadaed5bcd0c4c4e40cfd952b5f3e469dbac95301006e1c0a94afd4ba76c4b25435980a02fc68ce5c63132327b1802d01529a00524e0ef62e287d4d5f85c7a721edf487b745caffec31be673e52a31726e5d496c0a6aa4afa908e886e2e7b09eb48813b6b519db9f45a56e54ec05c957fdaf582de14b36ce35c2831e5c654a12c8b0ac746c58086dc6a6c63f0faec64fdc685ee42aafff611c2dfad8c9e242bd495118b9cbb7defb36c3eacf49aa71745022b255b568e30b5930d3cacf1a2c107a297325b954ece4ce6e619bb6c946fab4a5d9692df84998547e3686bfd6606bfb7605548d519c0f1628420d1a392616f14d8dcabc31aafd15a1a404ea68abb6284b25720965950f3687b7828e5be34470d72024a49c545f6531f00f05aa012a2c39abfeca6b90798d6c0e94939ed95f0dea1976142cbb75b828abd5cb18d588723e34690586bd68162cf2b80bab0529654ce2a3e4787763ab376b20bbcb87d9f45d0e578eb5c0f20bac2c49fa4539c7d8b2c322db7063d36254754f0add4900b2b6b55cd705c855ebf15b7819f43edaa34b999a9ce8006bec2b34df4e6d2046a6675b2e13c8224182b97fbfb28ba6b8038349cfe4ed811e4018579e94ea66e695a1039ebfefa23b4f69d0e0bb45ce867f94a5bc56a7e71e6a1217a37d6ec015bcd505f728efbcc5452aa9fe106f1f5d43cde03501c9f9eeeee37a96296412ce46d7374c180318e2d0fc5cc0608ebf1e31d19f2aaa</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好，这里需要密码。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -423,7 +418,7 @@ mjx-container[display="true"] + br {
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://xd-mu.github.io/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/" title="Learning Action Completeness from Points for Weakly-supervised Temporal Action Localization">https://xd-mu.github.io/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/</a>
+    <a href="https://xd-mu.github.io/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/" title="每日计划（长期）">https://xd-mu.github.io/2024/01/15/每日计划（长期）/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -433,12 +428,6 @@ mjx-container[display="true"] + br {
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E8%A7%86%E9%A2%91%E5%AE%9A%E4%BD%8D/" rel="tag"># 视频定位;</a>
-              <a href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3/" rel="tag"># 弱监督;</a>
-              <a href="/tags/%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D/" rel="tag"># 时序动作定位;</a>
-              <a href="/tags/%E5%8D%95%E5%B8%A7/" rel="tag"># 单帧</a>
-          </div>
 
         
 
@@ -446,13 +435,10 @@ mjx-container[display="true"] + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/10/2023-12-10%EF%BC%9A%EF%BC%88YOLO%EF%BC%89Car-detection-for-Autonomous-Driving/" rel="prev" title="2023-12-10：（YOLO）Car detection for Autonomous Driving">
-      <i class="fa fa-chevron-left"></i> 2023-12-10：（YOLO）Car detection for Autonomous Driving
+    <a href="/2024/01/02/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" rel="prev" title="注意力机制">
+      <i class="fa fa-chevron-left"></i> 注意力机制
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/12/17/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/" rel="next" title="多层感知机">
-      多层感知机 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -511,7 +497,6 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Abstract"><span class="nav-number">1.</span> <span class="nav-text">1.Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Introduction"><span class="nav-number">2.</span> <span class="nav-text">2.Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Related-Work"><span class="nav-number">3.</span> <span class="nav-text">3.Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Model"><span class="nav-number">4.</span> <span class="nav-text">4.Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Experiment"><span class="nav-number">5.</span> <span class="nav-text">5.Experiment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Conclusion"><span class="nav-number">6.</span> <span class="nav-text">6.Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">7.</span> <span class="nav-text">7.相关链接</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

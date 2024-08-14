@@ -22,30 +22,20 @@
     var CONFIG = {"hostname":"xd-mu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1.Abstract​	弱监督时态动作定位的目的是在训练过程中仅使用视频级类别标签来定位和识别未剪辑视频中的动作。在没有实例级注释的情况下，大多数现有方法都遵循基于片段的多实例学习（S-MIL）框架，即通过视频标签对片段预测进行监督。然而，在训练过程中获取分段级分数的目标与在测试过程中获取建议级分数的目标并不一致，从而导致了次优结果。为了解决这个问题，我们提出了一种新颖的基于提案的多实例学习（Pr">
+  <meta name="description" content="做了一个今年AAAI25的checklist的tex代码分享，无偿分享，有问题b站接着私信我就可以。 使用方法：新建一个checklist.tex文件复制下面进去，然后在主文件参考文献后面加上就可以： 123\newpage\clearpage\input{.&#x2F;checklist} checklist.tex： 123456789101112131415161718192021222324">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization（基于提案的弱监督时序动作定位多示例学习）">
-<meta property="og:url" content="https://xd-mu.github.io/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/index.html">
+<meta property="og:title" content="AAAI_CheckList模板">
+<meta property="og:url" content="https://xd-mu.github.io/2024/08/14/AAAI-CheckList%E6%A8%A1%E6%9D%BF/index.html">
 <meta property="og:site_name" content="野生调参侠的博客">
-<meta property="og:description" content="1.Abstract​	弱监督时态动作定位的目的是在训练过程中仅使用视频级类别标签来定位和识别未剪辑视频中的动作。在没有实例级注释的情况下，大多数现有方法都遵循基于片段的多实例学习（S-MIL）框架，即通过视频标签对片段预测进行监督。然而，在训练过程中获取分段级分数的目标与在测试过程中获取建议级分数的目标并不一致，从而导致了次优结果。为了解决这个问题，我们提出了一种新颖的基于提案的多实例学习（Pr">
+<meta property="og:description" content="做了一个今年AAAI25的checklist的tex代码分享，无偿分享，有问题b站接着私信我就可以。 使用方法：新建一个checklist.tex文件复制下面进去，然后在主文件参考文献后面加上就可以： 123\newpage\clearpage\input{.&#x2F;checklist} checklist.tex： 123456789101112131415161718192021222324">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://renhuan1999.github.io/P-MIL/images/P-MIL_motivation.png">
-<meta property="og:image" content="https://renhuan1999.github.io/P-MIL/images/P-MIL_framework.png">
-<meta property="og:image" content="https://renhuan1999.github.io/P-MIL/images/P-MIL_experiment_thumos14.png">
-<meta property="og:image" content="https://renhuan1999.github.io/P-MIL/images/P-MIL_experiment_activitynet.png">
-<meta property="og:image" content="https://s2.loli.net/2023/12/08/7Qv9wxEOHPGqfUd.png">
-<meta property="og:image" content="https://s2.loli.net/2023/12/08/6Kyh3irNIPBTevo.png">
-<meta property="og:image" content="https://renhuan1999.github.io/P-MIL/images/P-MIL_visualization.png">
-<meta property="article:published_time" content="2023-12-07T07:32:37.000Z">
-<meta property="article:modified_time" content="2023-12-09T03:08:15.958Z">
+<meta property="article:published_time" content="2024-08-14T07:11:59.000Z">
+<meta property="article:modified_time" content="2024-08-14T07:16:13.150Z">
 <meta property="article:author" content="野生调参侠">
-<meta property="article:tag" content="视频定位;">
-<meta property="article:tag" content="弱监督;">
-<meta property="article:tag" content="时序动作定位;">
+<meta property="article:tag" content="tools">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://renhuan1999.github.io/P-MIL/images/P-MIL_motivation.png">
 
-<link rel="canonical" href="https://xd-mu.github.io/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/">
+<link rel="canonical" href="https://xd-mu.github.io/2024/08/14/AAAI-CheckList%E6%A8%A1%E6%9D%BF/">
 
 
 <script id="page-configurations">
@@ -58,7 +48,7 @@
   };
 </script>
 
-  <title>Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization（基于提案的弱监督时序动作定位多示例学习） | 野生调参侠的博客</title>
+  <title>AAAI_CheckList模板 | 野生调参侠的博客</title>
   
 
 
@@ -320,7 +310,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2024/08/14/AAAI-CheckList%E6%A8%A1%E6%9D%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
@@ -333,7 +323,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization（基于提案的弱监督时序动作定位多示例学习）
+          AAAI_CheckList模板
         </h1>
 
         <div class="post-meta">
@@ -342,28 +332,9 @@ mjx-container[display="true"] + br {
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-12-07 15:32:37" itemprop="dateCreated datePublished" datetime="2023-12-07T15:32:37+08:00">2023-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-09 11:08:15" itemprop="dateModified" datetime="2023-12-09T11:08:15+08:00">2023-12-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文精读</span></a>
-                </span>
+              <time title="创建时间：2024-08-14 15:11:59 / 修改时间：15:16:13" itemprop="dateCreated datePublished" datetime="2024-08-14T15:11:59+08:00">2024-08-14</time>
             </span>
 
           
@@ -379,14 +350,14 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>4.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>9 分钟</span>
             </span>
 
         </div>
@@ -398,44 +369,11 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1.Abstract"></a>1.Abstract</h2><p>​	弱监督时态动作定位的目的是在训练过程中仅使用视频级类别标签来定位和识别未剪辑视频中的动作。在没有实例级注释的情况下，大多数现有方法都遵循基于片段的多实例学习（S-MIL）框架，即通过视频标签对片段预测进行监督。然而，在训练过程中获取分段级分数的目标与在测试过程中获取建议级分数的目标并不一致，从而导致了次优结果。为了解决这个问题，我们提出了一种新颖的基于提案的多实例学习（Proposal-based Multiple Instance Learning，P-MIL）框架，在训练和测试阶段直接对候选提案进行分类，其中包括三个关键设计：</p>
-<ul>
-<li>周边对比特征提取模块，通过考虑周边对比信息来抑制辨别性短提案；</li>
-<li>提案完整性评估模块，通过完整性伪标签的指导来抑制低质量提案；</li>
-<li>实例级等级一致性损失，通过利用 RGB 和 FLOW 模式的互补性来实现鲁棒检测；</li>
-</ul>
-<p>​	在两个具有挑战性的基准（包括 THUMOS14 和 ActivityNet）上取得的大量实验结果证明了我们的方法具有卓越的性能。</p>
-<span id="more"></span>
-
-<h2 id="2-Motivation"><a href="#2-Motivation" class="headerlink" title="2.Motivation"></a>2.Motivation</h2><p>S-MIL 框架有两个缺点。</p>
-<ol>
-<li>训练和测试阶段的目标不一致。如图（a）所示，在测试阶段，目标是对动作建议整体进行评分，但在训练阶段，分类器的训练目标是对片段进行评分。</li>
-<li>在很多情况下，很难单独对每个片段进行分类。如图（b）所示，通过观察单个跑步片段，很难判断它属于跳高、跳远还是三级跳远。</li>
-</ol>
-<img src="https://renhuan1999.github.io/P-MIL/images/P-MIL_motivation.png" alt="img">
-
-<h2 id="4-Model-FrameWork"><a href="#4-Model-FrameWork" class="headerlink" title="4.Model FrameWork"></a>4.Model FrameWork</h2><p><img src="https://renhuan1999.github.io/P-MIL/images/P-MIL_framework.png" alt="img"></p>
-<p>(a) 基于提案的多实例学习框架概述，包括候选提案生成、提案特征提取、提案分类和完善。</p>
-<p>(b) 周边对比特征提取（SCFE）模块扩展候选提案的边界，然后计算候选提案的内外对比特征。</p>
-<p>(c) 提案完整性评估（PCE）模块通过计算选定伪实例的 IoU 生成完整性伪标签。</p>
-<p>(d) 实例级等级一致性（IRC）损失限制 RGB 和 FLOW 两种模式之间簇内的归一化相对分类分数保持一致。</p>
-<h2 id="5-Experiment"><a href="#5-Experiment" class="headerlink" title="5.Experiment"></a>5.Experiment</h2><p><img src="https://renhuan1999.github.io/P-MIL/images/P-MIL_experiment_thumos14.png" alt="img"></p>
-<p><strong>Table 1</strong>：这个表格展示了在THUMOS14测试集上，不同方法在mAP（mean Average Precision）指标下的性能对比。这个表格说明了研究者提出的P-MIL方法在弱监督和全监督方法中的表现，结果表明P-MIL方法优于大部分现有方法，甚至在某些指标上超过了一些全监督方法。</p>
-<p><img src="https://renhuan1999.github.io/P-MIL/images/P-MIL_experiment_activitynet.png" alt="img"></p>
-<p><strong>Table 2和Table 3</strong>：这两个表格分别展示了在ActivityNet1.2和ActivityNet1.3验证集上的性能对比。这两个表格进一步证实了P-MIL方法在更大的数据集上也能取得优秀的性能。</p>
-<p><img src="https://s2.loli.net/2023/12/08/7Qv9wxEOHPGqfUd.png" alt="img"></p>
-<p><strong>Table 4</strong>：这个表格展示了不同候选提案生成方法对性能的影响。结果显示，引入背景提案能够显著提升性能，这验证了研究者提出的这一设计的有效性。</p>
-<p><strong>Table 5</strong>：这个表格展示了不同提案评分方法的性能对比，包括直接使用IoU与ground truth评分，使用S-MIL方法评分，使用P-MIL方法评分，以及融合S-MIL和P-MIL方法评分。结果显示，P-MIL方法在评分上优于S-MIL方法，且融合两种方法可以进一步提升性能。</p>
-<p><strong>Table 6</strong>：这个表格展示了不同变体的提案特征提取方法对性能的影响。结果显示，不扩展边界、直接连接三个特征向量、以及使用外-内对比特征提取的方法的性能逐渐提升，验证了环绕对比特征提取模块的有效性。</p>
-<p><strong>Table 7</strong>：这个表格展示了提案完整性评估（PCE）模块和实例级别排名一致性（IRC）损失对性能的影响。结果显示，这两个设计都能显著提升性能，且同时使用可以带来更大的提升。</p>
-<img src="https://s2.loli.net/2023/12/08/6Kyh3irNIPBTevo.png" alt="image-20231208101605046" style="zoom:150%;">
-
-<p><strong>Figure 3</strong>：这个图展示了两个超参数（λcomp和λIRC）对性能的影响。结果显示，模型对于这些超参数不是非常敏感，性能波动在<a href="mailto:&#109;&#65;&#80;&#x40;&#48;&#x2e;&#x35;">mAP@0.5</a>中小于2%。</p>
-<h2 id="6-Visualizations-Conclusion"><a href="#6-Visualizations-Conclusion" class="headerlink" title="6.Visualizations Conclusion"></a>6.Visualizations Conclusion</h2><img src="https://renhuan1999.github.io/P-MIL/images/P-MIL_visualization.png" alt="img">
-
-<p>​	本文提出了一种新颖的基于提案的多实例学习（Proposal-based Multiple Instance Learning，<strong>P-MIL</strong>）框架，用于弱监督时空动作定位，通过直接对候选提案进行分类，实现训练和测试阶段的统一目标。作者引入了三个关键设计来应对 P-MIL 框架不同阶段的挑战，包括<strong>周边对比特征提取模块、提案完整性评估模块和实例级等级一致性损失</strong>。在两个具有挑战性的基准上取得的大量实验结果证明了我们方法的有效性。</p>
-<h2 id="7-相关链接"><a href="#7-相关链接" class="headerlink" title="7.相关链接"></a>7.相关链接</h2><p>​	<a target="_blank" rel="noopener" href="https://openaccess.thecvf.com/content/CVPR2023/papers/Ren_Proposal-Based_Multiple_Instance_Learning_for_Weakly-Supervised_Temporal_Action_Localization_CVPR_2023_paper.pdf">论文地址</a></p>
-<p>​	<a target="_blank" rel="noopener" href="https://github.com/RenHuan1999/CVPR2023_P-MIL">作者源码地址</a></p>
+        <p>做了一个今年AAAI25的checklist的tex代码分享，无偿分享，有问题b站接着私信我就可以。</p>
+<p><strong>使用方法</strong>：新建一个checklist.tex文件复制下面进去，然后在主文件参考文献后面加上就可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\newpage</span><br><span class="line">\clearpage</span><br><span class="line">\input{./checklist}</span><br></pre></td></tr></table></figure>
+<p><strong>checklist.tex：</strong></p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\paragraph</span>{This paper:}</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> Includes a conceptual outline and/or pseudocode description of AI methods introduced (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Clearly delineates statements that are opinions, hypothesis, and speculation from objective facts and results (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Provides well marked pedagogical references for less-familiar readers to gain background necessary to replicate the paper (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper make theoretical contributions? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> All assumptions and restrictions are stated clearly and formally. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel claims are stated formally (e.g., in theorem statements). (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Proofs of all novel claims are included. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Proof sketches or intuitions are given for complex and/or novel results. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Appropriate citations to theoretical tools used are given. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All theoretical claims are demonstrated empirically to hold. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All experimental code used to eliminate or disprove claims is included. (yes/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper rely on one or more datasets? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> A motivation is given for why the experiments are conducted on the selected datasets (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel datasets introduced in this paper are included in a data appendix. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel datasets introduced in this paper will be made publicly available upon publication of the paper with a license that allows free usage for research purposes. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets drawn from the existing literature (potentially including authors’ own previously published work) are accompanied by appropriate citations. (yes/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets drawn from the existing literature (potentially including authors’ own previously published work) are publicly available. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets that are not publicly available are described in detail, with explanation why publicly available alternatives are not scientifically satisficing. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper include computational experiments? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> Any code required for pre-processing data is included in the appendix. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All source code required for conducting and analyzing the experiments is included in a code appendix. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All source code required for conducting and analyzing the experiments will be made publicly available upon publication of the paper with a license that allows free usage for research purposes. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All source code implementing new methods have comments detailing the implementation, with references to the paper where each step comes from. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> If an algorithm depends on randomness, then the method used for setting seeds is described in a way sufficient to allow replication of results. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper specifies the computing infrastructure used for running experiments (hardware and software), including GPU/CPU models; amount of memory; operating system; names and versions of relevant software libraries and frameworks. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper formally describes evaluation metrics used and explains the motivation for choosing these metrics. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper states the number of algorithm runs used to compute each reported result. (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Analysis of experiments goes beyond single-dimensional summaries of performance (e.g., average; median) to include measures of variation, confidence, or other distributional information. (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> The significance of any improvement or decrease in performance is judged using appropriate statistical tests (e.g., Wilcoxon signed-rank). (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper lists all final (hyper-)parameters used for each model/algorithm in the paper’s experiments. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper states the number and range of values tried per (hyper-) parameter during development of the paper, along with the criterion used for selecting the final parameter setting. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -466,7 +404,7 @@ mjx-container[display="true"] + br {
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://xd-mu.github.io/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/" title="Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization（基于提案的弱监督时序动作定位多示例学习）">https://xd-mu.github.io/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization（基于提案的弱监督时序动作定位多示例学习）/</a>
+    <a href="https://xd-mu.github.io/2024/08/14/AAAI-CheckList%E6%A8%A1%E6%9D%BF/" title="AAAI_CheckList模板">https://xd-mu.github.io/2024/08/14/AAAI-CheckList模板/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -477,9 +415,7 @@ mjx-container[display="true"] + br {
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E8%A7%86%E9%A2%91%E5%AE%9A%E4%BD%8D/" rel="tag"># 视频定位;</a>
-              <a href="/tags/%E5%BC%B1%E7%9B%91%E7%9D%A3/" rel="tag"># 弱监督;</a>
-              <a href="/tags/%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D/" rel="tag"># 时序动作定位;</a>
+              <a href="/tags/tools/" rel="tag"># tools</a>
           </div>
 
         
@@ -488,13 +424,10 @@ mjx-container[display="true"] + br {
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/12/06/SST-Single-Stream-Temporal-Action-Proposals%EF%BC%88%E5%8D%95%E6%B5%81%E6%97%B6%E9%97%B4%E5%8A%A8%E4%BD%9C%E5%BB%BA%E8%AE%AE%EF%BC%89/" rel="prev" title="SST: Single-Stream Temporal Action Proposals（单流时间动作建议）">
-      <i class="fa fa-chevron-left"></i> SST: Single-Stream Temporal Action Proposals（单流时间动作建议）
+    <a href="/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/12/10/2023-12-10%EF%BC%9A%EF%BC%88YOLO%EF%BC%89Car-detection-for-Autonomous-Driving/" rel="next" title="2023-12-10：（YOLO）Car detection for Autonomous Driving">
-      2023-12-10：（YOLO）Car detection for Autonomous Driving <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -553,7 +486,6 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Abstract"><span class="nav-number">1.</span> <span class="nav-text">1.Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Motivation"><span class="nav-number">2.</span> <span class="nav-text">2.Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Model-FrameWork"><span class="nav-number">3.</span> <span class="nav-text">4.Model FrameWork</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Experiment"><span class="nav-number">4.</span> <span class="nav-text">5.Experiment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Visualizations-Conclusion"><span class="nav-number">5.</span> <span class="nav-text">6.Visualizations Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">6.</span> <span class="nav-text">7.相关链接</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

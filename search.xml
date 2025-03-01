@@ -2142,4 +2142,203 @@ id="与经典网络相比的准确率提升程度">1.2.3与经典网络相比的
         <category>李沐《动手学深度学习》</category>
       </categories>
   </entry>
+  <entry>
+    <title>leetcode刷题日记</title>
+    <url>/2025/03/01/leetcode%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="面试精选100题">面试精选100题</h1>
+<h2 id="数组字符串">数组、字符串</h2>
+<h3 id="数组列表中的最大距离中等">1.数组列表中的最大距离（中等）</h3>
+<p>给定 <code>m</code> 个数组，每个数组都已经按照升序排好序了。</p>
+<p>现在你需要从两个不同的数组中选择两个整数（每个数组选一个）并且计算它们的距离。两个整数
+<code>a</code> 和 <code>b</code> 之间的距离定义为它们差的绝对值
+<code>|a-b|</code> 。</p>
+<p>返回最大距离。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：[[1,2,3],[4,5],[1,2,3]]</span><br><span class="line">输出：4</span><br><span class="line">解释：</span><br><span class="line">一种得到答案 4 的方法是从第一个数组或者第三个数组中选择 1，同时从第二个数组中选择 5 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：arrays = [[1],[1]]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>m == arrays.length</code></li>
+<li><code>2 &lt;= m &lt;= 105</code></li>
+<li><code>1 &lt;= arrays[i].length &lt;= 500</code></li>
+<li><code>-104 &lt;= arrays[i][j] &lt;= 104</code></li>
+<li><code>arrays[i]</code> 以 <strong>升序</strong> 排序。</li>
+<li>所有数组中最多有 <code>105</code> 个整数。</li>
+</ul>
+<p>解答：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxDistance</span>(<span class="params">self, arrays: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        n = <span class="built_in">len</span>(arrays[<span class="number">0</span>])</span><br><span class="line">        min_val = arrays[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        max_val = arrays[<span class="number">0</span>][-<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(arrays)):</span><br><span class="line">            n = <span class="built_in">len</span>(arrays[i])</span><br><span class="line">            res = <span class="built_in">max</span>(res, <span class="built_in">max</span>(<span class="built_in">abs</span>(arrays[i][n - <span class="number">1</span>] - min_val), </span><br><span class="line">                            <span class="built_in">abs</span>(max_val - arrays[i][<span class="number">0</span>])))</span><br><span class="line">            min_val = <span class="built_in">min</span>(min_val, arrays[i][<span class="number">0</span>])</span><br><span class="line">            max_val = <span class="built_in">max</span>(max_val, arrays[i][-<span class="number">1</span>])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="摆动排序中等">2.摆动排序（中等）</h3>
+<p>给你一个的整数数组 <code>nums</code>, 将该数组重新排序后使
+<code>nums[0] &lt;= nums[1] &gt;= nums[2] &lt;= nums[3]...</code></p>
+<p>输入数组总是有一个有效的答案。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：nums = [3,5,2,1,6,4]</span><br><span class="line">输出：[3,5,1,6,2,4]</span><br><span class="line">解释：[1,6,2,5,3,4]也是有效的答案</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：nums = [6,6,5,6,3,8]</span><br><span class="line">输出：[6,6,5,6,3,8]</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 104</code></li>
+<li>输入的 <code>nums</code> 保证至少有一个答案。</li>
+</ul>
+<p><strong>进阶：</strong>你能在 <code>O(n)</code>
+时间复杂度下解决这个问题吗？</p>
+<p>解答：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wiggleSort</span>(<span class="params">self, nums</span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify nums in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        nums.sort()</span><br><span class="line">        temp = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(nums)-<span class="number">1</span>,<span class="number">2</span>):</span><br><span class="line">            <span class="comment"># nums[i+1], nums[i] = nums[i], nums[i+1]</span></span><br><span class="line">                temp = nums[i]</span><br><span class="line">                nums[i] = nums[i+<span class="number">1</span>]</span><br><span class="line">                nums[i+<span class="number">1</span>] = temp</span><br><span class="line">        <span class="keyword">return</span> nums </span><br><span class="line"><span class="comment"># 时间复杂度O(n)</span></span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">wiggleSort</span>(<span class="params">self, nums</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> ((i%<span class="number">2</span> == <span class="number">0</span> <span class="keyword">and</span> nums[i] &gt; nums[i+<span class="number">1</span>]) <span class="keyword">or</span> (i%<span class="number">2</span> == <span class="number">1</span> <span class="keyword">and</span> nums[i] &lt; nums[i+<span class="number">1</span>])):</span><br><span class="line">                nums[i], nums[i+<span class="number">1</span>] = nums[i+<span class="number">1</span>], nums[i]</span><br></pre></td></tr></table></figure>
+<h3 id="反转数字简单">3.反转数字（简单）</h3>
+<p>给定一个数字 <code>N</code>，当它满足以下条件的时候返回
+<code>true</code>：</p>
+<p>原数字旋转 180° 以后可以得到新的数字。</p>
+<p>如 0, 1, 6, 8, 9 旋转 180° 以后，得到了新的数字 0, 1, 9, 8, 6 。</p>
+<p>2, 3, 4, 5, 7 旋转 180° 后，得到的<strong>不是</strong>数字。</p>
+<p>易混淆数 (confusing number)
+在旋转180°以后，可以得到和原来<strong>不同</strong>的数，且新数字的每一位都是有效的。</p>
+<p><strong>示例 1：</strong></p>
+<figure>
+<img src="https://assets.leetcode.com/uploads/2019/03/23/1268_1.png" alt="img">
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：6</span><br><span class="line">输出：true</span><br><span class="line">解释： </span><br><span class="line">把 6 旋转 180° 以后得到 9，9 是有效数字且 9!=6 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure>
+<img src="https://assets.leetcode.com/uploads/2019/03/23/1268_2.png" alt="img">
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：89</span><br><span class="line">输出：true</span><br><span class="line">解释: </span><br><span class="line">把 89 旋转 180° 以后得到 68，68 是有效数字且 89!=68 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3：</strong></p>
+<figure>
+<img src="https://assets.leetcode.com/uploads/2019/03/26/1268_3.png" alt="img">
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：11</span><br><span class="line">输出：false</span><br><span class="line">解释：</span><br><span class="line">把 11 旋转 180° 以后得到 11，11 是有效数字但是值保持不变，所以 11 不是易混淆数字。 </span><br></pre></td></tr></table></figure>
+<p><strong>示例 4：</strong></p>
+<figure>
+<img src="https://assets.leetcode.com/uploads/2019/03/23/1268_4.png" alt="img">
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：25</span><br><span class="line">输出：false</span><br><span class="line">解释：</span><br><span class="line">把 25 旋转 180° 以后得到的不是数字。</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ol type="1">
+<li><code>0 &lt;= N &lt;= 10^9</code></li>
+<li>可以忽略掉旋转后得到的前导零，例如，如果我们旋转后得到
+<code>0008</code> 那么该数字就是 <code>8</code> 。</li>
+</ol>
+<p>题解</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">confusingNumber</span>(<span class="params">self, n</span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        dic = {<span class="string">'0'</span>:<span class="string">'0'</span>,<span class="string">'1'</span>:<span class="string">'1'</span>,<span class="string">'8'</span>:<span class="string">'8'</span>,<span class="string">'6'</span>:<span class="string">'9'</span>,<span class="string">'9'</span>:<span class="string">'6'</span>}</span><br><span class="line">        s = <span class="built_in">str</span>(n)</span><br><span class="line">        rev_s = <span class="string">""</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            rev_s = dic[i] + rev_s</span><br><span class="line">        <span class="keyword">return</span> rev_s!=s</span><br></pre></td></tr></table></figure>
+<h3 id="字符串左右移">4.字符串左右移</h3>
+<p>给定一个包含小写英文字母的字符串 <code>s</code> 以及一个矩阵
+<code>shift</code>，其中
+<code>shift[i] = [direction, amount]</code>：</p>
+<ul>
+<li><code>direction</code> 可以为 <code>0</code> （表示左移）或
+<code>1</code> （表示右移）。</li>
+<li><code>amount</code> 表示 <code>s</code> 左右移的位数。</li>
+<li>左移 1 位表示移除 <code>s</code> 的第一个字符，并将该字符插入到
+<code>s</code> 的结尾。</li>
+<li>类似地，右移 1 位表示移除 <code>s</code>
+的最后一个字符，并将该字符插入到 <code>s</code> 的开头。</li>
+</ul>
+<p>对这个字符串进行所有操作后，返回最终结果。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = "abc", shift = [[0,1],[1,2]]</span><br><span class="line">输出："cab"</span><br><span class="line">解释：</span><br><span class="line">[0,1] 表示左移 1 位。 "abc" -&gt; "bca"</span><br><span class="line">[1,2] 表示右移 2 位。 "bca" -&gt; "cab"</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = "abcdefg", shift = [[1,1],[1,1],[0,2],[1,3]]</span><br><span class="line">输出："efgabcd"</span><br><span class="line">解释： </span><br><span class="line">[1,1] 表示右移 1 位。 "abcdefg" -&gt; "gabcdef"</span><br><span class="line">[1,1] 表示右移 1 位。 "gabcdef" -&gt; "fgabcde"</span><br><span class="line">[0,2] 表示左移 2 位。 "fgabcde" -&gt; "abcdefg"</span><br><span class="line">[1,3] 表示右移 3 位。 "abcdefg" -&gt; "efgabcd"</span><br></pre></td></tr></table></figure>
+<p>解答：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">stringShift</span>(<span class="params">self, s, shift</span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type shift: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        left_sum = <span class="number">0</span></span><br><span class="line">        right_sum = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> direction, amount <span class="keyword">in</span> shift:</span><br><span class="line">            <span class="keyword">if</span> direction == <span class="number">0</span>:</span><br><span class="line">                left_sum += amount</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                right_sum += amount</span><br><span class="line">        total = (right_sum-left_sum)%<span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">if</span> total &lt; <span class="number">0</span>:</span><br><span class="line">            total += <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="comment"># 切片操作</span></span><br><span class="line">        <span class="keyword">return</span> s[-total:] + s[:-total]</span><br></pre></td></tr></table></figure>
+<p>这行代码根据计算得到的 <code>total</code> 值对字符串 <code>s</code>
+进行切片和拼接操作。</p>
+<ul>
+<li><code>s[-total:]</code>：获取字符串 <code>s</code> 从倒数第
+<code>total</code> 个字符开始到末尾的子串。</li>
+<li><code>s[:-total]</code>：获取字符串 <code>s</code> 从开头到倒数第
+<code>total</code> 个字符之前的子串。</li>
+<li><code>s[-total:] + s[:-total]</code>：将上述两个子串拼接起来，得到最终移动后的字符串，并返回。</li>
+</ul>
+<h3 id="相隔为1的编辑距离中等">5.相隔为1的编辑距离（中等）</h3>
+<p>给定两个字符串 <code>s</code> 和 <code>t</code>
+，如果它们的编辑距离为 <code>1</code> ，则返回 <code>true</code>
+，否则返回 <code>false</code> 。</p>
+<p>字符串 <code>s</code> 和字符串 <code>t</code> 之间满足编辑距离等于 1
+有三种可能的情形：</p>
+<ul>
+<li>往 <code>s</code> 中插入 <strong>恰好一个</strong> 字符得到
+<code>t</code></li>
+<li>从 <code>s</code> 中删除 <strong>恰好一个</strong> 字符得到
+<code>t</code></li>
+<li>在 <code>s</code> 中用 <strong>一个不同的字符</strong> 替换
+<strong>恰好一个</strong> 字符得到 <code>t</code></li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入: s = "ab", t = "acb"</span><br><span class="line">输出: true</span><br><span class="line">解释: 可以将 'c' 插入字符串 s 来得到 t。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入: s = "cab", t = "ad"</span><br><span class="line">输出: false</span><br><span class="line">解释: 无法通过 1 步操作使 s 变为 t。</span><br></pre></td></tr></table></figure>
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>0 &lt;= s.length, t.length &lt;= 104</code></li>
+<li><code>s</code> 和 <code>t</code> 由小写字母，大写字母和数字组成</li>
+</ul>
+<p>解答：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isOneEditDistance</span>(<span class="params">self, s, t</span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type t: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        len_s,len_t = <span class="built_in">len</span>(s),<span class="built_in">len</span>(t)</span><br><span class="line">        <span class="comment"># 保证s长度要小于t   </span></span><br><span class="line">        <span class="keyword">if</span> len_s &gt; len_t:</span><br><span class="line">            <span class="keyword">return</span> isOneEditDistance(t,s)</span><br><span class="line">        <span class="comment"># 长度超过1的字符距离一定不满足题意</span></span><br><span class="line">        <span class="keyword">if</span> len_t - len_s &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="comment"># 找s和t的前len(s)项是否相同</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(len_s):</span><br><span class="line">            <span class="comment"># 出现一个字符不同</span></span><br><span class="line">            <span class="keyword">if</span> s[i] != t[i]:</span><br><span class="line">                <span class="comment"># 若长度相同则后面需要完全一样</span></span><br><span class="line">                <span class="keyword">if</span> len_s == len_t:</span><br><span class="line">                    <span class="keyword">return</span> s[i + <span class="number">1</span>:] == t[i + <span class="number">1</span>:]</span><br><span class="line">                <span class="comment"># 长度差为 1 时，s 从当前位置开始和 t 从下一个位置开始需相同</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">return</span> s[i:] == t[i + <span class="number">1</span>:]</span><br><span class="line">        <span class="comment"># 前len(s)完全相同 </span></span><br><span class="line">        <span class="keyword">return</span> len_s + <span class="number">1</span> == len_t</span><br></pre></td></tr></table></figure>
+<h3 id="反转字符串中的单词ⅱ中等">6.反转字符串中的单词Ⅱ（中等）</h3>
+<p>给你一个字符数组 <code>s</code> ，反转其中 <strong>单词</strong>
+的顺序。</p>
+<p><strong>单词</strong>
+的定义为：单词是一个由非空格字符组成的序列。<code>s</code>
+中的单词将会由单个空格分隔。</p>
+<p>必须设计并实现 <strong>原地</strong>
+解法来解决此问题，即不分配额外的空间。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = ["t","h","e"," ","s","k","y"," ","i","s"," ","b","l","u","e"]</span><br><span class="line">输出：["b","l","u","e"," ","i","s"," ","s","k","y"," ","t","h","e"]</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = ["a"]</span><br><span class="line">输出：["a"]</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 105</code></li>
+<li><code>s[i]</code> 可以是一个英文字母（大写或小写）、数字、或是空格
+<code>' '</code> 。</li>
+<li><code>s</code> 中至少存在一个单词</li>
+<li><code>s</code> 不含前导或尾随空格</li>
+<li>题目数据保证：<code>s</code> 中的每个单词都由单个空格分隔</li>
+</ul>
+<p>解答：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseWords</span>(<span class="params">self, s</span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type s: List[str]</span></span><br><span class="line"><span class="string">        :rtype: None Do not return anything, modify s in-place instead.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        <span class="comment"># 使用 Python 列表的 reverse() 方法将整个字符数组反转，这里reverse是创建了一个新的列表</span></span><br><span class="line">        s.reverse()</span><br><span class="line">        pre = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">if</span> s[i] ==<span class="string">' '</span>:</span><br><span class="line">                <span class="comment"># 不可以用s[pre:i].reverse()，因为切片操作时这样会自动创建新的列表原始并没有修改</span></span><br><span class="line">                s[pre:i] = <span class="built_in">reversed</span>(s[pre:i])</span><br><span class="line">                pre = i + <span class="number">1</span></span><br><span class="line">        <span class="comment"># 处理最后一个单词，因为最后一个单词后面没有空格</span></span><br><span class="line">        s[pre:] = <span class="built_in">reversed</span>(s[pre:])</span><br><span class="line">        <span class="keyword">return</span> s </span><br></pre></td></tr></table></figure>
+<h2 id="滑动窗口">滑动窗口</h2>
+<h3 id="至多包含两个不同字符的最长子串中等">1.至多包含两个不同字符的最长子串（中等）</h3>
+<p>给你一个字符串 <code>s</code> ，请你找出 <strong>至多</strong> 包含
+<strong>两个不同字符</strong> 的最长子串，并返回该子串的长度。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = "eceba"</span><br><span class="line">输出：3</span><br><span class="line">解释：满足题目要求的子串是 "ece" ，长度为 3 。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = "ccaabbb"</span><br><span class="line">输出：5</span><br><span class="line">解释：满足题目要求的子串是 "aabbb" ，长度为 5 。</span><br></pre></td></tr></table></figure>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= s.length &lt;= 105</code></li>
+<li><code>s</code> 由英文字母组成</li>
+</ul>
+<p>解答：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 模板 (伪代码)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">problemName</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># Step 1: 定义需要维护的变量们 (对于滑动窗口类题目，这些变量通常是最小长度，最大长度，或者哈希表)</span></span><br><span class="line">        x, y = ..., ...</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Step 2: 定义窗口的首尾端 (start, end)， 然后滑动窗口</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> end <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="comment"># Step 3: 更新需要维护的变量, 有的变量需要一个if语句来维护 (比如最大最小长度)</span></span><br><span class="line">            x = new_x</span><br><span class="line">            <span class="keyword">if</span> condition:</span><br><span class="line">                y = new_y</span><br><span class="line"></span><br><span class="line">            <span class="string">'''</span></span><br><span class="line"><span class="string">            ------------- 下面是两种情况，读者请根据题意二选1 -------------</span></span><br><span class="line"><span class="string">            '''</span></span><br><span class="line">            <span class="comment"># Step 4 - 情况1</span></span><br><span class="line">            <span class="comment"># 如果题目的窗口长度固定：用一个if语句判断一下当前窗口长度是否超过限定长度 </span></span><br><span class="line">            <span class="comment"># 如果超过了，窗口左指针前移一个单位保证窗口长度固定, 在那之前, 先更新Step 1定义的(部分或所有)维护变量 </span></span><br><span class="line">            <span class="keyword">if</span> 窗口长度大于限定值:</span><br><span class="line">                <span class="comment"># 更新 (部分或所有) 维护变量 </span></span><br><span class="line">                <span class="comment"># 窗口左指针前移一个单位保证窗口长度固定</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Step 4 - 情况2</span></span><br><span class="line">            <span class="comment"># 如果题目的窗口长度可变: 这个时候一般涉及到窗口是否合法的问题</span></span><br><span class="line">            <span class="comment"># 如果当前窗口不合法时, 用一个while去不断移动窗口左指针, 从而剔除非法元素直到窗口再次合法</span></span><br><span class="line">            <span class="comment"># 在左指针移动之前更新Step 1定义的(部分或所有)维护变量 </span></span><br><span class="line">            <span class="keyword">while</span> 不合法:</span><br><span class="line">                <span class="comment"># 更新 (部分或所有) 维护变量 </span></span><br><span class="line">                <span class="comment"># 不断移动窗口左指针直到窗口再次合法</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Step 5: 返回答案</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">lengthOfLongestSubstringTwoDistinct</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="comment"># 1. 定义需要维护的变量</span></span><br><span class="line">    <span class="comment"># 最大长度max_len，设计计算不重复元素格式需要哈希表hashmap</span></span><br><span class="line">    max_len, hashmap = <span class="number">0</span>, {}</span><br><span class="line">    <span class="comment"># 2. 定义窗口首尾（start，end），滑动窗口</span></span><br><span class="line">    start = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> end <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">        <span class="comment"># 3. 更新维护变量（max_len,hashmap）</span></span><br><span class="line">        <span class="comment"># 当前元素计数加一，一旦哈希表长度≤2，尝试更新最大长度</span></span><br><span class="line">        hashmap[s[end]] = hashmap.get(s[end],<span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(hashmap) &lt;=<span class="number">2</span>:</span><br><span class="line">            max_len = <span class="built_in">max</span>(max_len,end-start+<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 4. 因为窗口长度可变: 这个时候一般涉及到窗口是否合法的问题</span></span><br><span class="line">        <span class="comment"># 这时要用一个while去不断移动窗口左指针, 从而剔除非法元素直到窗口再次合法</span></span><br><span class="line">        <span class="comment"># 当哈希表长度&gt;2时，移动左指针，直到哈希表长度≤2</span></span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(hashmap) &gt; <span class="number">2</span>:</span><br><span class="line">            head = s[start]</span><br><span class="line">            hashmap[head] -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> hashmap[head] == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">del</span> hashmap[head]</span><br><span class="line">            start += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> max_len</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 同样道理</span></span><br><span class="line"><span class="comment"># 无重复字符的最长子串</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lengthOfLongestSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># Step 1: 定义需要维护的变量, 本题求最大长度，所以需要定义max_len, 该题又涉及去重，因此还需要一个哈希表</span></span><br><span class="line">        max_len, hashmap = <span class="number">0</span>, {}</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Step 2: 定义窗口的首尾端 (start, end)， 然后滑动窗口</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> end <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s)):</span><br><span class="line">            <span class="comment"># Step 3</span></span><br><span class="line">            <span class="comment"># 更新需要维护的变量 (max_len, hashmap)</span></span><br><span class="line">            <span class="comment"># i.e. 把窗口末端元素加入哈希表，使其频率加1，并且更新最大长度</span></span><br><span class="line">            hashmap[s[end]] = hashmap.get(s[end], <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(hashmap) == end - start + <span class="number">1</span>:</span><br><span class="line">                max_len = <span class="built_in">max</span>(max_len, end - start + <span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># Step 4: </span></span><br><span class="line">            <span class="comment"># 根据题意,  题目的窗口长度可变: 这个时候一般涉及到窗口是否合法的问题</span></span><br><span class="line">            <span class="comment"># 这时要用一个while去不断移动窗口左指针, 从而剔除非法元素直到窗口再次合法</span></span><br><span class="line">            <span class="comment"># 当窗口长度大于哈希表长度时候 (说明存在重复元素)，窗口不合法</span></span><br><span class="line">            <span class="comment"># 所以需要不断移动窗口左指针直到窗口再次合法, 同时提前更新需要维护的变量 (hashmap)</span></span><br><span class="line">            <span class="keyword">while</span> end - start + <span class="number">1</span> &gt; <span class="built_in">len</span>(hashmap):</span><br><span class="line">                head = s[start]</span><br><span class="line">                hashmap[head] -= <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> hashmap[head] == <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">del</span> hashmap[head]</span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">        <span class="comment"># Step 5: 返回答案 (最大长度)</span></span><br><span class="line">        <span class="keyword">return</span> max_len</span><br><span class="line"><span class="comment">#长度最小的子数组</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minSubArrayLen</span>(<span class="params">self, target: <span class="built_in">int</span>, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># Step 1: 定义需要维护的变量, 本题求最小长度，所以需要定义min_len, 本题又涉及求和，因此还需要一个sum变量</span></span><br><span class="line">        min_len, sum_ = math.inf, <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Step 2: 定义窗口的首尾端 (start, end)， 然后滑动窗口</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> end <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="comment"># Step 3: 更新需要维护的变量 (min_len, sum_)</span></span><br><span class="line">            sum_ += nums[end]</span><br><span class="line">            <span class="keyword">if</span> sum_ &gt;= target:</span><br><span class="line">                min_len = <span class="built_in">min</span>(min_len, end - start + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Step 4</span></span><br><span class="line">            <span class="comment"># 根据题意,  题目的窗口长度可变: 这个时候一般涉及到窗口是否合法的问题</span></span><br><span class="line">            <span class="comment"># 这时要用一个while去不断移动窗口左指针, 从而剔除非法元素直到窗口再次合法</span></span><br><span class="line">            <span class="comment"># 当sum_的值大于target时候，窗口不合法</span></span><br><span class="line">            <span class="comment"># 所以需要不断移动窗口左指针直到窗口再次合法, 同时提前更新需要维护的变量 (min_len， sum_)</span></span><br><span class="line">            <span class="keyword">while</span> sum_ &gt;= target:</span><br><span class="line">                min_len = <span class="built_in">min</span>(min_len, end - start + <span class="number">1</span>)</span><br><span class="line">                sum_ -= nums[start]</span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">        <span class="comment"># Step 5：返回答案 (最小长度)</span></span><br><span class="line">        <span class="keyword">if</span> min_len == math.inf:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> min_len</span><br></pre></td></tr></table></figure>
+<h3 id="最大连续1的个数中等">2.最大连续1的个数（中等）</h3>
+<p>给定一个二进制数组 <code>nums</code> ，如果最多可以翻转一个
+<code>0</code> ，则返回数组中连续 <code>1</code> 的最大个数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,0,1,1,0]</span><br><span class="line">输出：4</span><br><span class="line">解释：翻转第一个 0 可以得到最长的连续 1。</span><br><span class="line">     当翻转以后，最大连续 1 的个数为 4。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：nums = [1,0,1,1,0,1]</span><br><span class="line">输出：4</span><br></pre></td></tr></table></figure>
+<p><strong>提示:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 105</code></li>
+<li><code>nums[i]</code> 不是 <code>0</code> 就是 <code>1</code>.</li>
+</ul>
+<p><strong>进阶：</strong>如果输入的数字是作为 <strong>无限流</strong>
+逐个输入如何处理？换句话说，内存不能存储下所有从流中输入的数字。您可以有效地解决吗？</p>
+<p>解决：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMaxConsecutiveOnes</span>(<span class="params">self, nums</span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        zero_count = <span class="number">0</span></span><br><span class="line">        max_length = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 1 1 1 1 0 1 1 0 </span></span><br><span class="line">        <span class="keyword">for</span> end <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[end] == <span class="number">0</span>:</span><br><span class="line">                zero_count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> zero_count &gt; <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">if</span> nums[start] == <span class="number">0</span>:</span><br><span class="line">                    zero_count -= <span class="number">1</span></span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">            max_length = <span class="built_in">max</span>(max_length, end - start + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> max_length</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>刷题</tag>
+      </tags>
+  </entry>
 </search>

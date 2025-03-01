@@ -22,28 +22,38 @@
     var CONFIG = {"hostname":"xd-mu.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="野生调参侠的博客">
-<meta property="og:url" content="https://xd-mu.github.io/index.html">
+  <meta name="description" content="面试精选100题 数组、字符串 1.数组列表中的最大距离（中等） 给定 m 个数组，每个数组都已经按照升序排好序了。 现在你需要从两个不同的数组中选择两个整数（每个数组选一个）并且计算它们的距离。两个整数 a 和 b 之间的距离定义为它们差的绝对值 |a-b| 。 返回最大距离。 示例 1： 1234输入：[[1,2,3],[4,5],[1,2,3]]输出：4解释：一种得到答案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode刷题日记">
+<meta property="og:url" content="https://xd-mu.github.io/2025/03/01/leetcode%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/index.html">
 <meta property="og:site_name" content="野生调参侠的博客">
+<meta property="og:description" content="面试精选100题 数组、字符串 1.数组列表中的最大距离（中等） 给定 m 个数组，每个数组都已经按照升序排好序了。 现在你需要从两个不同的数组中选择两个整数（每个数组选一个）并且计算它们的距离。两个整数 a 和 b 之间的距离定义为它们差的绝对值 |a-b| 。 返回最大距离。 示例 1： 1234输入：[[1,2,3],[4,5],[1,2,3]]输出：4解释：一种得到答案">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/03/23/1268_1.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/03/23/1268_2.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/03/26/1268_3.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2019/03/23/1268_4.png">
+<meta property="article:published_time" content="2025-03-01T08:20:03.000Z">
+<meta property="article:modified_time" content="2025-03-01T08:21:02.413Z">
 <meta property="article:author" content="野生调参侠">
+<meta property="article:tag" content="刷题">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2019/03/23/1268_1.png">
 
-<link rel="canonical" href="https://xd-mu.github.io/">
+<link rel="canonical" href="https://xd-mu.github.io/2025/03/01/leetcode%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>野生调参侠的博客</title>
+  <title>leetcode刷题日记 | 野生调参侠的博客</title>
   
 
 
@@ -298,9 +308,10 @@ mjx-container[display="true"] + br {
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -316,10 +327,9 @@ mjx-container[display="true"] + br {
       <meta itemprop="name" content="野生调参侠的博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/03/01/leetcode%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" class="post-title-link" itemprop="url">leetcode刷题日记</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          leetcode刷题日记
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -332,7 +342,14 @@ mjx-container[display="true"] + br {
               <time title="创建时间：2025-03-01 16:20:03 / 修改时间：16:21:02" itemprop="dateCreated datePublished" datetime="2025-03-01T16:20:03+08:00">2025-03-01</time>
             </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -357,7 +374,7 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="面试精选100题">面试精选100题</h1>
+        <h1 id="面试精选100题">面试精选100题</h1>
 <h2 id="数组字符串">数组、字符串</h2>
 <h3 id="数组列表中的最大距离中等">1.数组列表中的最大距离（中等）</h3>
 <p>给定 <code>m</code> 个数组，每个数组都已经按照升序排好序了。</p>
@@ -549,1148 +566,66 @@ mjx-container[display="true"] + br {
 <p>解决：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMaxConsecutiveOnes</span>(<span class="params">self, nums</span>):</span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        start = <span class="number">0</span></span><br><span class="line">        zero_count = <span class="number">0</span></span><br><span class="line">        max_length = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 1 1 1 1 0 1 1 0 </span></span><br><span class="line">        <span class="keyword">for</span> end <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[end] == <span class="number">0</span>:</span><br><span class="line">                zero_count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> zero_count &gt; <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">if</span> nums[start] == <span class="number">0</span>:</span><br><span class="line">                    zero_count -= <span class="number">1</span></span><br><span class="line">                start += <span class="number">1</span></span><br><span class="line">            max_length = <span class="built_in">max</span>(max_length, end - start + <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> max_length</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
+        <div class="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
       
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2024/08/14/AAAI-CheckList%E6%A8%A1%E6%9D%BF/">
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="野生调参侠 微信支付">
+        <p>微信支付</p>
+      </div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
+  </div>
+</div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/08/14/AAAI-CheckList%E6%A8%A1%E6%9D%BF/" class="post-title-link" itemprop="url">AAAI_CheckList模板</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-08-14 15:11:59" itemprop="dateCreated datePublished" datetime="2024-08-14T15:11:59+08:00">2024-08-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-08-16 13:53:13" itemprop="dateModified" datetime="2024-08-16T13:53:13+08:00">2024-08-16</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>做了一个今年AAAI25的checklist的tex代码分享，无偿分享，有问题b站接着私信我就可以。</p>
-<p><strong>使用方法</strong>：新建一个checklist.tex文件复制下面进去，然后在主文件参考文献后面加上就可以：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\newpage</span><br><span class="line">\clearpage</span><br><span class="line">\input{./checklist}</span><br></pre></td></tr></table></figure>
-<p><strong>checklist.tex：</strong></p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\section</span>{Reproducibility Checklist}</span><br><span class="line"><span class="keyword">\paragraph</span>{This paper:}</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> Includes a conceptual outline and/or pseudocode description of AI methods introduced (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Clearly delineates statements that are opinions, hypothesis, and speculation from objective facts and results (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Provides well marked pedagogical references for less-familiare readers to gain background necessary to replicate the paper (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper make theoretical contributions? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> All assumptions and restrictions are stated clearly and formally. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel claims are stated formally (e.g., in theorem statements). (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Proofs of all novel claims are included. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Proof sketches or intuitions are given for complex and/or novel results. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Appropriate citations to theoretical tools used are given. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All theoretical claims are demonstrated empirically to hold. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All experimental code used to eliminate or disprove claims is included. (yes/no/NA) {<span class="keyword">\bf</span> NA}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper rely on one or more datasets? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> A motivation is given for why the experiments are conducted on the selected datasets (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel datasets introduced in this paper are included in a data appendix. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel datasets introduced in this paper will be made publicly available upon publication of the paper with a license that allows free usage for research purposes. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets drawn from the existing literature (potentially including authors’ own previously published work) are accompanied by appropriate citations. (yes/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets drawn from the existing literature (potentially including authors’ own previously published work) are publicly available. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets that are not publicly available are described in detail, with explanation why publicly available alternatives are not scientifically satisficing. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper include computational experiments? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> Any code required for pre-processing data is included in the appendix. (yes/partial/no) {<span class="keyword">\bf</span> no}</span><br><span class="line">    <span class="keyword">\item</span> All source code required for conducting and analyzing the experiments is included in a code appendix. (yes/partial/no) {<span class="keyword">\bf</span> no}</span><br><span class="line">    <span class="keyword">\item</span> All source code required for conducting and analyzing the experiments will be made publicly available upon publication of the paper with a license that allows free usage for research purposes. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All source code implementing new methods have comments detailing the implementation, with references to the paper where each step comes from. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> If an algorithm depends on randomness, then the method used for setting seeds is described in a way sufficient to allow replication of results. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper specifies the computing infrastructure used for running experiments (hardware and software), including GPU/CPU models; amount of memory; operating system; names and versions of relevant software libraries and frameworks. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper formally describes evaluation metrics used and explains the motivation for choosing these metrics. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper states the number of algorithm runs used to compute each reported result. (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Analysis of experiments goes beyond single-dimensional summaries of performance (e.g., average; median) to include measures of variation, confidence, or other distributional information. (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> The significance of any improvement or decrease in performance is judged using appropriate statistical tests (e.g., Wilcoxon signed-rank). (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper lists all final (hyper-)parameters used for each model/algorithm in the paper’s experiments. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper states the number and range of values tried per (hyper-) parameter during development of the paper, along with the criterion used for selecting the final parameter setting. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/" class="post-title-link" itemprop="url">每日计划（长期）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-01-15 10:40:20" itemprop="dateCreated datePublished" datetime="2024-01-15T10:40:20+08:00">2024-01-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-26 22:28:42" itemprop="dateModified" datetime="2024-06-26T22:28:42+08:00">2024-06-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%94%9F%E6%B4%BB%E5%AE%89%E6%8E%92/" itemprop="url" rel="index"><span itemprop="name">生活安排</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>21 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          个人每日计划安排，用Github备份一下，不对外开放噢
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/01/15/%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%88%E9%95%BF%E6%9C%9F%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2024/01/02/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/01/02/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">注意力机制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2024-01-02 10:29:58 / 修改时间：17:49:15" itemprop="dateCreated datePublished" datetime="2024-01-02T10:29:58+08:00">2024-01-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">传统算法学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%9D%8E%E6%B2%90%E3%80%8A%E5%8A%A8%E6%89%8B%E5%AD%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">李沐《动手学深度学习》</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>31 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="目标">1.目标</h2>
-<p>​
-学习注意力机制的基本理论思想，代码实现底层逻辑。同时学习多头注意力机制、自注意力和位置掩码、Transformer。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/01/02/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/20/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89%E5%8F%8A%E7%8E%B0%E4%BB%A3RNN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/20/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89%E5%8F%8A%E7%8E%B0%E4%BB%A3RNN/" class="post-title-link" itemprop="url">循环神经网络（RNN）及现代RNN</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-20 09:52:13" itemprop="dateCreated datePublished" datetime="2023-12-20T09:52:13+08:00">2023-12-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-27 11:52:56" itemprop="dateModified" datetime="2023-12-27T11:52:56+08:00">2023-12-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">传统算法学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%9D%8E%E6%B2%90%E3%80%8A%E5%8A%A8%E6%89%8B%E5%AD%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">李沐《动手学深度学习》</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>30 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="目标">1.目标</h2>
-<p>​
-学习RNN的基本结构，并以此延伸出来的现代循环神经网络：GRU、LSTM、深度循环神经网络、双向循环神经网络、编码器-解码器结构、序列到序列学习（seq2seq）、束搜索。</p>
-<p>​
-通过自己大致复现一遍经典循环神经网络结构，熟悉代码的架构和模板。这里基础知识尽可能精简，多写一些模型和不同方法适用的场景。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/20/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89%E5%8F%8A%E7%8E%B0%E4%BB%A3RNN/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/18/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/18/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">卷积神经网络</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-18 15:20:47" itemprop="dateCreated datePublished" datetime="2023-12-18T15:20:47+08:00">2023-12-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-19 18:02:04" itemprop="dateModified" datetime="2023-12-19T18:02:04+08:00">2023-12-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">传统算法学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%9D%8E%E6%B2%90%E3%80%8A%E5%8A%A8%E6%89%8B%E5%AD%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">李沐《动手学深度学习》</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>19k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>35 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="lenet和现代经典卷积神经网络">1.Lenet和现代经典卷积神经网络</h2>
-<p>​
-手敲一遍过去三四十年的传统神经网络，加深一下对于网络演变的认识，给自己后续学习新进的网络结构打好基础。</p>
-<p>​ 主要是分为：</p>
-<ul>
-<li>传统卷积神经网络：LeNet</li>
-<li>现代卷积神经网络：AlexNet、VGG、NiN、GoogleLeNet、Resnet、DenseNet</li>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>野生调参侠
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xd-mu.github.io/2025/03/01/leetcode%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0/" title="leetcode刷题日记">https://xd-mu.github.io/2025/03/01/leetcode刷题日记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
 </ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/18/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+</div>
 
-    
-    
-    
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/%E5%88%B7%E9%A2%98/" rel="tag"># 刷题</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/08/14/AAAI-CheckList%E6%A8%A1%E6%9D%BF/" rel="prev" title="AAAI_CheckList模板">
+      <i class="fa fa-chevron-left"></i> AAAI_CheckList模板
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/17/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/17/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="post-title-link" itemprop="url">多层感知机</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-17 10:44:58 / 修改时间：16:58:54" itemprop="dateCreated datePublished" datetime="2023-12-17T10:44:58+08:00">2023-12-17</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">传统算法学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%9D%8E%E6%B2%90%E3%80%8A%E5%8A%A8%E6%89%8B%E5%AD%A6%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">李沐《动手学深度学习》</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="目标">1.目标</h2>
-<p>​
-简单实现多层感知机，并学习其他方法：模型选择、欠拟合过拟合、权重衰减(L1、L2正则化)、暂退法（Dropout）、前向传播和反向传播、<strong>数值稳定性和模型初始化</strong>、环境和分布偏移。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/17/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/" class="post-title-link" itemprop="url">Learning Action Completeness from Points for Weakly-supervised Temporal Action Localization</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-13 15:07:17 / 修改时间：15:09:51" itemprop="dateCreated datePublished" datetime="2023-12-13T15:07:17+08:00">2023-12-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文精读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>506</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="abstract">1.Abstract</h2>
-<p>​
-我们要解决的问题是，在每个动作实例只有一个帧标签的情况下，如何定位动作的时间间隔，以进行训练。由于标签稀疏，现有工作无法学习动作的完整性，从而导致零碎的动作预测。在本文中，我们提出了一个新颖的框架，即生成密集的伪标签，为模型提供完整性指导。具体来说，我们首先选择伪背景点来补充点级动作标签。然后，通过将点作为种子，我们搜索可能包含完整动作实例的最佳序列，同时与种子达成一致。为了从获得的序列中学习完整性，我们引入了两种新的损失，分别从动作得分和特征相似性方面对动作实例和背景实例进行对比。实验结果表明，我们的完整性指导确实有助于模型定位完整的动作实例，从而大幅提高了性能，尤其是在高
-IoU
-阈值下。此外，我们还在四个基准测试中证明了我们的方法优于现有的先进方法：
-THUMOS'14、GTEA、BEOID 和
-ActivityNet。值得注意的是，我们的方法甚至可以与最新的全监督方法相媲美，而注释成本却低
-6 倍。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/10/2023-12-10%EF%BC%9A%EF%BC%88YOLO%EF%BC%89Car-detection-for-Autonomous-Driving/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/10/2023-12-10%EF%BC%9A%EF%BC%88YOLO%EF%BC%89Car-detection-for-Autonomous-Driving/" class="post-title-link" itemprop="url">2023-12-10：（YOLO）Car detection for Autonomous Driving</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-12-10 10:53:59 / 修改时间：14:36:37" itemprop="dateCreated datePublished" datetime="2023-12-10T10:53:59+08:00">2023-12-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">传统算法学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">吴恩达课程学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/Convolutional-Neural-Networks/" itemprop="url" rel="index"><span itemprop="name">Convolutional Neural Networks</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>9.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>17 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="任务">1.任务</h2>
-<p>​ 构建YOLO算法的各个模块：Bounding
-Box预测、交并比（IoU）、非极大值抑制、Anchor Boxes。</p>
-<p>​ 然后利用构建的YOLO算法进行目标识别（汽车检测）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/10/2023-12-10%EF%BC%9A%EF%BC%88YOLO%EF%BC%89Car-detection-for-Autonomous-Driving/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/" class="post-title-link" itemprop="url">Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization（基于提案的弱监督时序动作定位多示例学习）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-07 15:32:37" itemprop="dateCreated datePublished" datetime="2023-12-07T15:32:37+08:00">2023-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-09 11:08:15" itemprop="dateModified" datetime="2023-12-09T11:08:15+08:00">2023-12-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文精读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="abstract">1.Abstract</h2>
-<p>​
-弱监督时态动作定位的目的是在训练过程中仅使用视频级类别标签来定位和识别未剪辑视频中的动作。在没有实例级注释的情况下，大多数现有方法都遵循基于片段的多实例学习（S-MIL）框架，即通过视频标签对片段预测进行监督。然而，在训练过程中获取分段级分数的目标与在测试过程中获取建议级分数的目标并不一致，从而导致了次优结果。为了解决这个问题，我们提出了一种新颖的基于提案的多实例学习（Proposal-based
-Multiple Instance
-Learning，P-MIL）框架，在训练和测试阶段直接对候选提案进行分类，其中包括三个关键设计：</p>
-<ul>
-<li>周边对比特征提取模块，通过考虑周边对比信息来抑制辨别性短提案；</li>
-<li>提案完整性评估模块，通过完整性伪标签的指导来抑制低质量提案；</li>
-<li>实例级等级一致性损失，通过利用 RGB 和 FLOW
-模式的互补性来实现鲁棒检测；</li>
-</ul>
-<p>​ 在两个具有挑战性的基准（包括 THUMOS14 和
-ActivityNet）上取得的大量实验结果证明了我们的方法具有卓越的性能。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/06/SST-Single-Stream-Temporal-Action-Proposals%EF%BC%88%E5%8D%95%E6%B5%81%E6%97%B6%E9%97%B4%E5%8A%A8%E4%BD%9C%E5%BB%BA%E8%AE%AE%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/06/SST-Single-Stream-Temporal-Action-Proposals%EF%BC%88%E5%8D%95%E6%B5%81%E6%97%B6%E9%97%B4%E5%8A%A8%E4%BD%9C%E5%BB%BA%E8%AE%AE%EF%BC%89/" class="post-title-link" itemprop="url">SST: Single-Stream Temporal Action Proposals（单流时间动作建议）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-06 17:21:47" itemprop="dateCreated datePublished" datetime="2023-12-06T17:21:47+08:00">2023-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-08 10:22:00" itemprop="dateModified" datetime="2023-12-08T10:22:00+08:00">2023-12-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E8%AE%BA%E6%96%87%E7%B2%BE%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文精读</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="abstract">1.Abstract</h2>
-<p>​
-本文提出了一种新的方法，用于长时间未修剪视频序列中人体动作的时间检测。我们引入单流时序动作提案(
-SST
-)，这是一种新的有效且高效的生成时序动作提案的深度架构。我们的网络可以在很长的输入视频序列上以单个流连续运行，而不需要将输入分割成短的重叠片段或时间窗口进行批处理。我们在实验中证明了我们的模型在时间动作提议生成任务上的表现优于当前最先进的模型，同时达到了一些文献中最快的处理速度。最后，我们证明了将SST建议与现有的动作分类器结合使用，可以提高最先进的速度。</p>
-<p>​
-本论文主要提出了一个新进的Proposals方法，用于目标检测和动作识别。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/06/SST-Single-Stream-Temporal-Action-Proposals%EF%BC%88%E5%8D%95%E6%B5%81%E6%97%B6%E9%97%B4%E5%8A%A8%E4%BD%9C%E5%BB%BA%E8%AE%AE%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xd-mu.github.io/2023/12/04/2023-12-5%EF%BC%9AResidual-Networks%EF%BC%88ResNet%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/%E5%A4%B4%E5%83%8F.jpg">
-      <meta itemprop="name" content="野生调参侠">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="野生调参侠的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/12/04/2023-12-5%EF%BC%9AResidual-Networks%EF%BC%88ResNet%EF%BC%89/" class="post-title-link" itemprop="url">2023-12-5：Residual-Networks（ResNet）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-12-04 20:03:48" itemprop="dateCreated datePublished" datetime="2023-12-04T20:03:48+08:00">2023-12-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-17 10:45:35" itemprop="dateModified" datetime="2023-12-17T10:45:35+08:00">2023-12-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">课内学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">传统算法学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">吴恩达课程学习</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BE%E5%86%85%E5%AD%A6%E4%B9%A0/%E4%BC%A0%E7%BB%9F%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/Convolutional-Neural-Networks/" itemprop="url" rel="index"><span itemprop="name">Convolutional Neural Networks</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>21 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="任务">1.任务</h2>
-<p>​
-先一个个实现ResNets的网络模块，然后将这些模块拼到一起构建ResNets来实现图像分类
-。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/12/04/2023-12-5%EF%BC%9AResidual-Networks%EF%BC%88ResNet%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
@@ -1742,6 +677,7 @@ SST
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95%E7%B2%BE%E9%80%89100%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">面试精选100题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.1.</span> <span class="nav-text">数组、字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%E8%B7%9D%E7%A6%BB%E4%B8%AD%E7%AD%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.数组列表中的最大距离（中等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%86%E5%8A%A8%E6%8E%92%E5%BA%8F%E4%B8%AD%E7%AD%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.摆动排序（中等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E8%BD%AC%E6%95%B0%E5%AD%97%E7%AE%80%E5%8D%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.反转数字（简单）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B7%A6%E5%8F%B3%E7%A7%BB"><span class="nav-number">1.1.4.</span> <span class="nav-text">4.字符串左右移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E9%9A%94%E4%B8%BA1%E7%9A%84%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E4%B8%AD%E7%AD%89"><span class="nav-number">1.1.5.</span> <span class="nav-text">5.相隔为1的编辑距离（中等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D%E2%85%B1%E4%B8%AD%E7%AD%89"><span class="nav-number">1.1.6.</span> <span class="nav-text">6.反转字符串中的单词Ⅱ（中等）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3"><span class="nav-number">1.2.</span> <span class="nav-text">滑动窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%B3%E5%A4%9A%E5%8C%85%E5%90%AB%E4%B8%A4%E4%B8%AA%E4%B8%8D%E5%90%8C%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2%E4%B8%AD%E7%AD%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.至多包含两个不同字符的最长子串（中等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E8%BF%9E%E7%BB%AD1%E7%9A%84%E4%B8%AA%E6%95%B0%E4%B8%AD%E7%AD%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.最大连续1的个数（中等）</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

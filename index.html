@@ -366,10 +366,8 @@ mjx-container[display="true"] + br {
           <p>做了一个今年AAAI25的checklist的tex代码分享，无偿分享，有问题b站接着私信我就可以。</p>
 <p><strong>使用方法</strong>：新建一个checklist.tex文件复制下面进去，然后在主文件参考文献后面加上就可以：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\newpage</span><br><span class="line">\clearpage</span><br><span class="line">\input{./checklist}</span><br></pre></td></tr></table></figure>
-
 <p><strong>checklist.tex：</strong></p>
 <figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\section</span>{Reproducibility Checklist}</span><br><span class="line"><span class="keyword">\paragraph</span>{This paper:}</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> Includes a conceptual outline and/or pseudocode description of AI methods introduced (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Clearly delineates statements that are opinions, hypothesis, and speculation from objective facts and results (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Provides well marked pedagogical references for less-familiare readers to gain background necessary to replicate the paper (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper make theoretical contributions? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> All assumptions and restrictions are stated clearly and formally. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel claims are stated formally (e.g., in theorem statements). (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Proofs of all novel claims are included. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Proof sketches or intuitions are given for complex and/or novel results. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Appropriate citations to theoretical tools used are given. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All theoretical claims are demonstrated empirically to hold. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All experimental code used to eliminate or disprove claims is included. (yes/no/NA) {<span class="keyword">\bf</span> NA}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper rely on one or more datasets? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> A motivation is given for why the experiments are conducted on the selected datasets (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel datasets introduced in this paper are included in a data appendix. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All novel datasets introduced in this paper will be made publicly available upon publication of the paper with a license that allows free usage for research purposes. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets drawn from the existing literature (potentially including authors’ own previously published work) are accompanied by appropriate citations. (yes/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets drawn from the existing literature (potentially including authors’ own previously published work) are publicly available. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All datasets that are not publicly available are described in detail, with explanation why publicly available alternatives are not scientifically satisficing. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br><span class="line"></span><br><span class="line"><span class="keyword">\paragraph</span>{Does this paper include computational experiments? (yes/no)} {<span class="keyword">\bf</span> yes}</span><br><span class="line"></span><br><span class="line">If yes, please complete the list below.</span><br><span class="line"><span class="keyword">\begin</span>{itemize}</span><br><span class="line">    <span class="keyword">\item</span> Any code required for pre-processing data is included in the appendix. (yes/partial/no) {<span class="keyword">\bf</span> no}</span><br><span class="line">    <span class="keyword">\item</span> All source code required for conducting and analyzing the experiments is included in a code appendix. (yes/partial/no) {<span class="keyword">\bf</span> no}</span><br><span class="line">    <span class="keyword">\item</span> All source code required for conducting and analyzing the experiments will be made publicly available upon publication of the paper with a license that allows free usage for research purposes. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> All source code implementing new methods have comments detailing the implementation, with references to the paper where each step comes from. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> If an algorithm depends on randomness, then the method used for setting seeds is described in a way sufficient to allow replication of results. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper specifies the computing infrastructure used for running experiments (hardware and software), including GPU/CPU models; amount of memory; operating system; names and versions of relevant software libraries and frameworks. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper formally describes evaluation metrics used and explains the motivation for choosing these metrics. (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper states the number of algorithm runs used to compute each reported result. (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> Analysis of experiments goes beyond single-dimensional summaries of performance (e.g., average; median) to include measures of variation, confidence, or other distributional information. (yes/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> The significance of any improvement or decrease in performance is judged using appropriate statistical tests (e.g., Wilcoxon signed-rank). (yes/partial/no) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper lists all final (hyper-)parameters used for each model/algorithm in the paper’s experiments. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line">    <span class="keyword">\item</span> This paper states the number and range of values tried per (hyper-) parameter during development of the paper, along with the criterion used for selecting the final parameter setting. (yes/partial/no/NA) {<span class="keyword">\bf</span> yes}</span><br><span class="line"><span class="keyword">\end</span>{itemize}</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -554,7 +552,9 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-目标"><a href="#1-目标" class="headerlink" title="1.目标"></a>1.目标</h2><p>​	学习注意力机制的基本理论思想，代码实现底层逻辑。同时学习多头注意力机制、自注意力和位置掩码、Transformer。</p>
+          <h2 id="目标">1.目标</h2>
+<p>​
+学习注意力机制的基本理论思想，代码实现底层逻辑。同时学习多头注意力机制、自注意力和位置掩码、Transformer。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/01/02/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/#more" rel="contents">
@@ -657,8 +657,11 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-目标"><a href="#1-目标" class="headerlink" title="1.目标"></a>1.目标</h2><p>​	学习RNN的基本结构，并以此延伸出来的现代循环神经网络：GRU、LSTM、深度循环神经网络、双向循环神经网络、编码器-解码器结构、序列到序列学习（seq2seq）、束搜索。</p>
-<p>​	通过自己大致复现一遍经典循环神经网络结构，熟悉代码的架构和模板。这里基础知识尽可能精简，多写一些模型和不同方法适用的场景。</p>
+          <h2 id="目标">1.目标</h2>
+<p>​
+学习RNN的基本结构，并以此延伸出来的现代循环神经网络：GRU、LSTM、深度循环神经网络、双向循环神经网络、编码器-解码器结构、序列到序列学习（seq2seq）、束搜索。</p>
+<p>​
+通过自己大致复现一遍经典循环神经网络结构，熟悉代码的架构和模板。这里基础知识尽可能精简，多写一些模型和不同方法适用的场景。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/20/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89%E5%8F%8A%E7%8E%B0%E4%BB%A3RNN/#more" rel="contents">
@@ -761,8 +764,10 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Lenet和现代经典卷积神经网络"><a href="#1-Lenet和现代经典卷积神经网络" class="headerlink" title="1.Lenet和现代经典卷积神经网络"></a>1.Lenet和现代经典卷积神经网络</h2><p>​	手敲一遍过去三四十年的传统神经网络，加深一下对于网络演变的认识，给自己后续学习新进的网络结构打好基础。</p>
-<p>​	主要是分为：</p>
+          <h2 id="lenet和现代经典卷积神经网络">1.Lenet和现代经典卷积神经网络</h2>
+<p>​
+手敲一遍过去三四十年的传统神经网络，加深一下对于网络演变的认识，给自己后续学习新进的网络结构打好基础。</p>
+<p>​ 主要是分为：</p>
 <ul>
 <li>传统卷积神经网络：LeNet</li>
 <li>现代卷积神经网络：AlexNet、VGG、NiN、GoogleLeNet、Resnet、DenseNet</li>
@@ -863,7 +868,9 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-目标"><a href="#1-目标" class="headerlink" title="1.目标"></a>1.目标</h2><p>​	简单实现多层感知机，并学习其他方法：模型选择、欠拟合过拟合、权重衰减(L1、L2正则化)、暂退法（Dropout）、前向传播和反向传播、<strong>数值稳定性和模型初始化</strong>、环境和分布偏移。</p>
+          <h2 id="目标">1.目标</h2>
+<p>​
+简单实现多层感知机，并学习其他方法：模型选择、欠拟合过拟合、权重衰减(L1、L2正则化)、暂退法（Dropout）、前向传播和反向传播、<strong>数值稳定性和模型初始化</strong>、环境和分布偏移。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/17/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/#more" rel="contents">
@@ -956,7 +963,14 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1.Abstract"></a>1.Abstract</h2><p>​	我们要解决的问题是，在每个动作实例只有一个帧标签的情况下，如何定位动作的时间间隔，以进行训练。由于标签稀疏，现有工作无法学习动作的完整性，从而导致零碎的动作预测。在本文中，我们提出了一个新颖的框架，即生成密集的伪标签，为模型提供完整性指导。具体来说，我们首先选择伪背景点来补充点级动作标签。然后，通过将点作为种子，我们搜索可能包含完整动作实例的最佳序列，同时与种子达成一致。为了从获得的序列中学习完整性，我们引入了两种新的损失，分别从动作得分和特征相似性方面对动作实例和背景实例进行对比。实验结果表明，我们的完整性指导确实有助于模型定位完整的动作实例，从而大幅提高了性能，尤其是在高 IoU 阈值下。此外，我们还在四个基准测试中证明了我们的方法优于现有的先进方法： THUMOS’14、GTEA、BEOID 和 ActivityNet。值得注意的是，我们的方法甚至可以与最新的全监督方法相媲美，而注释成本却低 6 倍。</p>
+          <h2 id="abstract">1.Abstract</h2>
+<p>​
+我们要解决的问题是，在每个动作实例只有一个帧标签的情况下，如何定位动作的时间间隔，以进行训练。由于标签稀疏，现有工作无法学习动作的完整性，从而导致零碎的动作预测。在本文中，我们提出了一个新颖的框架，即生成密集的伪标签，为模型提供完整性指导。具体来说，我们首先选择伪背景点来补充点级动作标签。然后，通过将点作为种子，我们搜索可能包含完整动作实例的最佳序列，同时与种子达成一致。为了从获得的序列中学习完整性，我们引入了两种新的损失，分别从动作得分和特征相似性方面对动作实例和背景实例进行对比。实验结果表明，我们的完整性指导确实有助于模型定位完整的动作实例，从而大幅提高了性能，尤其是在高
+IoU
+阈值下。此外，我们还在四个基准测试中证明了我们的方法优于现有的先进方法：
+THUMOS'14、GTEA、BEOID 和
+ActivityNet。值得注意的是，我们的方法甚至可以与最新的全监督方法相媲美，而注释成本却低
+6 倍。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/13/Learning-Action-Completeness-from-Points-for-Weakly-supervised-Temporal-Action-Localization/#more" rel="contents">
@@ -1038,7 +1052,7 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.4k</span>
+              <span>9.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1057,8 +1071,10 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-任务"><a href="#1-任务" class="headerlink" title="1.任务"></a>1.任务</h2><p>​	构建YOLO算法的各个模块：Bounding Box预测、交并比（IoU）、非极大值抑制、Anchor Boxes。</p>
-<p>​	然后利用构建的YOLO算法进行目标识别（汽车检测）。</p>
+          <h2 id="任务">1.任务</h2>
+<p>​ 构建YOLO算法的各个模块：Bounding
+Box预测、交并比（IoU）、非极大值抑制、Anchor Boxes。</p>
+<p>​ 然后利用构建的YOLO算法进行目标识别（汽车检测）。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/10/2023-12-10%EF%BC%9A%EF%BC%88YOLO%EF%BC%89Car-detection-for-Autonomous-Driving/#more" rel="contents">
@@ -1157,13 +1173,19 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1.Abstract"></a>1.Abstract</h2><p>​	弱监督时态动作定位的目的是在训练过程中仅使用视频级类别标签来定位和识别未剪辑视频中的动作。在没有实例级注释的情况下，大多数现有方法都遵循基于片段的多实例学习（S-MIL）框架，即通过视频标签对片段预测进行监督。然而，在训练过程中获取分段级分数的目标与在测试过程中获取建议级分数的目标并不一致，从而导致了次优结果。为了解决这个问题，我们提出了一种新颖的基于提案的多实例学习（Proposal-based Multiple Instance Learning，P-MIL）框架，在训练和测试阶段直接对候选提案进行分类，其中包括三个关键设计：</p>
+          <h2 id="abstract">1.Abstract</h2>
+<p>​
+弱监督时态动作定位的目的是在训练过程中仅使用视频级类别标签来定位和识别未剪辑视频中的动作。在没有实例级注释的情况下，大多数现有方法都遵循基于片段的多实例学习（S-MIL）框架，即通过视频标签对片段预测进行监督。然而，在训练过程中获取分段级分数的目标与在测试过程中获取建议级分数的目标并不一致，从而导致了次优结果。为了解决这个问题，我们提出了一种新颖的基于提案的多实例学习（Proposal-based
+Multiple Instance
+Learning，P-MIL）框架，在训练和测试阶段直接对候选提案进行分类，其中包括三个关键设计：</p>
 <ul>
 <li>周边对比特征提取模块，通过考虑周边对比信息来抑制辨别性短提案；</li>
 <li>提案完整性评估模块，通过完整性伪标签的指导来抑制低质量提案；</li>
-<li>实例级等级一致性损失，通过利用 RGB 和 FLOW 模式的互补性来实现鲁棒检测；</li>
+<li>实例级等级一致性损失，通过利用 RGB 和 FLOW
+模式的互补性来实现鲁棒检测；</li>
 </ul>
-<p>​	在两个具有挑战性的基准（包括 THUMOS14 和 ActivityNet）上取得的大量实验结果证明了我们的方法具有卓越的性能。</p>
+<p>​ 在两个具有挑战性的基准（包括 THUMOS14 和
+ActivityNet）上取得的大量实验结果证明了我们的方法具有卓越的性能。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/07/Proposal-based-Multiple-Instance-Learning-for-Weakly-supervised-Temporal-Action-Localization%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%8F%90%E6%A1%88%E7%9A%84%E5%BC%B1%E7%9B%91%E7%9D%A3%E6%97%B6%E5%BA%8F%E5%8A%A8%E4%BD%9C%E5%AE%9A%E4%BD%8D%E5%A4%9A%E7%A4%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%89/#more" rel="contents">
@@ -1262,8 +1284,13 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1.Abstract"></a>1.Abstract</h2><p>​	本文提出了一种新的方法，用于长时间未修剪视频序列中人体动作的时间检测。我们引入单流时序动作提案( SST )，这是一种新的有效且高效的生成时序动作提案的深度架构。我们的网络可以在很长的输入视频序列上以单个流连续运行，而不需要将输入分割成短的重叠片段或时间窗口进行批处理。我们在实验中证明了我们的模型在时间动作提议生成任务上的表现优于当前最先进的模型，同时达到了一些文献中最快的处理速度。最后，我们证明了将SST建议与现有的动作分类器结合使用，可以提高最先进的速度。</p>
-<p>​	本论文主要提出了一个新进的Proposals方法，用于目标检测和动作识别。</p>
+          <h2 id="abstract">1.Abstract</h2>
+<p>​
+本文提出了一种新的方法，用于长时间未修剪视频序列中人体动作的时间检测。我们引入单流时序动作提案(
+SST
+)，这是一种新的有效且高效的生成时序动作提案的深度架构。我们的网络可以在很长的输入视频序列上以单个流连续运行，而不需要将输入分割成短的重叠片段或时间窗口进行批处理。我们在实验中证明了我们的模型在时间动作提议生成任务上的表现优于当前最先进的模型，同时达到了一些文献中最快的处理速度。最后，我们证明了将SST建议与现有的动作分类器结合使用，可以提高最先进的速度。</p>
+<p>​
+本论文主要提出了一个新进的Proposals方法，用于目标检测和动作识别。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/06/SST-Single-Stream-Temporal-Action-Proposals%EF%BC%88%E5%8D%95%E6%B5%81%E6%97%B6%E9%97%B4%E5%8A%A8%E4%BD%9C%E5%BB%BA%E8%AE%AE%EF%BC%89/#more" rel="contents">
@@ -1351,7 +1378,7 @@ mjx-container[display="true"] + br {
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1370,7 +1397,10 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-任务"><a href="#1-任务" class="headerlink" title="1.任务"></a>1.任务</h2><p>​	先一个个实现ResNets的网络模块，然后将这些模块拼到一起构建ResNets来实现图像分类 。</p>
+          <h2 id="任务">1.任务</h2>
+<p>​
+先一个个实现ResNets的网络模块，然后将这些模块拼到一起构建ResNets来实现图像分类
+。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/04/2023-12-5%EF%BC%9AResidual-Networks%EF%BC%88ResNet%EF%BC%89/#more" rel="contents">
@@ -1465,7 +1495,7 @@ mjx-container[display="true"] + br {
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>25 分钟</span>
+              <span>26 分钟</span>
             </span>
 
         </div>
@@ -1477,7 +1507,8 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-任务"><a href="#1-任务" class="headerlink" title="1.任务"></a>1.任务</h2><p>​	分步构建卷积神经网络并进行部署应用。</p>
+          <h2 id="任务">1.任务</h2>
+<p>​ 分步构建卷积神经网络并进行部署应用。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/12/03/2023-12-4%EF%BC%9AConvolution-model-Step-by-Step-and-Application/#more" rel="contents">
@@ -1626,7 +1657,7 @@ mjx-container[display="true"] + br {
 <div class="copyright">
   
   &copy; 2023 – 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1636,13 +1667,13 @@ mjx-container[display="true"] + br {
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">159k</span>
+    <span title="站点总字数">160k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:49</span>
+    <span title="站点阅读时长">4:51</span>
 </div>
 
 <!--
